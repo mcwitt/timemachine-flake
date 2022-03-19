@@ -1,0 +1,147 @@
+{
+  "nodes": {
+    "eigen": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1607118821,
+        "narHash": "sha256-JMIG7CLMndUsECfbKpXE3BtVFuAjn+CZvf8GXZpLkFQ=",
+        "owner": "libeigen",
+        "repo": "eigen",
+        "rev": "0fd6b4f71dd85b2009ee4d1aeb296e2c11fc9d68",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "libeigen",
+        "ref": "3.3.9",
+        "repo": "eigen",
+        "type": "gitlab"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "hilbertcurve-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617050438,
+        "narHash": "sha256-U7neRV/c3ke+2A1+aAZwehwReglduQ4iqzNYIvObT4o=",
+        "owner": "galtay",
+        "repo": "hilbertcurve",
+        "rev": "6599899ee2156fe7833b15447325f330cf5b8113",
+        "type": "github"
+      },
+      "original": {
+        "owner": "galtay",
+        "repo": "hilbertcurve",
+        "type": "github"
+      }
+    },
+    "nixos-qchem": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1647610474,
+        "narHash": "sha256-bXQOPprnytCPRdCemogwcUQgLPe+G7mhsCNhvIwGeQ4=",
+        "owner": "markuskowa",
+        "repo": "NixOS-QChem",
+        "rev": "2a7f76578db601162caa2e8d277349706d047da7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "markuskowa",
+        "repo": "NixOS-QChem",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1646271573,
+        "narHash": "sha256-X0W5eTiYzfgzEKkhYBLaGqA1aodKyledNDcqNx/r+e8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7a3e6d6604ad99c77e7a98943734bdeea564bff2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1647297614,
+        "narHash": "sha256-ulGq3W5XsrBMU/u5k9d4oPy65pQTkunR4HKKtTq0RwY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "73ad5f9e147c0d2a2061f1d4bd91e05078dc0b58",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pymbar-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647216484,
+        "narHash": "sha256-bOadRT5SoR8PKrT5PF31Cr2ICsa+pJYFFnw4y1nVdKQ=",
+        "owner": "choderalab",
+        "repo": "pymbar",
+        "rev": "b1a063f84477bc6039880ff6c0036a477bf88f5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "choderalab",
+        "repo": "pymbar",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "eigen": "eigen",
+        "flake-utils": "flake-utils",
+        "hilbertcurve-src": "hilbertcurve-src",
+        "nixos-qchem": "nixos-qchem",
+        "nixpkgs": "nixpkgs_2",
+        "pymbar-src": "pymbar-src",
+        "timemachine-src": "timemachine-src"
+      }
+    },
+    "timemachine-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647622569,
+        "narHash": "sha256-v2uDHfNV5jQwak+SsvmKLqaJ4i/+sbLqvt1RMGdyW2k=",
+        "owner": "proteneer",
+        "repo": "timemachine",
+        "rev": "2a971ee27cb3b8fc457fee1439af2f8dbd375b72",
+        "type": "github"
+      },
+      "original": {
+        "owner": "proteneer",
+        "repo": "timemachine",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
