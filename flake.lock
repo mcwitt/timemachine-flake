@@ -17,21 +17,6 @@
         "type": "gitlab"
       }
     },
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1644229661,
-        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "hilbertcurve-src": {
       "flake": false,
       "locked": {
@@ -117,7 +102,6 @@
     "root": {
       "inputs": {
         "eigen": "eigen",
-        "flake-utils": "flake-utils",
         "hilbertcurve-src": "hilbertcurve-src",
         "nixos-qchem": "nixos-qchem",
         "nixpkgs": "nixpkgs_2",
@@ -128,11 +112,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1647622569,
-        "narHash": "sha256-v2uDHfNV5jQwak+SsvmKLqaJ4i/+sbLqvt1RMGdyW2k=",
+        "lastModified": 1648141364,
+        "narHash": "sha256-xVf91QrSP7R5VR0gS1On7NukRHzYHqEhM0YZjMnalsY=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "2a971ee27cb3b8fc457fee1439af2f8dbd375b72",
+        "rev": "d011a2c8d0d8be34eee8f88f1b52c649aee94e97",
         "type": "github"
       },
       "original": {

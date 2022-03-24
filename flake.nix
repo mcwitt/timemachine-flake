@@ -96,6 +96,7 @@
           propagatedBuildInputs = [ cudatoolkit ] ++ (with final; [
             grpcio
             hilbertcurve
+            importlib-resources
             jax
             jaxlib
             networkx
@@ -113,6 +114,7 @@
             ./patches/setup.py-remove-bootstrapped.patch
           ];
           preBuild = ''
+            export CMAKE_ARGS=-DCUDA_ARCH=61
             export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
           '';
           EIGEN_SRC_DIR = eigen;
