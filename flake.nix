@@ -44,7 +44,7 @@
 
       cudatoolkit = pkgs.cudatoolkit_11_6;
 
-      packageOverrides = final: prev: {
+      pythonOverrides = final: prev: {
         inherit (pkgs.qchem.python3.pkgs) rdkit;
 
         hilbertcurve = prev.buildPythonPackage {
@@ -121,10 +121,8 @@
           doCheck = false;
         };
       };
-
-      python3 = pkgs.python3.override { inherit packageOverrides; };
     in
     {
-      overlay = _: _: { inherit python3; };
+      overlay = _: _: { inherit pythonOverrides; };
     };
 }
