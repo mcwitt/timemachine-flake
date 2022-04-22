@@ -45,7 +45,6 @@
       cudatoolkit = pkgs.cudatoolkit_11_6;
 
       pythonOverrides = final: prev: {
-        inherit (pkgs.qchem.python3.pkgs) rdkit;
 
         hilbertcurve = prev.buildPythonPackage {
           name = "hilbertcurve";
