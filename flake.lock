@@ -35,14 +35,16 @@
     },
     "nixos-qchem": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1647610474,
-        "narHash": "sha256-bXQOPprnytCPRdCemogwcUQgLPe+G7mhsCNhvIwGeQ4=",
+        "lastModified": 1650549459,
+        "narHash": "sha256-HXbeGI0/vWgjvkHXq8SgdN3F7s37t81DVai/MpKsbu0=",
         "owner": "markuskowa",
         "repo": "NixOS-QChem",
-        "rev": "2a7f76578db601162caa2e8d277349706d047da7",
+        "rev": "aff5d92a402dbb6fd72412dd93d2330c7a5e8b6b",
         "type": "github"
       },
       "original": {
@@ -53,32 +55,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1646271573,
-        "narHash": "sha256-X0W5eTiYzfgzEKkhYBLaGqA1aodKyledNDcqNx/r+e8=",
-        "owner": "NixOS",
+        "lastModified": 1650929990,
+        "narHash": "sha256-eY64sJaRaVBDdKVj6Esrm5ZW0JoMLW8fkO0tYphmeQg=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7a3e6d6604ad99c77e7a98943734bdeea564bff2",
+        "rev": "85a130db2a80767465b0b8a99e772595e728b2e4",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1650646629,
-        "narHash": "sha256-QS5KhJZ+GoKOjumhHAfH9kAWeVhYKeXOZgRJr2APHHY=",
-        "owner": "mcwitt",
-        "repo": "nixpkgs",
-        "rev": "a6bbe9a732da73145c5aca1dab266d1b2120554b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mcwitt",
-        "ref": "rdkit-upgrade",
+        "owner": "nixos",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -104,7 +89,7 @@
         "eigen": "eigen",
         "hilbertcurve-src": "hilbertcurve-src",
         "nixos-qchem": "nixos-qchem",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "pymbar-src": "pymbar-src",
         "timemachine-src": "timemachine-src"
       }
@@ -112,15 +97,16 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1649855335,
-        "narHash": "sha256-SOmBUtFSzup8fGhLoqEpfN4KpR+T/oR2eVCcUeGocvc=",
+        "lastModified": 1650905420,
+        "narHash": "sha256-v59uCorwPVO2Usr7v5eYURQWl20XbKPz6bktRqJ208o=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "8d6bd25a143aa81e8b3b8c6a33e6e03afe272c56",
+        "rev": "4dfe8053ca35ac86fdbd4c45027e742c2b57a9d1",
         "type": "github"
       },
       "original": {
         "owner": "proteneer",
+        "ref": "setuptools-fixes",
         "repo": "timemachine",
         "type": "github"
       }

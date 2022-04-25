@@ -2,7 +2,7 @@
   description = "timemachine python environment";
 
   inputs = {
-    nixpkgs.url = "github:mcwitt/nixpkgs/rdkit-upgrade";
+    nixpkgs.url = "github:nixos/nixpkgs";
 
     eigen = {
       url = "gitlab:libeigen/eigen/3.3.9";
@@ -14,7 +14,10 @@
       flake = false;
     };
 
-    nixos-qchem.url = "github:markuskowa/NixOS-QChem";
+    nixos-qchem = {
+      url = "github:markuskowa/NixOS-QChem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     pymbar-src = {
       url = "github:choderalab/pymbar";
@@ -22,7 +25,7 @@
     };
 
     timemachine-src = {
-      url = "github:proteneer/timemachine";
+      url = "github:proteneer/timemachine/setuptools-fixes";
       flake = false;
     };
   };
@@ -42,7 +45,7 @@
         overlays = [ nixos-qchem.overlay ];
       };
 
-      cudatoolkit = pkgs.cudatoolkit_11_6;
+      cudaPackages = pkgs.cudaPackages_11_6;
 
       pythonOverrides = final: prev: {
 
@@ -76,8 +79,8 @@
             };
           };
 
-        openmm = pkgs.qchem.python3.pkgs.openmm.override {
-          inherit cudatoolkit;
+        openmm = prev.openmm.override {
+          inherit (cudaPackages) cudatoolkit;
           enableCuda = false;
         };
 
@@ -91,8 +94,8 @@
         timemachine = prev.buildPythonPackage {
           name = "timemachine";
           src = timemachine-src;
-          nativeBuildInputs = [ pkgs.cmake pkgs.xxd prev.pybind11 ];
-          propagatedBuildInputs = [ cudatoolkit ] ++ (with final; [
+          nativeBuildInputs = [ pkgs.cmake prev.mypy prev.pybind11 ];
+          propagatedBuildInputs = [ cudaPackages.cudatoolkit ] ++ (with final; [
             grpcio
             hilbertcurve
             importlib-resources
@@ -108,20 +111,19 @@
             scipy
           ]);
           dontUseCmakeConfigure = true;
-          patches = [
-            ./patches/CMakeLists.txt.patch
-            ./patches/setup.py-remove-bootstrapped.patch
-          ];
+          patches = [ ./patches/CMakeLists.txt.patch ];
           preBuild = ''
-            export CMAKE_ARGS=-DCUDA_ARCH=61
             export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
           '';
+          CMAKE_ARGS = "-DCUDA_ARCH=61";
           EIGEN_SRC_DIR = eigen;
           doCheck = false;
         };
       };
+
+      python3 = pkgs.qchem.python3.override (old: {
+        packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_:_: { })) pythonOverrides;
+      });
     in
-    {
-      overlay = _: _: { inherit pythonOverrides; };
-    };
+    { overlay = _: _: { timemachine = { inherit python3; }; }; };
 }
