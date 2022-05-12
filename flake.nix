@@ -25,7 +25,7 @@
     };
 
     timemachine-src = {
-      url = "github:proteneer/timemachine/setuptools-fixes";
+      url = "github:proteneer/timemachine";
       flake = false;
     };
   };
@@ -42,7 +42,7 @@
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        overlays = [ nixos-qchem.overlay ];
+        overlays = [ nixos-qchem.overlays.qchem ];
       };
 
       cudaPackages = pkgs.cudaPackages_11_6;

@@ -51,3 +51,13 @@ index e0426d37..f1fd4bac 100644
  include_directories(SYSTEM ${CMAKE_CURRENT_BINARY_DIR}/${CUB_SRC_DIR})
  
  set_property(TARGET ${LIBRARY_NAME} PROPERTY CUDA_STANDARD 17)
+diff --git a/timemachine/cpp/generate_stubs b/timemachine/cpp/generate_stubs
+index b60b055c..17d75260 100755
+--- a/timemachine/cpp/generate_stubs
++++ b/timemachine/cpp/generate_stubs
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/bin/sh
+ set -e
+ 
+ MODULE=custom_ops
