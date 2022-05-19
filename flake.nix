@@ -30,7 +30,8 @@
     };
   };
   outputs =
-    { nixpkgs
+    { self
+    , nixpkgs
     , eigen
     , hilbertcurve-src
     , nixos-qchem
@@ -111,7 +112,14 @@
             scipy
           ]);
           dontUseCmakeConfigure = true;
-          patches = [ ./patches/CMakeLists.txt.patch ];
+          patches = [
+            ./patches/update-cmake-build.patch
+            ./patches/fix-interpreter.patch
+            (pkgs.substituteAll {
+              src = ./patches/hardcode-version.patch;
+              version = self.inputs.timemachine-src.rev;
+            })
+          ];
           preBuild = ''
             export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
           '';
