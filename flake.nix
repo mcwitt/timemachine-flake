@@ -2,7 +2,7 @@
   description = "timemachine python environment";
 
   inputs = {
-    nixpkgs.url = "github:mcwitt/nixpkgs/rdkit-upgrade";
+    nixpkgs.url = "github:mcwitt/nixpkgs/nixos-22.05-rdkit-upgrade";
 
     eigen = {
       url = "gitlab:libeigen/eigen/3.3.9";
