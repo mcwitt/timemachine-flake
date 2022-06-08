@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1652360819,
-        "narHash": "sha256-/sfFcDPfAFTyZ94i8PoPhiCYFB4Y6MY3AVboapxdvfU=",
+        "lastModified": 1653841512,
+        "narHash": "sha256-5AUTSbIKc2RbmTXxah6IQOTBqWBhLMplsUOBtkJiw1M=",
         "owner": "markuskowa",
         "repo": "NixOS-QChem",
-        "rev": "0a10a4bdd1e86d2c0736829be551d2c88e89d842",
+        "rev": "9098db1d7dd5ab517d369f8a1485b4fdb9092482",
         "type": "github"
       },
       "original": {
@@ -55,15 +55,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1652392220,
-        "narHash": "sha256-s9GC6KHg0XakVoKeryVZ8Tpth80usxljNtnwhtlgXrQ=",
-        "owner": "nixos",
+        "lastModified": 1654730717,
+        "narHash": "sha256-ju1L0wtdIsWRNQqmw8BXJFN+4oddXOJpZPsKqKaSixw=",
+        "owner": "mcwitt",
         "repo": "nixpkgs",
-        "rev": "39936c75c581828a7cebad2e274cc8db08007f58",
+        "rev": "e62b38b6fcd509b3fdb9c86e4c83466c3120415f",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "mcwitt",
+        "ref": "rdkit-upgrade",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -71,11 +72,11 @@
     "pymbar-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1647216484,
-        "narHash": "sha256-bOadRT5SoR8PKrT5PF31Cr2ICsa+pJYFFnw4y1nVdKQ=",
+        "lastModified": 1652463818,
+        "narHash": "sha256-oMFvXl9GD/fSqxo9sErIZgM2Gq/8CiiNp7HAM6ULxvw=",
         "owner": "choderalab",
         "repo": "pymbar",
-        "rev": "b1a063f84477bc6039880ff6c0036a477bf88f5a",
+        "rev": "7ff37e95c92527c6d9e64453ecf892986edb21c6",
         "type": "github"
       },
       "original": {
@@ -97,11 +98,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1652284226,
-        "narHash": "sha256-5Yj2EGOgvbqNJIaFwLBSAHPZce/PRwX5UdcqESkgS5g=",
+        "lastModified": 1653420529,
+        "narHash": "sha256-p45qO1zVHVz3GraCjLkyKLuWRKfugvqydLQPnOMXGg0=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "451803e01afe6231147a0e6a3ca019d4aa5069d8",
+        "rev": "c8e0f91c25c65610ab5fc6b0761defbfb1a80f2e",
         "type": "github"
       },
       "original": {
