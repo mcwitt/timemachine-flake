@@ -2,7 +2,7 @@
   description = "timemachine python environment";
 
   inputs = {
-    nixpkgs.url = "github:mcwitt/nixpkgs/nixos-22.05-rdkit-upgrade";
+    nixpkgs.url = "github:NixOS/nixpkgs";
 
     eigen = {
       url = "gitlab:libeigen/eigen/3.3.9";
@@ -40,8 +40,10 @@
     , ...
     }:
     let
+      system = "x86_64-linux";
+
       pkgs = import nixpkgs {
-        system = "x86_64-linux";
+        inherit system;
         config.allowUnfree = true;
         overlays = [ nixos-qchem.overlays.qchem ];
       };
@@ -50,11 +52,11 @@
 
       pythonOverrides = final: prev: {
 
-        hilbertcurve = prev.buildPythonPackage {
+        hilbertcurve = final.buildPythonPackage {
           name = "hilbertcurve";
           src = hilbertcurve-src;
-          buildInputs = [ prev.numpy ];
-          checkInputs = [ prev.pytest ];
+          buildInputs = [ final.numpy ];
+          checkInputs = [ final.pytest ];
         };
 
         openeye-toolkits =
@@ -62,18 +64,20 @@
             version = "2020.2.0";
             mkUrl = pname: "https://pypi.anaconda.org/openeye/simple/${pname}/${version}/${pname}-${version}.tar.gz";
           in
-          prev.buildPythonPackage rec {
+          final.buildPythonPackage rec {
             pname = "OpenEye-toolkits";
             inherit version;
-            propagatedBuildInputs = let openeye-toolkits-python3-linux-x64 = prev.buildPythonPackage rec {
-              pname = "OpenEye-toolkits-python3-linux-x64";
-              inherit version;
-              src = pkgs.fetchurl {
-                url = mkUrl pname;
-                sha256 = "sha256-bz+i2rX8g/QVPR30fK1m8KRb/iXz9etCKVD9DO3bVnM=";
-              };
-              doCheck = false;
-            }; in [ openeye-toolkits-python3-linux-x64 ];
+            propagatedBuildInputs = [
+              (final.buildPythonPackage rec {
+                pname = "OpenEye-toolkits-python3-linux-x64";
+                inherit version;
+                src = pkgs.fetchurl {
+                  url = mkUrl pname;
+                  sha256 = "sha256-bz+i2rX8g/QVPR30fK1m8KRb/iXz9etCKVD9DO3bVnM=";
+                };
+                doCheck = false;
+              })
+            ];
             src = pkgs.fetchurl {
               url = mkUrl pname;
               sha256 = "sha256-c7boNOV4oeJwJmQgsSoCN/tsSUcIruj97FzsFS/PRb8=";
@@ -85,17 +89,17 @@
           enableCuda = false;
         };
 
-        pymbar = prev.buildPythonPackage {
+        pymbar = final.buildPythonPackage {
           name = "pymbar";
           src = pymbar-src;
-          buildInputs = with prev; [ numpy scipy six ];
+          buildInputs = with final; [ numpy scipy six ];
           doCheck = false;
         };
 
-        timemachine = prev.buildPythonPackage {
+        timemachine = final.buildPythonPackage {
           name = "timemachine";
           src = timemachine-src;
-          nativeBuildInputs = [ pkgs.cmake prev.mypy prev.pybind11 ];
+          nativeBuildInputs = [ pkgs.cmake final.mypy final.pybind11 ];
           propagatedBuildInputs = [ cudaPackages.cudatoolkit ] ++ (with final; [
             grpcio
             hilbertcurve
@@ -133,5 +137,8 @@
         packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_:_: { })) pythonOverrides;
       });
     in
-    { overlay = _: _: { timemachine = { inherit python3; }; }; };
+    {
+      overlay = _: _: { timemachine = { inherit python3; }; };
+      devShells.${system}.default = (python3.withPackages (ps: [ ps.timemachine ])).env;
+    };
 }

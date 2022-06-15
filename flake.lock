@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1653841512,
-        "narHash": "sha256-5AUTSbIKc2RbmTXxah6IQOTBqWBhLMplsUOBtkJiw1M=",
+        "lastModified": 1654864374,
+        "narHash": "sha256-h/WZalhMOfg1BFHR4n+tULHO98niyYdJUtso9TjiTi4=",
         "owner": "markuskowa",
         "repo": "NixOS-QChem",
-        "rev": "9098db1d7dd5ab517d369f8a1485b4fdb9092482",
+        "rev": "f01be25a5e4b22e6940625d653395efa17a8125e",
         "type": "github"
       },
       "original": {
@@ -55,16 +55,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1654730717,
-        "narHash": "sha256-ju1L0wtdIsWRNQqmw8BXJFN+4oddXOJpZPsKqKaSixw=",
-        "owner": "mcwitt",
+        "lastModified": 1655318135,
+        "narHash": "sha256-kFs/bujjrbLqitmsHIOIarUSo9cHX4HMcfkOly4L0AE=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e62b38b6fcd509b3fdb9c86e4c83466c3120415f",
+        "rev": "abb346a417c334bb093ac77e907a2920f8e3289d",
         "type": "github"
       },
       "original": {
-        "owner": "mcwitt",
-        "ref": "rdkit-upgrade",
+        "owner": "NixOS",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -98,11 +97,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1653420529,
-        "narHash": "sha256-p45qO1zVHVz3GraCjLkyKLuWRKfugvqydLQPnOMXGg0=",
+        "lastModified": 1655317965,
+        "narHash": "sha256-BjX28Sj8MlOQ/pQ4xB2igcqRoP2/c+Supheg7aKWE0k=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "c8e0f91c25c65610ab5fc6b0761defbfb1a80f2e",
+        "rev": "35c0a0bb39ce25c4b53211676c52d2f7e779ee03",
         "type": "github"
       },
       "original": {
