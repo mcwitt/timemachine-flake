@@ -49,7 +49,7 @@
         let
           cudaPackages = pkgs.cudaPackages_11_6;
         in
-        final: prev: {
+        final: _: {
           hilbertcurve = final.buildPythonPackage {
             name = "hilbertcurve";
             src = hilbertcurve-src;
@@ -84,7 +84,7 @@
               };
             };
 
-          openmm = prev.openmm.override {
+          openmm = pkgs.qchem.python3.pkgs.openmm.override {
             inherit (cudaPackages) cudatoolkit;
             enableCuda = false;
           };
@@ -138,7 +138,7 @@
       });
 
       pythonEnv =
-        let python3 = override pkgs.qchem.python3;
+        let python3 = override pkgs.python3;
         in python3.withPackages (ps: [ ps.timemachine ]);
 
     in
