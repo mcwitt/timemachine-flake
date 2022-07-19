@@ -133,12 +133,17 @@
           };
         };
 
-      python3 = pkgs.qchem.python3.override (old: {
+      override = python3: python3.override (old: {
         packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_:_: { })) pythonOverrides;
       });
+
+      pythonEnv =
+        let python3 = override pkgs.qchem.python3;
+        in python3.withPackages (ps: [ ps.timemachine ]);
+
     in
     {
-      overlay = _: _: { inherit python3; };
-      devShells.${system}.default = (python3.withPackages (ps: [ ps.timemachine ])).env;
+      overlay = _: prev: { python3 = override prev.python3; };
+      devShells.${system}.default = pythonEnv.env;
     };
 }
