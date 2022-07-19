@@ -35,9 +35,7 @@
     },
     "nixos-qchem": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1654864374,
@@ -55,15 +53,32 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1655318135,
-        "narHash": "sha256-kFs/bujjrbLqitmsHIOIarUSo9cHX4HMcfkOly4L0AE=",
+        "lastModified": 1658119717,
+        "narHash": "sha256-4upOZIQQ7Bc4CprqnHsKnqYfw+arJeAuU+QcpjYBXW0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "abb346a417c334bb093ac77e907a2920f8e3289d",
+        "rev": "9eb60f25aff0d2218c848dd4574a0ab5e296cabe",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1658103945,
+        "narHash": "sha256-1/kQlzKGt1563JZ+gIlNHU6rEbaDh2KopZLJ4CzraWI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2e3f6efdeda4cfff0259912495761885d8bee74a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -89,7 +104,7 @@
         "eigen": "eigen",
         "hilbertcurve-src": "hilbertcurve-src",
         "nixos-qchem": "nixos-qchem",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "pymbar-src": "pymbar-src",
         "timemachine-src": "timemachine-src"
       }

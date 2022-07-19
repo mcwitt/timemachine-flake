@@ -14,10 +14,7 @@
       flake = false;
     };
 
-    nixos-qchem = {
-      url = "github:markuskowa/NixOS-QChem";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-qchem.url = "github:markuskowa/NixOS-QChem";
 
     pymbar-src = {
       url = "github:choderalab/pymbar";
