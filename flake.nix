@@ -138,7 +138,7 @@
       });
     in
     {
-      overlay = _: _: { timemachine = { inherit python3; }; };
+      overlay = _: _: { inherit python3; };
       devShells.${system}.default = (python3.withPackages (ps: [ ps.timemachine ])).env;
     };
 }
