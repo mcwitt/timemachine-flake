@@ -2,27 +2,27 @@
   description = "timemachine python environment";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
 
     eigen = {
-      url = "gitlab:libeigen/eigen/3.3.9";
+      url = gitlab:libeigen/eigen/3.3.9;
       flake = false;
     };
 
     hilbertcurve-src = {
-      url = "github:galtay/hilbertcurve";
+      url = github:galtay/hilbertcurve;
       flake = false;
     };
 
-    nixos-qchem.url = "github:markuskowa/NixOS-QChem";
+    nixos-qchem.url = github:markuskowa/NixOS-QChem;
 
     pymbar-src = {
-      url = "github:choderalab/pymbar";
+      url = github:choderalab/pymbar;
       flake = false;
     };
 
     timemachine-src = {
-      url = "github:proteneer/timemachine";
+      url = github:proteneer/timemachine;
       flake = false;
     };
   };
