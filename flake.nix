@@ -119,6 +119,7 @@
             patches = [
               ./patches/update-cmake-build.patch
               ./patches/fix-interpreter.patch
+              ./patches/unpin-jax.patch
               (pkgs.substituteAll {
                 src = ./patches/hardcode-version.patch;
                 version = self.inputs.timemachine-src.rev;
