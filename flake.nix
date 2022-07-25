@@ -92,7 +92,7 @@
           pymbar = final.buildPythonPackage {
             name = "pymbar";
             src = pymbar-src;
-            buildInputs = with final; [ numpy scipy six ];
+            buildInputs = with final; [ jax jaxlib numexpr ];
             doCheck = false;
           };
 
