@@ -123,7 +123,7 @@
               ./patches/unpin-jax.patch
               (pkgs.substituteAll {
                 src = ./patches/hardcode-version.patch;
-                version = self.inputs.timemachine-src.rev;
+                version = self.inputs.timemachine-src.rev or "dirty";
               })
             ];
             preBuild = ''
