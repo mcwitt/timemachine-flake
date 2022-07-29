@@ -147,7 +147,11 @@
 
     in
     {
-      overlay = _: prev: { python3 = override prev.python3; };
+      overlay = _: prev: { python3 = overridePython prev.python3; };
+      packages.${system} = {
+        default = self.packages.${system}.timemachine;
+        timemachine = pythonEnv;
+      };
       devShells.${system}.default = pythonEnv.env;
     };
 }
