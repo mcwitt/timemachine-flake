@@ -137,13 +137,13 @@
           };
         };
 
-      override = python3: python3.override (old: {
+      overridePython = python: python.override (old: {
         packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_:_: { })) pythonOverrides;
       });
 
       pythonEnv =
-        let python3 = override pkgs.python3;
-        in python3.withPackages (ps: [ ps.timemachine ]);
+        let python3 = overridePython pkgs.python3;
+        in python3.withPackages (ps: with ps; [ jaxlib timemachine ]);
 
     in
     {
