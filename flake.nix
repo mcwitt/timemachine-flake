@@ -101,12 +101,12 @@
             name = "timemachine";
             src = timemachine-src;
             nativeBuildInputs = [ pkgs.cmake final.mypy final.pybind11 ];
+            buildInputs = [ pkgs.jaxlib ];
             propagatedBuildInputs = [ cudaPackages.cudatoolkit ] ++ (with final; [
               grpcio
               hilbertcurve
               importlib-resources
               jax
-              jaxlib
               networkx
               numpy
               openeye-toolkits
