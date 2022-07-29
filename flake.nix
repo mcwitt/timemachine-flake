@@ -109,6 +109,7 @@
               hilbertcurve
               importlib-resources
               jax
+              matplotlib
               networkx
               numpy
               openeye-toolkits
