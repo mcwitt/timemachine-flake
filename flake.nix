@@ -49,7 +49,9 @@
         let
           cudaPackages = pkgs.cudaPackages_11_6;
         in
-        final: _: {
+        final: prev: {
+          jaxlib = prev.jaxlib.override { inherit cudaPackages; };
+
           hilbertcurve = final.buildPythonPackage {
             name = "hilbertcurve";
             src = hilbertcurve-src;
