@@ -112,11 +112,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1659090109,
-        "narHash": "sha256-lM8vWBKQ6qTURu5UR+PHNFYYOfUt1JfMOineib6ejJE=",
+        "lastModified": 1659135710,
+        "narHash": "sha256-aTHL9GSOUKc4yJX4jQjYrrlixTiPFVUJkzacNjM/pmM=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "af78e24598ccc71763ce6912336330f3efce785c",
+        "rev": "5aa164035823e13d58aff2c01ad2d71223c25dd0",
         "type": "github"
       },
       "original": {
