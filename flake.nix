@@ -2,7 +2,7 @@
   description = "timemachine python environment";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
 
     eigen = {
       url = gitlab:libeigen/eigen/3.3.9;
