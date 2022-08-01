@@ -42,7 +42,6 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ nixos-qchem.overlays.qchem ];
       };
 
       pythonOverrides =
@@ -86,7 +85,7 @@
               };
             };
 
-          openmm = pkgs.qchem.python3.pkgs.openmm.override {
+          openmm = final.callPackage "${nixos-qchem}/pkgs/apps/openmm" {
             inherit (cudaPackages) cudatoolkit;
             enableCuda = false;
           };
