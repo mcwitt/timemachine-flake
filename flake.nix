@@ -129,7 +129,7 @@
               })
             ];
             preBuild = ''
-              export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
+              export CMAKE_BUILD_PARALLEL_LEVEL=$NIX_BUILD_CORES
             '';
             CMAKE_ARGS = "-DCUDA_ARCH=61";
             EIGEN_SRC_DIR = eigen;
