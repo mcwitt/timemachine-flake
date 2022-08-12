@@ -98,42 +98,9 @@
             doCheck = false;
           };
 
-          timemachine = final.buildPythonPackage {
-            name = "timemachine";
-            src = timemachine-src;
-            nativeBuildInputs = [ pkgs.cmake final.mypy final.pybind11 ];
-            buildInputs = [ final.jaxlib ];
-            propagatedBuildInputs = [ cudaPackages.cudatoolkit ] ++ (with final; [
-              grpcio
-              hilbertcurve
-              importlib-resources
-              jax
-              matplotlib
-              networkx
-              numpy
-              openeye-toolkits
-              openmm
-              pymbar
-              pyyaml
-              rdkit
-              scipy
-            ]);
-            dontUseCmakeConfigure = true;
-            patches = [
-              ./patches/update-cmake-build.patch
-              ./patches/fix-interpreter.patch
-              ./patches/unpin-jax.patch
-              (pkgs.substituteAll {
-                src = ./patches/hardcode-version.patch;
-                version = self.inputs.timemachine-src.rev or "dirty";
-              })
-            ];
-            preBuild = ''
-              export CMAKE_BUILD_PARALLEL_LEVEL=$NIX_BUILD_CORES
-            '';
-            CMAKE_ARGS = "-DCUDA_ARCH=61";
-            EIGEN_SRC_DIR = eigen;
-            doCheck = false;
+          timemachine = final.callPackage ./timemachine {
+            inherit (cudaPackages) cudatoolkit;
+            inherit eigen timemachine-src;
           };
         };
 
@@ -148,10 +115,12 @@
     in
     {
       overlay = _: prev: { python3 = overridePython prev.python3; };
+
       packages.${system} = {
         default = self.packages.${system}.timemachine;
         timemachine = pythonEnv;
       };
+
       devShells.${system}.default = pythonEnv.env;
     };
 }
