@@ -10,7 +10,7 @@
     };
 
     hilbertcurve-src = {
-      url = github:galtay/hilbertcurve;
+      url = github:galtay/hilbertcurve?ref=v1.0.5;
       flake = false;
     };
 

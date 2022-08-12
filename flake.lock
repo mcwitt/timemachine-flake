@@ -20,15 +20,16 @@
     "hilbertcurve-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1657727377,
-        "narHash": "sha256-TMP5WltspR50RKQztadvLaQRZCfWofrJexMbRFMueco=",
+        "lastModified": 1605133181,
+        "narHash": "sha256-fY5WD8qCj01VXo4j66qZ4aFHDw6jFFB4codmpJF8nqQ=",
         "owner": "galtay",
         "repo": "hilbertcurve",
-        "rev": "58c59c4979a9e8f2882f369821e63a34e6ac4efb",
+        "rev": "fcd750a2f836e36708851905c02c2b66ddacf8eb",
         "type": "github"
       },
       "original": {
         "owner": "galtay",
+        "ref": "v1.0.5",
         "repo": "hilbertcurve",
         "type": "github"
       }
