@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs;
 
-    eigen = {
-      url = gitlab:libeigen/eigen/3.3.9;
-      flake = false;
-    };
-
     hilbertcurve-src = {
       url = github:galtay/hilbertcurve?ref=v1.0.5;
       flake = false;
@@ -29,7 +24,6 @@
   outputs =
     { self
     , nixpkgs
-    , eigen
     , hilbertcurve-src
     , nixos-qchem
     , pymbar-src
@@ -100,7 +94,7 @@
 
           timemachine = final.callPackage ./timemachine {
             inherit (cudaPackages) cudatoolkit;
-            inherit eigen timemachine-src;
+            inherit timemachine-src;
           };
         };
 

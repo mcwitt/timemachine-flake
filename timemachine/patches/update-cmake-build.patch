@@ -1,20 +1,21 @@
 diff --git a/timemachine/cpp/CMakeLists.txt b/timemachine/cpp/CMakeLists.txt
-index e0426d37..f1fd4bac 100644
+index 3d1a97cb..21ac96fe 100644
 --- a/timemachine/cpp/CMakeLists.txt
 +++ b/timemachine/cpp/CMakeLists.txt
-@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
  
  set(CMAKE_CXX_STANDARD 17)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
 -set(PYBIND11_PYTHON_VERSION 3.7 CACHE STRING "Which version of python we're building wrappers against")
-+set(PYBIND11_PYTHON_VERSION 3.9 CACHE STRING "Which version of python we're building wrappers against")
++set(PYBIND11_PYTHON_VERSION @pythonVersion@ CACHE STRING "Which version of python we're building wrappers against")
  
  project(timemachine LANGUAGES CXX CUDA)
  
 -find_package(PythonInterp 3.7 REQUIRED)
 -find_package(PythonLibs 3.7 REQUIRED)
-+find_package(PythonInterp 3.9 REQUIRED)
-+find_package(PythonLibs 3.9 REQUIRED)
++find_package(PythonInterp @pythonVersion@ REQUIRED)
++find_package(PythonLibs @pythonVersion@ REQUIRED)
++find_package(Eigen3 3.4 REQUIRED NO_MODULE)
 +find_package(pybind11)
  
 -string(APPEND CMAKE_CXX_FLAGS "-Werror -Wall -Wextra")
@@ -22,7 +23,7 @@ index e0426d37..f1fd4bac 100644
  
  string(APPEND CMAKE_CUDA_FLAGS "-O3 -lineinfo")
  string(APPEND CMAKE_CUDA_FLAGS
-@@ -28,19 +29,6 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+@@ -28,19 +30,6 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
  endif()
  
  set(LIBRARY_NAME custom_ops)
@@ -42,12 +43,12 @@ index e0426d37..f1fd4bac 100644
  
  # Disable warnings on vendored files
  file(
-@@ -85,7 +73,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
+@@ -90,7 +79,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
  
  include_directories(src/kernels)
  include_directories(SYSTEM ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
 -include_directories(SYSTEM ${CMAKE_CURRENT_BINARY_DIR}/${EIGEN_SRC_DIR})
-+include_directories($ENV{EIGEN_SRC_DIR})
++include_directories(${EIGEN3_INCLUDE_DIRS})
  include_directories(SYSTEM ${CMAKE_CURRENT_BINARY_DIR}/${CUB_SRC_DIR})
  
  set_property(TARGET ${LIBRARY_NAME} PROPERTY CUDA_STANDARD 17)

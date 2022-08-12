@@ -1,4 +1,5 @@
 { lib
+, python
 , buildPythonPackage
 , addOpenGLRunpath
 , pytestCheckHook
@@ -36,7 +37,7 @@ buildPythonPackage {
 
   nativeBuildInputs = [ addOpenGLRunpath cmake mypy pybind11 ];
 
-  buildInputs = [ jaxlib ];
+  buildInputs = [ eigen jaxlib ];
 
   propagatedBuildInputs = [
     cudatoolkit
@@ -60,9 +61,14 @@ buildPythonPackage {
   dontUseCmakeConfigure = true;
 
   patches = [
-    ./patches/update-cmake-build.patch
     ./patches/fix-interpreter.patch
     ./patches/unpin-jax.patch
+
+    (substituteAll {
+      src = ./patches/update-cmake-build.patch;
+      pythonVersion = lib.versions.majorMinor python.version;
+    })
+
     (substituteAll {
       src = ./patches/hardcode-version.patch;
       version = timemachine-src.rev or "dirty";
@@ -70,7 +76,6 @@ buildPythonPackage {
   ];
 
   CMAKE_ARGS = "-DCUDA_ARCH=61";
-  EIGEN_SRC_DIR = eigen;
 
   postFixup = ''
     find $out -type f \( -name '*.so' -or -name '*.so.*' \) | while read lib; do

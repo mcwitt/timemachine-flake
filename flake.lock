@@ -1,22 +1,5 @@
 {
   "nodes": {
-    "eigen": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1607118821,
-        "narHash": "sha256-JMIG7CLMndUsECfbKpXE3BtVFuAjn+CZvf8GXZpLkFQ=",
-        "owner": "libeigen",
-        "repo": "eigen",
-        "rev": "0fd6b4f71dd85b2009ee4d1aeb296e2c11fc9d68",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "libeigen",
-        "ref": "3.3.9",
-        "repo": "eigen",
-        "type": "gitlab"
-      }
-    },
     "hilbertcurve-src": {
       "flake": false,
       "locked": {
@@ -70,11 +53,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1660270513,
-        "narHash": "sha256-sOA7UwhAXm8DqQYgcqIe5em6OFW0Tx1AR2rcGe2VLic=",
+        "lastModified": 1660320330,
+        "narHash": "sha256-WfaQO9OpyRZoZ0o7qwdbZhEzyxAD67lEc9l3y1QrPg0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bd2c13dc11cdc7125778f38573cf57b321244a24",
+        "rev": "de93b48a79cbf6e45a8b19c39554e2a520f1a8ec",
         "type": "github"
       },
       "original": {
@@ -101,7 +84,6 @@
     },
     "root": {
       "inputs": {
-        "eigen": "eigen",
         "hilbertcurve-src": "hilbertcurve-src",
         "nixos-qchem": "nixos-qchem",
         "nixpkgs": "nixpkgs_2",
@@ -112,11 +94,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1660259508,
-        "narHash": "sha256-WZNqRJ96OvwhbZonI6+FXsSg0qbAaVb34Q8ynPeBPO0=",
+        "lastModified": 1660316974,
+        "narHash": "sha256-f8dGwwqbWV2dgNK9tn9x43HwgIMteaJxyTszpuRUICo=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "c1717b058b7131d0888a25b35748db554a569654",
+        "rev": "245fbfa80699c6b337153f93de1e2aeaffcec99b",
         "type": "github"
       },
       "original": {
