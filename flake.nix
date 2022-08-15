@@ -11,6 +11,16 @@
 
     nixos-qchem.url = github:markuskowa/NixOS-QChem;
 
+    mdtraj-src = {
+      url = github:mdtraj/mdtraj;
+      flake = false;
+    };
+
+    mols2grid-src = {
+      url = github:cbouy/mols2grid;
+      flake = false;
+    };
+
     pymbar-src = {
       url = github:choderalab/pymbar;
       flake = false;
@@ -25,6 +35,8 @@
     { self
     , nixpkgs
     , hilbertcurve-src
+    , mdtraj-src
+    , mols2grid-src
     , nixos-qchem
     , pymbar-src
     , timemachine-src
@@ -60,6 +72,12 @@
             inherit (cudaPackages) cudatoolkit;
             inherit timemachine-src;
           };
+
+          # Optional
+
+          mdtraj = final.callPackage ./mdtraj.nix { inherit mdtraj-src; };
+
+          mols2grid = final.callPackage ./mols2grid.nix { inherit mols2grid-src; };
         };
 
       overridePython = python: python.override (old: {
