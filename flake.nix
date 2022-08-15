@@ -45,52 +45,16 @@
         final: prev: {
           jaxlib = prev.jaxlib.override { inherit cudaPackages; };
 
-          hilbertcurve = final.buildPythonPackage {
-            name = "hilbertcurve";
-            src = hilbertcurve-src;
-            buildInputs = [ final.numpy ];
-            checkInputs = [ final.pytest ];
-          };
+          hilbertcurve = final.callPackage ./hilbertcurve.nix { inherit hilbertcurve-src; };
 
-          openeye-toolkits =
-            let
-              version = "2020.2.0";
-              mkUrl = pname: "https://pypi.anaconda.org/openeye/simple/${pname}/${version}/${pname}-${version}.tar.gz";
-
-              subpackage =
-                let pname = "OpenEye-toolkits-python3-linux-x64";
-                in final.buildPythonPackage {
-                  inherit pname version;
-                  src = pkgs.fetchurl {
-                    url = mkUrl pname;
-                    sha256 = "sha256-bz+i2rX8g/QVPR30fK1m8KRb/iXz9etCKVD9DO3bVnM=";
-                  };
-                  doCheck = false;
-                };
-
-              pname = "OpenEye-toolkits";
-            in
-            final.buildPythonPackage {
-              inherit pname version;
-              propagatedBuildInputs = [ subpackage ];
-              src = pkgs.fetchurl {
-                url = mkUrl pname;
-                sha256 = "sha256-c7boNOV4oeJwJmQgsSoCN/tsSUcIruj97FzsFS/PRb8=";
-              };
-            };
+          openeye-toolkits = final.callPackage ./openeye-toolkits.nix { };
 
           openmm = final.callPackage "${nixos-qchem}/pkgs/apps/openmm" {
             inherit (cudaPackages) cudatoolkit;
             enableCuda = false;
           };
 
-          pymbar = final.buildPythonPackage {
-            name = "pymbar";
-            src = pymbar-src;
-            buildInputs = [ final.jaxlib ];
-            propagatedBuildInputs = with final; [ jax numexpr ];
-            doCheck = false;
-          };
+          pymbar = final.callPackage ./pymbar.nix { inherit pymbar-src; };
 
           timemachine = final.callPackage ./timemachine {
             inherit (cudaPackages) cudatoolkit;
