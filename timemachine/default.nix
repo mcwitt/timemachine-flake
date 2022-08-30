@@ -62,7 +62,6 @@ let
 
     patches = [
       ./patches/fix-interpreter.patch
-      ./patches/unpin-jax.patch
 
       (substituteAll {
         src = ./patches/update-cmake-build.patch;
