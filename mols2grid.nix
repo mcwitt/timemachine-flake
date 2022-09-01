@@ -13,6 +13,5 @@ buildPythonPackage rec {
     sha256 = "sha256-Rnd3nuch7N6Frbk3MEuEEc9CRklsSKUmRMhiKd2x/y4=";
   };
   buildInputs = [ jinja2 pandas rdkit ];
-  doCheck = false;
   pythonImportsCheck = [ "mols2grid" ];
 }

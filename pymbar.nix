@@ -3,6 +3,10 @@
 , jax
 , jaxlib
 , numexpr
+
+, pytest
+, pytest-cov
+, pytest-runner
 }:
 
 buildPythonPackage rec {
@@ -11,10 +15,10 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "choderalab";
     repo = "pymbar";
-    rev = "4.0.1";
+    rev = version;
     sha256 = "sha256-62LzflqqSKfvH7QTmd7xN7685w0gGGYqsZc+9nkb8Jw=";
   };
   buildInputs = [ jaxlib ];
   propagatedBuildInputs = [ jax numexpr ];
-  doCheck = false;
+  checkInputs = [ pytest pytest-cov pytest-runner ];
 }

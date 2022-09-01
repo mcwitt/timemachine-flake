@@ -12,6 +12,7 @@ let
         sha256 = "sha256-bz+i2rX8g/QVPR30fK1m8KRb/iXz9etCKVD9DO3bVnM=";
       };
       doCheck = false;
+      pythonImportsCheck = [ "openeye" ];
     };
 
   pname = "OpenEye-toolkits";
