@@ -42,6 +42,8 @@
             enableCuda = false;
           };
 
+          py3Dmol = final.callPackage ./py3Dmol.nix { };
+
           pymbar = final.callPackage ./pymbar.nix { };
 
           timemachine = final.callPackage ./timemachine {
@@ -63,6 +65,7 @@
         in python3.withPackages (ps: with ps; [
           jaxlib
           mols2grid
+          py3Dmol
           timemachine
         ]);
 
