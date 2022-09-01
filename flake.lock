@@ -1,54 +1,5 @@
 {
   "nodes": {
-    "hilbertcurve-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1605133181,
-        "narHash": "sha256-fY5WD8qCj01VXo4j66qZ4aFHDw6jFFB4codmpJF8nqQ=",
-        "owner": "galtay",
-        "repo": "hilbertcurve",
-        "rev": "fcd750a2f836e36708851905c02c2b66ddacf8eb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "galtay",
-        "ref": "v1.0.5",
-        "repo": "hilbertcurve",
-        "type": "github"
-      }
-    },
-    "mdtraj-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653011639,
-        "narHash": "sha256-MwRYymhkHPvh/WkNlx55+YgGuC8o5DSIiXbEO3tf6kA=",
-        "owner": "mdtraj",
-        "repo": "mdtraj",
-        "rev": "1a757274f6f9acd6c9c847c72f5857e9c1046d17",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mdtraj",
-        "repo": "mdtraj",
-        "type": "github"
-      }
-    },
-    "mols2grid-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1652997211,
-        "narHash": "sha256-1vd2Lj952Dsr2JjlWYmAgyzKQT5Bl1sG7kxofFImUs8=",
-        "owner": "cbouy",
-        "repo": "mols2grid",
-        "rev": "50e7d9ffa812a152e8f8b206d58c9bcc21d68c69",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cbouy",
-        "repo": "mols2grid",
-        "type": "github"
-      }
-    },
     "nixos-qchem": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -98,30 +49,10 @@
         "type": "github"
       }
     },
-    "pymbar-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1658354184,
-        "narHash": "sha256-62LzflqqSKfvH7QTmd7xN7685w0gGGYqsZc+9nkb8Jw=",
-        "owner": "choderalab",
-        "repo": "pymbar",
-        "rev": "445170f705226d53c85b8b70ffa1f687f2aafcc4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "choderalab",
-        "repo": "pymbar",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "hilbertcurve-src": "hilbertcurve-src",
-        "mdtraj-src": "mdtraj-src",
-        "mols2grid-src": "mols2grid-src",
         "nixos-qchem": "nixos-qchem",
         "nixpkgs": "nixpkgs_2",
-        "pymbar-src": "pymbar-src",
         "timemachine-src": "timemachine-src"
       }
     },

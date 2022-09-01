@@ -4,27 +4,7 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs;
 
-    hilbertcurve-src = {
-      url = github:galtay/hilbertcurve?ref=v1.0.5;
-      flake = false;
-    };
-
     nixos-qchem.url = github:markuskowa/NixOS-QChem;
-
-    mdtraj-src = {
-      url = github:mdtraj/mdtraj;
-      flake = false;
-    };
-
-    mols2grid-src = {
-      url = github:cbouy/mols2grid;
-      flake = false;
-    };
-
-    pymbar-src = {
-      url = github:choderalab/pymbar;
-      flake = false;
-    };
 
     timemachine-src = {
       url = github:proteneer/timemachine;
@@ -34,11 +14,7 @@
   outputs =
     { self
     , nixpkgs
-    , hilbertcurve-src
-    , mdtraj-src
-    , mols2grid-src
     , nixos-qchem
-    , pymbar-src
     , timemachine-src
     , ...
     }:
@@ -57,7 +33,7 @@
         final: prev: {
           jaxlib = prev.jaxlib.override { inherit cudaPackages; };
 
-          hilbertcurve = final.callPackage ./hilbertcurve.nix { inherit hilbertcurve-src; };
+          hilbertcurve = final.callPackage ./hilbertcurve.nix { };
 
           openeye-toolkits = final.callPackage ./openeye-toolkits.nix { };
 
@@ -66,7 +42,7 @@
             enableCuda = false;
           };
 
-          pymbar = final.callPackage ./pymbar.nix { inherit pymbar-src; };
+          pymbar = final.callPackage ./pymbar.nix { };
 
           timemachine = final.callPackage ./timemachine {
             inherit (cudaPackages) cudatoolkit;
@@ -75,9 +51,9 @@
 
           # Optional
 
-          mdtraj = final.callPackage ./mdtraj.nix { inherit mdtraj-src; };
+          mdtraj = final.callPackage ./mdtraj.nix { };
 
-          mols2grid = final.callPackage ./mols2grid.nix { inherit mols2grid-src; };
+          mols2grid = final.callPackage ./mols2grid.nix { };
         };
 
       overridePython = python: python.override (old: {
@@ -86,7 +62,12 @@
 
       pythonEnv =
         let python3 = overridePython pkgs.python3;
-        in python3.withPackages (ps: with ps; [ jaxlib timemachine ]);
+        in python3.withPackages (ps: with ps; [
+          jaxlib
+          mdtraj
+          mols2grid
+          timemachine
+        ]);
 
     in
     {
