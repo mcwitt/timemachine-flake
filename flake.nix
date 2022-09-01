@@ -51,22 +51,19 @@
 
           # Optional
 
-          mdtraj = final.callPackage ./mdtraj.nix { };
-
           mols2grid = final.callPackage ./mols2grid.nix { };
         };
 
       overridePython = python: python.override (old: {
-        packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_:_: { })) pythonOverrides;
+        packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) pythonOverrides;
       });
 
       pythonEnv =
         let python3 = overridePython pkgs.python3;
-        in python3.withPackages (ps: with ps; [
-          jaxlib
-          mdtraj
-          mols2grid
-          timemachine
+        in python3.withPackages (ps: [
+          ps.jaxlib
+          ps.mols2grid
+          ps.timemachine
         ]);
 
     in

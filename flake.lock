@@ -36,11 +36,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1661901046,
-        "narHash": "sha256-XgSPlTu2DS3B2KieKHc1Vq2O7fqM2zrehf0asGtN0a0=",
+        "lastModified": 1662073308,
+        "narHash": "sha256-ECKZ5scA9OHz60OduaM5917HiAfwwNeHuOeeInj8vGA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "22f43ade54b5cbcd2e87cf96dccf62642a71eb30",
+        "rev": "cf40140a53bf1920bb71473a0e51730512f83951",
         "type": "github"
       },
       "original": {
@@ -59,11 +59,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1661800956,
-        "narHash": "sha256-LJqHDB3f36C/t+poBGQpnpJnhFIwttJkzM5L3CO92uY=",
+        "lastModified": 1662060473,
+        "narHash": "sha256-sptTx1eaOibVlzVLp46kMUucwyj5HJA8VtPnr5r5VWY=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "13ca9fd3f27210a7a116a7ca2747b5cd5b0cc4f6",
+        "rev": "3ab363944b50728869f023fd2c69c1c74122fcf8",
         "type": "github"
       },
       "original": {
