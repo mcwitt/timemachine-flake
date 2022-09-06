@@ -60,10 +60,10 @@
 
       pythonEnv =
         let python3 = overridePython pkgs.python3;
-        in python3.withPackages (ps: [
-          ps.jaxlib
-          ps.mols2grid
-          ps.timemachine
+        in python3.withPackages (ps: with ps; [
+          jaxlib
+          mols2grid
+          timemachine
         ]);
 
     in
