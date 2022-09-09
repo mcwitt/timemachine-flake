@@ -32,12 +32,12 @@
 }:
 
 let
-  timemachine = buildPythonPackage {
+  timemachine = buildPythonPackage rec {
     name = "timemachine";
+    version = timemachine-src.rev or "dirty";
     src = timemachine-src;
 
     nativeBuildInputs = [ addOpenGLRunpath cmake mypy pybind11 ];
-
     buildInputs = [ eigen jaxlib ];
 
     propagatedBuildInputs = [
@@ -70,7 +70,7 @@ let
 
       (substituteAll {
         src = ./patches/hardcode-version.patch;
-        version = timemachine-src.rev or "dirty";
+        inherit version;
       })
     ];
 
