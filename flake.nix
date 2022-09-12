@@ -26,7 +26,7 @@
         config.allowUnfree = true;
       };
 
-      pythonOverrides =
+      packageOverrides =
         let
           cudaPackages = pkgs.cudaPackages_11_6;
         in
@@ -57,7 +57,7 @@
         };
 
       overridePython = python: python.override (old: {
-        packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) pythonOverrides;
+        packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) packageOverrides;
       });
 
       pythonEnv =
