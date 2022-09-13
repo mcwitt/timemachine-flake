@@ -1,8 +1,8 @@
 { buildPythonPackage
 , fetchFromGitHub
-, jax
-, jaxlib
-, numexpr
+, numpy
+, scipy
+, six
 
 , pytest
 , pytest-cov
@@ -11,14 +11,13 @@
 
 buildPythonPackage rec {
   pname = "pymbar";
-  version = "4.0.1";
+  version = "3.1.0";
   src = fetchFromGitHub {
     owner = "choderalab";
     repo = "pymbar";
     rev = version;
-    sha256 = "sha256-62LzflqqSKfvH7QTmd7xN7685w0gGGYqsZc+9nkb8Jw=";
+    sha256 = "sha256-lyUFPvhbVsqLIYRspYd+Mk40/1rCYP2W6ESY/7UDUT4=";
   };
-  buildInputs = [ jaxlib ];
-  propagatedBuildInputs = [ jax numexpr ];
+  propagatedBuildInputs = [ numpy scipy six ];
   checkInputs = [ pytest pytest-cov pytest-runner ];
 }
