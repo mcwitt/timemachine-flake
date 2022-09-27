@@ -1,7 +1,7 @@
 # timemachine-flake
 
-Nix Flake for the [timemachine][] molecular dynamics and free energy
-package.
+[Nix][] [Flake](https://nixos.wiki/wiki/Flakes) for the
+[timemachine][] molecular dynamics and free energy package.
 
 ## Quick start
 
@@ -74,5 +74,6 @@ Example:
 }
 ```
 
+[Nix]: https://nixos.org/
 [timemachine]: https://github.com/proteneer/timemachine
 [nixGL]: https://github.com/guibou/nixGL
