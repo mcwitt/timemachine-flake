@@ -79,5 +79,16 @@
       };
 
       devShells.${system}.default = pythonEnv.env;
+
+      templates = {
+        notebook = {
+          path = ./templates/notebook;
+          description = "notebook environment with timemachine";
+        };
+        script = {
+          path = ./templates/script;
+          description = "python environment with timemachine";
+        };
+      };
     };
 }

@@ -1,0 +1,184 @@
+{
+  "nodes": {
+    "mdtraj": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "py-utils": "py-utils",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1653011639,
+        "narHash": "sha256-MwRYymhkHPvh/WkNlx55+YgGuC8o5DSIiXbEO3tf6kA=",
+        "owner": "mdtraj",
+        "repo": "mdtraj",
+        "rev": "1a757274f6f9acd6c9c847c72f5857e9c1046d17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mdtraj",
+        "repo": "mdtraj",
+        "type": "github"
+      }
+    },
+    "nixos-qchem": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1663851913,
+        "narHash": "sha256-nvISOpUJYIlSu371s3hpvg/rCwFUX+3Pcxo9QyM9i40=",
+        "owner": "markuskowa",
+        "repo": "NixOS-QChem",
+        "rev": "674309f18c37c449fc184e9e2890f29bbcee8f51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "markuskowa",
+        "repo": "NixOS-QChem",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1644359234,
+        "narHash": "sha256-u/sBnRgrFrn9W8gZMS6vN3ZnJsoTvbws968TpqwlDJQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c5051e2b5fe9fab43a64f0e0d06b62c81a890b90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1664195620,
+        "narHash": "sha256-/0V1a1gAR+QbiQe4aCxBoivhkxss0xyt2mBD6yDrgjw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "62228ccc672ed000f35b1e5c82e4183e46767e52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1662096612,
+        "narHash": "sha256-R+Q8l5JuyJryRPdiIaYpO5O3A55rT+/pItBrKcy7LM4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "21de2b973f9fee595a7a1ac4693efff791245c34",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1664308866,
+        "narHash": "sha256-+JG94mDnyW/YEeEeTR2ggDbSr0yCuCjJckDfHiaa7Gg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "592815804a9de9985c7b39b42d01cb3586572756",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "py-utils": {
+      "locked": {
+        "lastModified": 1644413691,
+        "narHash": "sha256-JcZlxVZGRQkAs5ti5N1hvt7JA3w6NoZ+P4Hte77izC0=",
+        "owner": "rmcgibbo",
+        "repo": "python-flake-utils",
+        "rev": "47b4ec65adfd82f029be229aa0d1646c0b6d2ed4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rmcgibbo",
+        "ref": "2arg",
+        "repo": "python-flake-utils",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "mdtraj": "mdtraj",
+        "nixpkgs": "nixpkgs_2",
+        "timemachine-flake": "timemachine-flake",
+        "timemachine-src": "timemachine-src"
+      }
+    },
+    "timemachine-flake": {
+      "inputs": {
+        "nixos-qchem": "nixos-qchem",
+        "nixpkgs": "nixpkgs_4",
+        "timemachine-src": [
+          "timemachine-src"
+        ]
+      },
+      "locked": {
+        "lastModified": 1664309189,
+        "narHash": "sha256-5qNsDv9LzJpjn+hoCGfjMQsWQbwd6w/RCSLti4Wnn/o=",
+        "owner": "mcwitt",
+        "repo": "timemachine-flake",
+        "rev": "ebccff0d86ef57ad36677ef6da1e881f716f41df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mcwitt",
+        "repo": "timemachine-flake",
+        "type": "github"
+      }
+    },
+    "timemachine-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664310933,
+        "narHash": "sha256-2U5QQrVNXiTmYXBQG8auJjB6yCJPCUgPnv04ya54oWc=",
+        "owner": "proteneer",
+        "repo": "timemachine",
+        "rev": "848977e4e3c73bc3b2cda7407f75a3b68859c4de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "proteneer",
+        "repo": "timemachine",
+        "type": "github"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

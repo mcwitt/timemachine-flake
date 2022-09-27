@@ -1,0 +1,5 @@
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+honor_noqa = true      # allow overriding with `# noqa`
+multi_line_output = 3  # https://pycqa.github.io/isort/docs/configuration/multi_line_output_modes.html
