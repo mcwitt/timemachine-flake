@@ -12,8 +12,7 @@
     };
   };
   outputs =
-    { self
-    , nixpkgs
+    { nixpkgs
     , nixos-qchem
     , timemachine-src
     , ...
@@ -73,9 +72,14 @@
     {
       overlay = _: prev: { python3 = overridePython prev.python3; };
 
-      packages.${system} = {
-        default = self.packages.${system}.timemachine;
-        timemachine = pythonEnv;
+      packages.${system} = rec {
+        inherit pythonEnv;
+        default = pythonEnv;
+
+        docker = pkgs.dockerTools.buildImage {
+          name = "timemachine";
+          config.Cmd = "${pythonEnv}/bin/python";
+        };
       };
 
       devShells.${system}.default = pythonEnv.env;
