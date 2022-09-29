@@ -2,10 +2,10 @@
   description = "timemachine notebook environment";
 
   inputs = {
-    jupyterWith.url = github:tweag/jupyterWith;
-    mdtraj.url = github:mdtraj/mdtraj;
-    nixpkgs.url = github:nixos/nixpkgs;
-    timemachine-flake.url = github:mcwitt/timemachine-flake;
+    jupyterWith.url = "github:tweag/jupyterWith";
+    mdtraj.url = "github:mdtraj/mdtraj";
+    nixpkgs.url = "github:nixos/nixpkgs";
+    timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
   outputs =
     { jupyterWith

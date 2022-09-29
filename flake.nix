@@ -2,12 +2,12 @@
   description = "timemachine python environment";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs;
+    nixpkgs.url = "github:nixos/nixpkgs";
 
-    nixos-qchem.url = github:markuskowa/NixOS-QChem;
+    nixos-qchem.url = "github:markuskowa/NixOS-QChem";
 
     timemachine-src = {
-      url = github:proteneer/timemachine;
+      url = "github:proteneer/timemachine";
       flake = false;
     };
   };

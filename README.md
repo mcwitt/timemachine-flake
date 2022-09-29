@@ -54,12 +54,12 @@ Example:
 ```nix
 {
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs;
+    nixpkgs.url = "github:nixos/nixpkgs";
 
     timemachine-flake = {
-      url = github:mcwitt/timemachine-flake;
+      url = "github:mcwitt/timemachine-flake";
       # optional; use a specific timemachine commit
-      inputs.timemachine-src.url = github:proteneer/timemachine/445c5df908d9c13280db5509bb5d5e201dbfbe64;
+      inputs.timemachine-src.url = "github:proteneer/timemachine/445c5df908d9c13280db5509bb5d5e201dbfbe64";
     };
   };
 

@@ -2,16 +2,16 @@
   description = "timemachine python environment";
 
   inputs = {
-    mdtraj.url = github:mdtraj/mdtraj;
-    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    mdtraj.url = "github:mdtraj/mdtraj";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     timemachine-flake = {
-      url = github:mcwitt/timemachine-flake;
+      url = "github:mcwitt/timemachine-flake";
       inputs.timemachine-src.follows = "timemachine-src";
     };
 
     timemachine-src = {
-      url = github:proteneer/timemachine;
+      url = "github:proteneer/timemachine";
       flake = false;
     };
   };
