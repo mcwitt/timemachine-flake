@@ -4,7 +4,7 @@
   inputs = {
     jupyterWith.url = "github:tweag/jupyterWith";
     mdtraj.url = "github:mdtraj/mdtraj";
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
   outputs =
