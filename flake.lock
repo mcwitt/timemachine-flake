@@ -60,11 +60,11 @@
     "timemachine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1664411725,
-        "narHash": "sha256-hvQybwLEiqL2g9XGtrrKUd0vlaVLGOt5IkwsJZCEeBQ=",
+        "lastModified": 1664550661,
+        "narHash": "sha256-O3Xl93yySUztARBepcTcnNxzJGwFwwxTPmXqoUr8gkg=",
         "owner": "proteneer",
         "repo": "timemachine",
-        "rev": "f9fecb8dc7dd970fa2002d06453751f87fcb27a0",
+        "rev": "4c0e1784dcb26a8c0b6afb043a346f88cdfaadc7",
         "type": "github"
       },
       "original": {

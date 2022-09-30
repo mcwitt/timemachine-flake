@@ -61,8 +61,6 @@ let
     dontUseCmakeConfigure = true;
 
     patches = [
-      ./patches/fix-interpreter.patch
-
       (substituteAll {
         src = ./patches/update-cmake-build.patch;
         pythonVersion = lib.versions.majorMinor python.version;
