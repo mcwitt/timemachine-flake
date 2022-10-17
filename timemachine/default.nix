@@ -9,7 +9,6 @@
 , cudatoolkit
 , eigen
 
-, grpcio
 , hilbertcurve
 , importlib-resources
 , jax
@@ -42,7 +41,6 @@ let
 
     propagatedBuildInputs = [
       cudatoolkit
-      grpcio
       importlib-resources
       jax
       matplotlib
