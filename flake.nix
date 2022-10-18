@@ -59,14 +59,14 @@
         packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) packageOverrides;
       });
 
-      pythonEnv =
-        let python3 = overridePython pkgs.python3;
-        in python3.withPackages (ps: with ps; [
-          jaxlib
-          mols2grid
-          py3Dmol
-          timemachine
-        ]);
+      python3 = overridePython pkgs.python3;
+
+      pythonEnv = python3.withPackages (ps: with ps; [
+        jaxlib
+        mols2grid
+        py3Dmol
+        timemachine
+      ]);
 
     in
     {
@@ -75,6 +75,7 @@
       packages.${system} = rec {
         inherit pythonEnv;
         default = pythonEnv;
+        inherit (python3.pkgs) timemachine;
 
         docker = pkgs.dockerTools.buildImage {
           name = "timemachine";
