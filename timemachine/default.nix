@@ -1,17 +1,14 @@
-{ lib
-, python
+{ addOpenGLRunpath
 , buildPythonPackage
-, addOpenGLRunpath
-, substituteAll
-
 , cmake
 , cudatoolkit
 , eigen
-
 , hilbertcurve
+, hypothesis
 , importlib-resources
 , jax
 , jaxlib
+, lib
 , matplotlib
 , mypy
 , networkx
@@ -20,13 +17,12 @@
 , openmm
 , pybind11
 , pymbar
+, pytest
+, python
 , pyyaml
 , rdkit
 , scipy
-
-, hypothesis
-, pytest
-
+, substituteAll
 , timemachine-src
 }:
 
@@ -76,10 +72,7 @@ let
     CMAKE_ARGS = "-DCUDA_ARCH=61";
 
     postFixup = ''
-      find $out -type f \( -name '*.so' -or -name '*.so.*' \) | while read lib; do
-        echo "setting opengl runpath for $lib"
-        addOpenGLRunpath "$lib"
-      done
+      addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
     '';
 
     checkInputs = timemachine.optional-dependencies.test;
@@ -128,11 +121,11 @@ let
 
     passthru.optional-dependencies.test = [ pytest hilbertcurve hypothesis ];
 
-    meta = with lib; {
+    meta = {
       description = "A high-performance differentiable molecular dynamics, docking and optimization engine";
       homepage = "https://github.com/proteneer/timemachine";
-      license = licenses.asl20;
-      maintainers = with maintainers; [ mcwitt ];
+      license = lib.licenses.asl20;
+      maintainers = [ lib.maintainers.mcwitt ];
     };
   };
 in
