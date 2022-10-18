@@ -1,40 +1,6 @@
 {
   "nodes": {
-    "nixos-qchem": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1666006177,
-        "narHash": "sha256-4C7fxUMz6HH+h6D3111ureWtsg+CsnqhpzCqwpcrIEc=",
-        "owner": "markuskowa",
-        "repo": "NixOS-QChem",
-        "rev": "3b03db9060ee0de87fd30c9ff74d19a114be3a1b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "markuskowa",
-        "repo": "NixOS-QChem",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1665634984,
-        "narHash": "sha256-zwXeMc96BD9iFxSB/SLr3dI8iYpqM+seX9qy6bGV+cw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "cfea568da97a2668ef3cb3fc42eaacfb0e706807",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1665940183,
         "narHash": "sha256-cPe3F7CtnxU9YbJpc3Adl4d9kX+turqTv5FxM98i8vg=",
@@ -52,8 +18,7 @@
     },
     "root": {
       "inputs": {
-        "nixos-qchem": "nixos-qchem",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "timemachine-src": "timemachine-src"
       }
     },

@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixos-qchem.url = "github:markuskowa/NixOS-QChem";
-
     timemachine-src = {
       url = "github:proteneer/timemachine";
       flake = false;
@@ -13,7 +11,6 @@
   };
   outputs =
     { nixpkgs
-    , nixos-qchem
     , timemachine-src
     , ...
     }:
@@ -36,7 +33,7 @@
 
           openeye-toolkits = final.callPackage ./openeye-toolkits.nix { };
 
-          openmm = final.callPackage "${nixos-qchem}/pkgs/apps/openmm" {
+          openmm = prev.openmm.override {
             inherit (cudaPackages) cudatoolkit;
             enableCuda = false;
           };
