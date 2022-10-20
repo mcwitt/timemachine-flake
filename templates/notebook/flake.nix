@@ -2,14 +2,12 @@
   description = "timemachine notebook environment";
 
   inputs = {
-    jupyterWith.url = "github:tweag/jupyterWith";
     mdtraj.url = "github:mdtraj/mdtraj";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
   outputs =
-    { jupyterWith
-    , mdtraj
+    { mdtraj
     , nixpkgs
     , timemachine-flake
     , ...
@@ -20,8 +18,6 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
-          jupyterWith.overlays.jupyterWith
-          jupyterWith.overlays.python
           mdtraj.overlay
           timemachine-flake.overlay
         ];
@@ -40,60 +36,38 @@
 
             format = "pyproject";
 
+            nativeBuildInputs = [ final.pythonRelaxDepsHook ];
+
             propagatedBuildInputs = with python3.pkgs; [
               black
               python3.pkgs.ipython
               tokenize-rt
             ];
 
-            postPatch = ''
-              substituteInPlace setup.cfg --replace "ipython >= 7.27.0, < 8" "ipython >= 7.27.0"
-            '';
+            pythonRelaxDeps = [ "ipython" ];
           };
         });
       });
 
-      pkgFun = ps: with ps; [
-        black
-        isort
-        jaxlib
-        matplotlib
-        (ps.mdtraj.override { scikitlearn = ps.scikit-learn; })
-        mols2grid
-        timemachine
-        tqdm
-      ];
-
-      pythonEnv = python3.withPackages pkgFun;
-
-      ipython = pkgs.kernels.iPythonWith {
-        name = "python3-timemachine";
-        inherit python3;
-        packages = ps: pkgFun ps ++ (with ps; [
+      pythonEnv = python3.withPackages (
+        ps: with ps; [
+          black
           ipywidgets
+          isort
+          jaxlib
           jupyter-black
+          matplotlib
+          (ps.mdtraj.override { scikitlearn = ps.scikit-learn; })
+          mols2grid
+          notebook
           py3Dmol
-        ]);
-        ignoreCollisions = true;
-      };
-
-      jupyterEnv = pkgs.jupyterlabWith { kernels = [ ipython ]; };
+          timemachine
+          tqdm
+        ]
+      );
 
     in
     {
-      apps.${system} = rec {
-        jupyter-lab = {
-          type = "app";
-          program = "${jupyterEnv}/bin/jupyter-lab";
-        };
-
-        default = jupyter-lab;
-      };
-
-      devShells.${system} = {
-        default = pythonEnv.env;
-        pythonEnv = pythonEnv.env;
-        jupyterEnv = jupyterEnv.env;
-      };
+      devShells.${system}.default = pythonEnv.env;
     };
 }
