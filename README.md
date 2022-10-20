@@ -15,7 +15,7 @@ correct OpenGL driver.*
    nix develop github:mcwitt/timemachine-flake
    ```
 
-1. To create a reproducible notebook using timemachine
+1. To create a reproducible notebook environment using timemachine
 
     ```console
     mkdir my-project
@@ -23,13 +23,12 @@ correct OpenGL driver.*
     nix flake init -t github:mcwitt/timemachine-flake#notebook
     ```
 
-    Optionally edit `flake.nix` to configure the environment, then run
+    Optionally edit `flake.nix` to configure, then enter the
+    environment with
 
     ```console
-    nix run
+    nix develop
     ```
-
-    to launch the notebook server.
 
 1. To create a reproducible script using timemachine
 
