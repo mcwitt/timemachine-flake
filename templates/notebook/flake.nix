@@ -4,7 +4,11 @@
   inputs = {
     mdtraj.url = "github:mdtraj/mdtraj";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    timemachine-flake.url = "github:mcwitt/timemachine-flake";
+    timemachine-flake = {
+      url = "github:mcwitt/timemachine-flake";
+      # (optional) pin to a timemachine commit
+      # inputs.timemachine-src.url = "github:proteneer/timemachine/70aef22f702112c6bb87f4ca2c7da3fe460e2b3b";
+    };
   };
   outputs =
     { mdtraj
@@ -24,28 +28,9 @@
       };
 
       python3 = pkgs.python3.override (old: {
-        packageOverrides = nixpkgs.lib.composeExtensions old.packageOverrides (final: _: {
-          jupyter-black = final.buildPythonPackage rec {
-            pname = "jupyter-black";
-            version = "0.3.1";
-
-            src = final.fetchPypi {
-              inherit pname version;
-              sha256 = "sha256-8LCmCo6oMCqNZZR6q2kSOK3bKAah1ljrWpgHj+tEgRw=";
-            };
-
-            format = "pyproject";
-
-            nativeBuildInputs = [ final.pythonRelaxDepsHook ];
-
-            propagatedBuildInputs = with python3.pkgs; [
-              black
-              python3.pkgs.ipython
-              tokenize-rt
-            ];
-
-            pythonRelaxDeps = [ "ipython" ];
-          };
+        packageOverrides = nixpkgs.lib.composeExtensions old.packageOverrides (final: prev: {
+          jupyter-black = final.callPackage ./nix/jupyter-black.nix { };
+          timemachine = prev.timemachine.overrideAttrs (_: { doInstallCheck = false; }); # tests are slow
         });
       });
 
@@ -57,7 +42,7 @@
           jaxlib
           jupyter-black
           matplotlib
-          (ps.mdtraj.override { scikitlearn = ps.scikit-learn; })
+          ps.mdtraj
           mols2grid
           notebook
           py3Dmol

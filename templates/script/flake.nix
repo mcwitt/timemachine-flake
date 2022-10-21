@@ -12,6 +12,8 @@
 
     timemachine-src = {
       url = "github:proteneer/timemachine";
+      # (optional) pin to a timemachine commit
+      # url = "github:proteneer/timemachine/70aef22f702112c6bb87f4ca2c7da3fe460e2b3b";
       flake = false;
     };
   };
@@ -38,7 +40,7 @@
         isort
         jaxlib
         matplotlib
-        (ps.mdtraj.override { scikitlearn = ps.scikit-learn; })
+        mdtraj
         mols2grid
         rich
         timemachine
@@ -57,7 +59,7 @@
           program = makeProgram "print-version" [
             "${pythonEnv}/bin/python"
             "-c"
-            "'import timemachine; print(timemachine.__version__)'"
+            "'import timemachine; print(timemachine.__version__, timemachine.__commit__)'"
           ];
         };
 
