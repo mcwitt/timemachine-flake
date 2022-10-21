@@ -20,6 +20,7 @@
 , pytest
 , python
 , pyyaml
+, pythonRelaxDepsHook
 , rdkit
 , scipy
 , substituteAll
@@ -28,9 +29,12 @@
 
 let
   timemachine = buildPythonPackage rec {
-    name = "timemachine";
-    version = timemachine-src.rev or "dirty";
+    pname = "timemachine";
+    version = "0.1";
+
     src = timemachine-src;
+
+    format = "pyproject";
 
     patches =
       let
@@ -40,6 +44,7 @@ let
         };
         hardcode-version = substituteAll {
           src = ./patches/hardcode-version.patch;
+          commit = timemachine-src.rev;
           inherit version;
         };
       in
@@ -48,7 +53,13 @@ let
         hardcode-version
       ];
 
-    nativeBuildInputs = [ addOpenGLRunpath cmake mypy pybind11 ];
+    nativeBuildInputs = [
+      addOpenGLRunpath
+      cmake
+      mypy
+      pybind11
+      pythonRelaxDepsHook
+    ];
 
     buildInputs = [ eigen jaxlib ];
 
@@ -67,10 +78,17 @@ let
       scipy
     ];
 
+    # setuptools doesn't recognize nixpkgs rdkit because it's missing
+    # a dist-info directory. Remove rdkit from the requirements to
+    # allow installation to succeed
+    pythonRemoveDeps = [ "rdkit" ];
+
+    # CMake is invoked by the setuptools build
     dontUseCmakeConfigure = true;
 
     CMAKE_ARGS = "-DCUDA_ARCH=61";
 
+    # Allow extension module to find NVIDIA drivers
     postFixup = ''
       addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
     '';
@@ -90,7 +108,6 @@ let
 
         disabledTestFiles = [
           # many tests in these files require an OpenEye license
-          "tests/test_absolute_hydration.py"
           "tests/test_align.py"
           "tests/test_handlers.py"
         ];

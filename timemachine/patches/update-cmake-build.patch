@@ -1,5 +1,5 @@
 diff --git a/timemachine/cpp/CMakeLists.txt b/timemachine/cpp/CMakeLists.txt
-index 3d1a97cb..21ac96fe 100644
+index 7877106d..64a14635 100644
 --- a/timemachine/cpp/CMakeLists.txt
 +++ b/timemachine/cpp/CMakeLists.txt
 @@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
@@ -43,7 +43,7 @@ index 3d1a97cb..21ac96fe 100644
  
  # Disable warnings on vendored files
  file(
-@@ -90,7 +79,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
+@@ -91,7 +80,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
  
  include_directories(src/kernels)
  include_directories(SYSTEM ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
