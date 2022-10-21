@@ -47,10 +47,10 @@
       ]);
 
       makeProgram = name: args:
-        let command = pkgs.lib.concatStringsSep " " args;
+        let command = nixpkgs.lib.concatStringsSep " " args;
         in toString (pkgs.writeScript name command);
 
-      attrsToArgs = pkgs.lib.mapAttrsToList (k: v: "--${k}=${toString v}");
+      attrsToArgs = nixpkgs.lib.mapAttrsToList (k: v: "--${k}=${toString v}");
     in
     {
       apps.${system} = rec {

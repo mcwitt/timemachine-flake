@@ -53,7 +53,7 @@
         };
 
       overridePython = python: python.override (old: {
-        packageOverrides = pkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) packageOverrides;
+        packageOverrides = nixpkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) packageOverrides;
       });
 
       python3 = overridePython pkgs.python3;
