@@ -18,6 +18,7 @@
 , pybind11
 , pymbar
 , pytest
+, pytest-cov
 , python
 , pyyaml
 , pythonRelaxDepsHook
@@ -136,7 +137,12 @@ let
 
     pythonImportsCheck = [ "timemachine" ];
 
-    passthru.optional-dependencies.test = [ pytest hilbertcurve hypothesis ];
+    passthru.optional-dependencies.test = [
+      pytest
+      pytest-cov
+      hilbertcurve
+      hypothesis
+    ];
 
     meta = {
       description = "A high-performance differentiable molecular dynamics, docking and optimization engine";
