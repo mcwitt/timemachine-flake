@@ -1,11 +1,14 @@
 { addOpenGLRunpath
+, black_21_12b0
 , buildPythonPackage
 , cmake
 , cudatoolkit
 , eigen
+, flake8
 , hilbertcurve
 , hypothesis
 , importlib-resources
+, isort
 , jax
 , jaxlib
 , lib
@@ -20,8 +23,8 @@
 , pytest
 , pytest-cov
 , python
-, pyyaml
 , pythonRelaxDepsHook
+, pyyaml
 , rdkit
 , scipy
 , substituteAll
@@ -136,6 +139,13 @@ let
       '';
 
     pythonImportsCheck = [ "timemachine" ];
+
+    passthru.optional-dependencies.dev = [
+      black_21_12b0
+      flake8
+      isort
+      mypy
+    ];
 
     passthru.optional-dependencies.test = [
       pytest

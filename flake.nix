@@ -27,7 +27,30 @@
           cudaPackages = pkgs.cudaPackages_11_6;
         in
         final: prev: {
-          jaxlib = prev.jaxlib.override { inherit cudaPackages; };
+
+          black_21_12b0 = (prev.black.overrideAttrs (oldAttrs: rec {
+            pname = "black";
+            version = "21.12b0";
+            src = final.fetchPypi {
+              inherit pname version;
+              hash = "sha256-d7gPaTpWni5SeVhFljTxjfmwuiYluk4MLV2lvkLm8rM=";
+            };
+            nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
+            pythonRelaxDeps = [ "tomli" ];
+            doInstallCheck = false;
+          })).override { click = final.click_8_0_4; };
+
+          # can remove when upgrading black
+          # https://github.com/psf/black/issues/2964
+          click_8_0_4 = prev.click.overrideAttrs (_: rec {
+            pname = "click";
+            version = "8.0.4";
+            src = final.fetchPypi {
+              inherit pname version;
+              hash = "sha256-hFjXsSh8X7EoyQ4jOBz5nc3nS+r2x/9jhM6E1v4JCts=";
+            };
+            doInstallCheck = false;
+          });
 
           hilbertcurve = final.callPackage ./hilbertcurve.nix { };
 
@@ -80,19 +103,16 @@
 
         inputsFrom = [ python3.pkgs.timemachine ];
 
-        packages = with pkgs; [
-          black
+        packages = python3.pkgs.timemachine.optional-dependencies.dev ++ (with pkgs; [
           clang-tools
           cudaPackages.cuda_gdb
           cudaPackages.cuda_sanitizer_api
           gdb
           hadolint
-          isort
           pyright
-          python3Packages.flake8
           python3Packages.jaxlibWithoutCuda
           python3Packages.pytest-xdist
-        ];
+        ]);
 
         shellHook = ''
           # needed to find the NVIDIA driver at runtime on NixOS
