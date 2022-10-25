@@ -7,15 +7,15 @@
 
 *Note: only Linux is supported. For distributions other than NixOS, you
 might need to prefix `nix` commands with [nixGL][] to run with the
-correct OpenGL driver.*
+correct NVIDIA driver.*
 
-1. To enter a development environment with timemachine installed
+1. To enter an environment with timemachine development dependencies installed
 
    ```console
    nix develop github:mcwitt/timemachine-flake
    ```
 
-1. To create a reproducible notebook environment using timemachine
+1. To create a reproducible notebook using timemachine
 
     ```console
     mkdir my-project
@@ -38,7 +38,8 @@ correct OpenGL driver.*
     nix flake init -t github:mcwitt/timemachine-flake#script
     ```
 
-    Edit `flake.nix` to configure the environment and outputs. Then run (for example)
+    Edit `flake.nix` to configure the environment and entry points.
+    Then run (for example)
 
     ```console
     nix run .#rbfe

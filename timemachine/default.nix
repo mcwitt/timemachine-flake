@@ -89,7 +89,7 @@ let
 
     CMAKE_ARGS = "-DCUDA_ARCH=61";
 
-    # Allow extension module to find NVIDIA drivers
+    # Allow extension module to find NVIDIA drivers on NixOS
     postFixup = ''
       addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
     '';

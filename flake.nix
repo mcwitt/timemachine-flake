@@ -58,20 +58,21 @@
 
       python3 = overridePython pkgs.python3;
 
-      pythonEnv = python3.withPackages (ps: with ps; [
-        jaxlib
-        mols2grid
-        py3Dmol
-        timemachine
-      ]);
-
     in
     {
       overlay = _: prev: { python3 = overridePython prev.python3; };
 
       packages.${system} = rec {
-        inherit pythonEnv;
+
         default = pythonEnv;
+
+        pythonEnv = python3.withPackages (ps: with ps; [
+          jaxlib
+          mols2grid
+          py3Dmol
+          timemachine
+        ]);
+
         inherit (python3.pkgs) timemachine;
 
         docker = pkgs.dockerTools.buildImage {
@@ -80,7 +81,28 @@
         };
       };
 
-      devShells.${system}.default = pythonEnv.env;
+      devShells.${system}.default = pkgs.mkShell {
+
+        inputsFrom = [ python3.pkgs.timemachine ];
+
+        packages = with pkgs; [
+          black
+          clang-tools
+          cudaPackages.cuda_gdb
+          cudaPackages.cuda_sanitizer_api
+          gdb
+          hadolint
+          isort
+          pyright
+          python3Packages.flake8
+          python3Packages.pytest-xdist
+        ];
+
+        shellHook = ''
+          # needed to find the NVIDIA driver at runtime on NixOS
+          export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+        '';
+      };
 
       templates = {
         notebook = {
