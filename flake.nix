@@ -66,12 +66,7 @@
 
         default = pythonEnv;
 
-        pythonEnv = python3.withPackages (ps: with ps; [
-          jaxlib
-          mols2grid
-          py3Dmol
-          timemachine
-        ]);
+        pythonEnv = python3.withPackages (ps: with ps; [ jaxlibWithoutCuda timemachine ]);
 
         inherit (python3.pkgs) timemachine;
 
@@ -95,6 +90,7 @@
           isort
           pyright
           python3Packages.flake8
+          python3Packages.jaxlibWithoutCuda
           python3Packages.pytest-xdist
         ];
 

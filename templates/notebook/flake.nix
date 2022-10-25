@@ -39,7 +39,7 @@
           black
           ipywidgets
           isort
-          jaxlib
+          jaxlibWithoutCuda
           jupyter-black
           matplotlib
           ps.mdtraj

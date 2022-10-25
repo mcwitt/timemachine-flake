@@ -38,7 +38,7 @@
       pythonEnv = pkgs.python3.withPackages (ps: with ps; [
         black
         isort
-        jaxlib
+        jaxlibWithoutCuda
         matplotlib
         mdtraj
         mols2grid
