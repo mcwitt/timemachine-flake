@@ -1,16 +1,10 @@
-{ buildPythonPackage
-, fetchPypi
-, numpy
-, pytest
-}:
+{ buildPythonPackage, fetchPypi }:
 
 buildPythonPackage rec {
   pname = "hilbertcurve";
-  version = "2.0.5";
+  version = "1.0.5";
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-ancD2aLx/nSMhthpCL8YPn0Tm5c2ReSyUm4Qs051eW0=";
+    sha256 = "sha256-rvwAhZyc3v7h5TtyLDOyCRr6GKYIp+7cfuKs2/Yv6zY=";
   };
-  buildInputs = [ numpy ];
-  checkInputs = [ pytest ];
 }
