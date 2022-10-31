@@ -111,7 +111,6 @@
           hadolint
           pyright
           python3Packages.jaxlibWithoutCuda
-          python3Packages.pytest-xdist
         ]);
 
         shellHook = ''

@@ -22,6 +22,7 @@
 , pymbar
 , pytest
 , pytest-cov
+, pytest-xdist
 , pytestCheckHook
 , python
 , pythonRelaxDepsHook
@@ -99,7 +100,7 @@ let
       addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
     '';
 
-    checkInputs = timemachine.optional-dependencies.test;
+    checkInputs = timemachine.optional-dependencies.test ++ [ pytest-xdist ];
 
     disabledTestPaths = [
       # many tests in these files require an OpenEye license
@@ -115,7 +116,7 @@ let
       "test_jax_transform_intermediate_potential"
     ];
 
-    pytestFlagsArray = [ "--hypothesis-profile=ci" "-m" "nogpu" ];
+    pytestFlagsArray = [ "--hypothesis-profile=ci" "--numprocesses=auto" "-m" "nogpu" ];
 
     pythonImportsCheck = [ "timemachine" ];
 
