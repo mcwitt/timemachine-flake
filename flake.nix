@@ -24,7 +24,7 @@
 
       packageOverrides =
         let
-          cudaPackages = pkgs.cudaPackages_11_6;
+          cudaPackages = pkgs.cudaPackages_11_7;
         in
         final: prev: {
 
