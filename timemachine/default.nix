@@ -22,6 +22,7 @@
 , pymbar
 , pytest
 , pytest-cov
+, pytestCheckHook
 , python
 , pythonRelaxDepsHook
 , pyyaml
@@ -62,6 +63,7 @@ let
       cmake
       mypy
       pybind11
+      pytestCheckHook
       pythonRelaxDepsHook
     ];
 
@@ -99,44 +101,21 @@ let
 
     checkInputs = timemachine.optional-dependencies.test;
 
-    # Work around issue where Python loads stub module from the
-    # build directory instead of the C extension
-    preCheck = ''
-      rm -r timemachine/lib
-    '';
+    disabledTestPaths = [
+      # many tests in these files require an OpenEye license
+      "tests/test_align.py"
+      "tests/test_handlers.py"
+    ];
 
-    checkPhase =
-      let
-        mkDisabledTestFiles = files: lib.concatStringsSep " " (map (f: "--ignore ${f}") files);
-        mkDisabledTests = names: "-k '${lib.concatStringsSep " and " (map (n: "not ${n}") names)}'";
+    disabledTests = [
+      # require OpenEye license
+      "test_get_strained_atoms"
+      "test_hif2a_set"
+      "test_write_single_topology_frame"
+      "test_jax_transform_intermediate_potential"
+    ];
 
-        disabledTestFiles = [
-          # many tests in these files require an OpenEye license
-          "tests/test_align.py"
-          "tests/test_handlers.py"
-        ];
-
-        disabledTests = [
-          # require OpenEye license
-          "test_get_strained_atoms"
-          "test_hif2a_set"
-          "test_write_single_topology_frame"
-          "test_jax_transform_intermediate_potential"
-        ];
-      in
-      ''
-        # validate disabledTestFiles
-        for path in ${lib.concatStringsSep " " disabledTestFiles}; do
-            if [ ! -e $path ]; then
-                echo "Disabled tests path \"$path\" does not exist. Aborting"
-                exit 1
-            fi
-        done
-
-        pytest --hypothesis-profile ci -m nogpu \
-            ${mkDisabledTestFiles disabledTestFiles} \
-            ${mkDisabledTests disabledTests}
-      '';
+    pytestFlagsArray = [ "--hypothesis-profile=ci" "-m" "nogpu" ];
 
     pythonImportsCheck = [ "timemachine" ];
 
