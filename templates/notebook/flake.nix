@@ -30,7 +30,7 @@
       python3 = pkgs.python3.override (old: {
         packageOverrides = nixpkgs.lib.composeExtensions old.packageOverrides (final: prev: {
           jupyter-black = final.callPackage ./nix/jupyter-black.nix { };
-          timemachine = prev.timemachine.overrideAttrs (_: { doInstallCheck = false; }); # tests are slow
+          timemachine = prev.timemachine.overrideAttrs (_: { dontUsePytestCheck = true; }); # tests are slow
         });
       });
 
