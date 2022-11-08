@@ -66,8 +66,8 @@
           pymbar = final.callPackage ./pymbar.nix { };
 
           timemachine = final.callPackage ./timemachine {
-            inherit (cudaPackages) cudatoolkit;
             inherit timemachine-src;
+            inherit (cudaPackages) cudatoolkit cuda_cudart;
           };
 
           # Optional

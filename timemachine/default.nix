@@ -2,6 +2,7 @@
 , black_21_12b0
 , buildPythonPackage
 , cmake
+, cuda_cudart
 , cudatoolkit
 , eigen
 , flake8
@@ -62,16 +63,20 @@ let
     nativeBuildInputs = [
       addOpenGLRunpath
       cmake
+      cudatoolkit
       mypy
       pybind11
       pytestCheckHook
       pythonRelaxDepsHook
     ];
 
-    buildInputs = [ eigen jaxlib ];
+    buildInputs = [
+      cuda_cudart
+      eigen
+      jaxlib
+    ];
 
     propagatedBuildInputs = [
-      cudatoolkit
       importlib-resources
       jax
       matplotlib
