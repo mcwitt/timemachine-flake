@@ -114,6 +114,8 @@ let
     ];
 
     disabledTests = [
+      "test_bootstrap_bar" # nondeterministic timeout
+
       # require OpenEye license
       "test_get_strained_atoms"
       "test_hif2a_set"
