@@ -31,7 +31,7 @@
 , rdkit
 , scipy
 , substituteAll
-, timemachine-src
+, src
 }:
 
 let
@@ -39,7 +39,7 @@ let
     pname = "timemachine";
     version = "0.1";
 
-    src = timemachine-src;
+    inherit src;
 
     format = "pyproject";
 
@@ -51,7 +51,7 @@ let
         };
         hardcode-version = substituteAll {
           src = ./patches/hardcode-version.patch;
-          commit = timemachine-src.rev;
+          commit = src.rev;
           inherit version;
         };
       in
