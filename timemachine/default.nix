@@ -2,8 +2,9 @@
 , black_21_12b0
 , buildPythonPackage
 , cmake
+, cub
 , cuda_cudart
-, cudatoolkit
+, cuda_nvcc
 , eigen
 , flake8
 , hilbertcurve
@@ -13,6 +14,7 @@
 , jax
 , jaxlib
 , lib
+, libcurand
 , matplotlib
 , mypy
 , networkx
@@ -30,8 +32,9 @@
 , pyyaml
 , rdkit
 , scipy
-, substituteAll
 , src
+, substituteAll
+, thrust
 }:
 
 let
@@ -63,7 +66,7 @@ let
     nativeBuildInputs = [
       addOpenGLRunpath
       cmake
-      cudatoolkit
+      cuda_nvcc
       mypy
       pybind11
       pytestCheckHook
@@ -71,9 +74,12 @@ let
     ];
 
     buildInputs = [
+      cub
       cuda_cudart
       eigen
       jaxlib
+      libcurand
+      thrust
     ];
 
     propagatedBuildInputs = [
