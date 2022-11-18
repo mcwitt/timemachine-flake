@@ -62,7 +62,6 @@
           cudaPackages.cuda_gdb
           cudaPackages.cuda_sanitizer_api
           gdb
-          hadolint
           pyright
           python3Packages.jaxlibWithoutCuda
         ]);
