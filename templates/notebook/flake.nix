@@ -21,6 +21,7 @@
 
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
         overlays = [
           mdtraj.overlay
           timemachine-flake.overlay
