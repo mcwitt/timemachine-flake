@@ -11,7 +11,8 @@
     };
   };
   outputs =
-    { mdtraj
+    { self
+    , mdtraj
     , nixpkgs
     , timemachine-flake
     , ...
@@ -22,38 +23,46 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-          mdtraj.overlay
-          timemachine-flake.overlay
-        ];
+        overlays =
+          let
+            overlay = _: super: {
+              python3 = super.python3.override (old: {
+                packageOverrides = nixpkgs.lib.composeExtensions old.packageOverrides (final: _: {
+                  jupyter-black = final.callPackage ./nix/jupyter-black.nix { };
+                });
+              });
+            };
+          in
+          [
+            mdtraj.overlay
+            timemachine-flake.overlay
+            overlay
+          ];
       };
-
-      python3 = pkgs.python3.override (old: {
-        packageOverrides = nixpkgs.lib.composeExtensions old.packageOverrides (final: prev: {
-          jupyter-black = final.callPackage ./nix/jupyter-black.nix { };
-          timemachine = prev.timemachine.overrideAttrs (_: { dontUsePytestCheck = true; }); # tests are slow
-        });
-      });
-
-      pythonEnv = python3.withPackages (
-        ps: with ps; [
-          black
-          ipywidgets
-          isort
-          jaxlibWithoutCuda
-          jupyter-black
-          matplotlib
-          ps.mdtraj
-          mols2grid
-          notebook
-          py3Dmol
-          timemachine
-          tqdm
-        ]
-      );
 
     in
     {
-      devShells.${system}.default = pythonEnv.env;
+      packages.${system} = rec {
+        default = python;
+
+        python = pkgs.python3.withPackages (
+          ps: with ps; [
+            black
+            ipywidgets
+            isort
+            jaxlibWithoutCuda
+            jupyter-black
+            matplotlib
+            ps.mdtraj
+            mols2grid
+            notebook
+            py3Dmol
+            timemachine
+            tqdm
+          ]
+        );
+      };
+
+      devShells.${system}.default = self.packages.${system}.python.env;
     };
 }
