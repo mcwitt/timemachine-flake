@@ -32,10 +32,25 @@
 
         inherit (pkgs.python3.pkgs) timemachine;
 
-        docker = pkgs.dockerTools.buildImage {
+        docker = pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
-          config.Cmd = "${python}/bin/python";
+          contents = [
+            python
+
+            # for debugging
+            pkgs.bash
+            pkgs.coreutils
+            pkgs.findutils
+            pkgs.glibc # required by nvidia-smi
+          ];
         };
+
+        config.Env = [
+          "LD_LIBRARY_PATH=/usr/lib64/" # nvidia-runtime mounts the host driver here
+          "NVIDIA_DRIVER_CAPABILITIES=compute,utility" # selects which driver components to mount
+          "NVIDIA_VISIBLE_DEVICES=all"
+          "NVIDIA_REQUIRE_CUDA=cuda>=${nixpkgs.lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
+        ];
       };
 
       devShells.${system}.default = pkgs.mkShell {
