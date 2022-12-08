@@ -114,9 +114,7 @@ let
     checkInputs = timemachine.optional-dependencies.test ++ [ pytest-xdist ];
 
     disabledTestPaths = [
-      # many tests in these files require an OpenEye license
-      "tests/test_align.py"
-      "tests/test_handlers.py"
+      "tests/test_handlers.py" # many tests require OpenEye license
     ];
 
     disabledTests = [
