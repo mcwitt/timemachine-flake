@@ -32,7 +32,7 @@
 
         inherit (pkgs.python3.pkgs) timemachine;
 
-        docker = pkgs.dockerTools.buildLayeredImage {
+        docker = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
           contents = [
             python
