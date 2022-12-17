@@ -43,14 +43,14 @@
             pkgs.findutils
             pkgs.glibc # required by nvidia-smi
           ];
-        };
 
-        config.Env = [
-          "LD_LIBRARY_PATH=/usr/lib64/" # nvidia-runtime mounts the host driver here
-          "NVIDIA_DRIVER_CAPABILITIES=compute,utility" # selects which driver components to mount
-          "NVIDIA_VISIBLE_DEVICES=all"
-          "NVIDIA_REQUIRE_CUDA=cuda>=${nixpkgs.lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
-        ];
+          config.Env = [
+            "LD_LIBRARY_PATH=/usr/lib64/" # nvidia-runtime mounts the host driver here
+            "NVIDIA_DRIVER_CAPABILITIES=compute,utility" # selects which driver components to mount
+            "NVIDIA_VISIBLE_DEVICES=all"
+            "NVIDIA_REQUIRE_CUDA=cuda>=${nixpkgs.lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
+          ];
+        };
       };
 
       devShells.${system}.default = pkgs.mkShell {
