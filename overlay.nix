@@ -44,7 +44,7 @@ super:
         openeye-toolkits = final.callPackage ./pkgs/openeye-toolkits.nix { };
 
         openmm = prev.openmm.override {
-          inherit (self.cudaPackages) cudatoolkit;
+          inherit (self) cudaPackages;
           enableCuda = false;
         };
 
