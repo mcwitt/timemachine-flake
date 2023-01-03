@@ -4,13 +4,17 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     timemachine-src = {
       url = "github:proteneer/timemachine";
       flake = false;
     };
+
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
-  outputs = inputs @ { nixpkgs, ... }:
+  outputs = inputs @ { self, nixpkgs, flake-utils, pre-commit-hooks, ... }:
     let
       system = "x86_64-linux";
 
@@ -22,7 +26,7 @@
 
     in
     {
-      overlay = import ./overlay.nix { inherit inputs; };
+      overlays.default = import ./overlay.nix { inherit inputs; };
 
       packages.${system} = rec {
 
@@ -69,7 +73,7 @@
         shellHook = ''
           # needed to find the NVIDIA driver at runtime on NixOS
           export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
-        '';
+        '' + self.checks.${system}.pre-commit-check.shellHook;
       };
 
       templates = {
@@ -82,5 +86,16 @@
           description = "python environment with timemachine";
         };
       };
-    };
+    } // flake-utils.lib.eachDefaultSystem (system:
+      {
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              nixpkgs-fmt.enable = true;
+            };
+          };
+        };
+      }
+    );
 }
