@@ -35,7 +35,7 @@
           in
           [
             mdtraj.overlay
-            timemachine-flake.overlay
+            timemachine-flake.overlays.default
             overlay
           ];
       };

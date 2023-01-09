@@ -33,7 +33,7 @@
         config.allowUnfree = true;
         overlays = [
           mdtraj.overlay
-          timemachine-flake.overlay
+          timemachine-flake.overlays.default
         ];
       };
 
