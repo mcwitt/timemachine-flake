@@ -8,8 +8,8 @@ prev:
     # https://developer.download.nvidia.com/compute/cuda/redist/
     # Fetching these from github lets us avoid depending on
     # cudatoolkit, which would add substantial size to the closure
-    cub = final.callPackage ./pkgs/cub.nix { };
-    thrust = final.callPackage ./pkgs/thrust.nix { };
+    cub = final.callPackage ./packages/cub.nix { };
+    thrust = final.callPackage ./packages/thrust.nix { };
   });
 
   python3 = prev.python3.override (old: {
@@ -39,24 +39,24 @@ prev:
           doInstallCheck = false;
         });
 
-        hilbertcurve = pyfinal.callPackage ./pkgs/hilbertcurve.nix { };
+        hilbertcurve = pyfinal.callPackage ./packages/hilbertcurve.nix { };
 
-        openeye-toolkits = pyfinal.callPackage ./pkgs/openeye-toolkits.nix { };
+        openeye-toolkits = pyfinal.callPackage ./packages/openeye-toolkits.nix { };
 
         openmm = pyprev.openmm.override {
           inherit (final) cudaPackages;
           enableCuda = false;
         };
 
-        py3Dmol = pyfinal.callPackage ./pkgs/py3Dmol.nix { };
+        py3Dmol = pyfinal.callPackage ./packages/py3Dmol.nix { };
 
-        pymbar = pyfinal.callPackage ./pkgs/pymbar.nix { };
+        pymbar = pyfinal.callPackage ./packages/pymbar.nix { };
 
-        timemachine = pyfinal.callPackage ./pkgs/timemachine {
+        timemachine = pyfinal.callPackage ./packages/timemachine {
           inherit (final.cudaPackages) cub cuda_cudart cuda_nvcc libcurand thrust;
         };
 
-        mols2grid = pyfinal.callPackage ./pkgs/mols2grid.nix { };
+        mols2grid = pyfinal.callPackage ./packages/mols2grid.nix { };
       });
   });
 }
