@@ -68,37 +68,17 @@
         "type": "github"
       }
     },
-    "mdtraj": {
-      "inputs": {
-        "nixpkgs": "nixpkgs",
-        "py-utils": "py-utils",
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1653011639,
-        "narHash": "sha256-MwRYymhkHPvh/WkNlx55+YgGuC8o5DSIiXbEO3tf6kA=",
-        "owner": "mdtraj",
-        "repo": "mdtraj",
-        "rev": "1a757274f6f9acd6c9c847c72f5857e9c1046d17",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mdtraj",
-        "repo": "mdtraj",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1644359234,
-        "narHash": "sha256-u/sBnRgrFrn9W8gZMS6vN3ZnJsoTvbws968TpqwlDJQ=",
-        "owner": "NixOS",
+        "lastModified": 1673450908,
+        "narHash": "sha256-b8em+kwrNtnB7gR8SyVf6WuTyQ+6tHS6dzt9D9wgKF0=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c5051e2b5fe9fab43a64f0e0d06b62c81a890b90",
+        "rev": "6c8644fc37b6e141cbfa6c7dc8d98846c4ff0c2e",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -138,22 +118,6 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1673134516,
-        "narHash": "sha256-mAZQKqkNQbBmJnmUU0blOfkKlgMSSVyPHdeWeuKad8U=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "f6f44561884c3470e2b783683d5dbac42dfc833b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
         "lastModified": 1671271357,
         "narHash": "sha256-xRJdLbWK4v2SewmSStYrcLa0YGJpleufl44A19XSW8k=",
         "owner": "NixOS",
@@ -173,7 +137,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
@@ -190,81 +154,29 @@
         "type": "github"
       }
     },
-    "py-utils": {
-      "locked": {
-        "lastModified": 1644413691,
-        "narHash": "sha256-JcZlxVZGRQkAs5ti5N1hvt7JA3w6NoZ+P4Hte77izC0=",
-        "owner": "rmcgibbo",
-        "repo": "python-flake-utils",
-        "rev": "47b4ec65adfd82f029be229aa0d1646c0b6d2ed4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rmcgibbo",
-        "ref": "2arg",
-        "repo": "python-flake-utils",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "mdtraj": "mdtraj",
-        "nixpkgs": "nixpkgs_2",
-        "timemachine-flake": "timemachine-flake",
-        "timemachine-src": "timemachine-src"
+        "nixpkgs": "nixpkgs",
+        "timemachine-flake": "timemachine-flake"
       }
     },
     "timemachine-flake": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_3",
-        "pre-commit-hooks": "pre-commit-hooks",
-        "timemachine-src": [
-          "timemachine-src"
-        ]
+        "nixpkgs": "nixpkgs_2",
+        "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1673297694,
-        "narHash": "sha256-WkkjN7DGv2JriepKYfnJf1HQKglFJQrX+wgDSS4+HlQ=",
+        "lastModified": 1673563790,
+        "narHash": "sha256-bgU9QYTjpMAf79TeGjcqQj9uIaq4tFE5q6KrAzBu8ec=",
         "owner": "mcwitt",
         "repo": "timemachine-flake",
-        "rev": "62941fb489e3a90b479534cd28cb4536b462135c",
+        "rev": "014ea381d14f62c17b0fbdf1992ef5df78e4e6d7",
         "type": "github"
       },
       "original": {
         "owner": "mcwitt",
         "repo": "timemachine-flake",
-        "type": "github"
-      }
-    },
-    "timemachine-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673303514,
-        "narHash": "sha256-qB9HvVxFLz+kdBugsfeNG8hzrM2aV4so71wcStfgl70=",
-        "owner": "proteneer",
-        "repo": "timemachine",
-        "rev": "c77aea7b6cb9912dbd32ff4530667d7624769338",
-        "type": "github"
-      },
-      "original": {
-        "owner": "proteneer",
-        "repo": "timemachine",
-        "type": "github"
-      }
-    },
-    "utils": {
-      "locked": {
-        "lastModified": 1644229661,
-        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     }

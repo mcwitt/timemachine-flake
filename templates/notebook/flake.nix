@@ -2,17 +2,11 @@
   description = "timemachine notebook environment";
 
   inputs = {
-    mdtraj.url = "github:mdtraj/mdtraj";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    timemachine-flake = {
-      url = "github:mcwitt/timemachine-flake";
-      # (optional) pin to a timemachine commit
-      # inputs.timemachine-src.url = "github:proteneer/timemachine/70aef22f702112c6bb87f4ca2c7da3fe460e2b3b";
-    };
+    timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
   outputs =
     { self
-    , mdtraj
     , nixpkgs
     , timemachine-flake
     , ...
@@ -34,7 +28,6 @@
             };
           in
           [
-            mdtraj.overlay
             timemachine-flake.overlays.default
             overlay
           ];
@@ -53,7 +46,6 @@
             jaxlibWithoutCuda
             jupyter-black
             matplotlib
-            ps.mdtraj
             mols2grid
             notebook
             py3Dmol
