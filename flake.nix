@@ -6,11 +6,6 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    timemachine-src = {
-      url = "github:proteneer/timemachine";
-      flake = false;
-    };
-
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 

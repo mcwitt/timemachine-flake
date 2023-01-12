@@ -141,24 +141,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "pre-commit-hooks": "pre-commit-hooks",
-        "timemachine-src": "timemachine-src"
-      }
-    },
-    "timemachine-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673303514,
-        "narHash": "sha256-qB9HvVxFLz+kdBugsfeNG8hzrM2aV4so71wcStfgl70=",
-        "owner": "proteneer",
-        "repo": "timemachine",
-        "rev": "c77aea7b6cb9912dbd32ff4530667d7624769338",
-        "type": "github"
-      },
-      "original": {
-        "owner": "proteneer",
-        "repo": "timemachine",
-        "type": "github"
+        "pre-commit-hooks": "pre-commit-hooks"
       }
     }
   },

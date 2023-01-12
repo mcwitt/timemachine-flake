@@ -54,7 +54,6 @@ prev:
 
         timemachine = pyfinal.callPackage ./pkgs/timemachine {
           inherit (final.cudaPackages) cub cuda_cudart cuda_nvcc libcurand thrust;
-          src = inputs.timemachine-src;
         };
 
         mols2grid = pyfinal.callPackage ./pkgs/mols2grid.nix { };

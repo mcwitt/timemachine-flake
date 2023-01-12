@@ -6,6 +6,7 @@
 , cuda_cudart
 , cuda_nvcc
 , eigen
+, fetchFromGitHub
 , flake8
 , hilbertcurve
 , hypothesis
@@ -32,7 +33,6 @@
 , pyyaml
 , rdkit
 , scipy
-, src
 , substituteAll
 , thrust
 }:
@@ -42,7 +42,17 @@ let
     pname = "timemachine";
     version = "0.1";
 
-    inherit src;
+    src = fetchFromGitHub {
+      owner = "proteneer";
+      repo = "timemachine";
+      rev = "eb6765c90c8cc245a857b6c57f183cae1b64f070";
+      hash = "sha256-y6s2MtNk19w0G3AmmYWtbRUaqK7kaUr94dDeYYsHzjo=";
+
+      # work around hash instability due to use of export-subst
+      postFetch = ''
+        rm $out/timemachine/_version.py
+      '';
+    };
 
     format = "pyproject";
 
