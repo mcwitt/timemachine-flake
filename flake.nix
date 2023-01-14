@@ -3,13 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    flake-utils.url = "github:numtide/flake-utils";
-
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-utils, pre-commit-hooks, ... }:
+  outputs = inputs @ { self, nixpkgs, pre-commit-hooks, ... }:
     let
       system = "x86_64-linux";
 
@@ -52,23 +49,30 @@
         };
       };
 
-      devShells.${system}.default = pkgs.mkShell {
+      devShells.${system} = {
 
-        inputsFrom = [ pkgs.python3.pkgs.timemachine ];
+        default = nixpkgs.legacyPackages.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+        };
 
-        packages = pkgs.python3.pkgs.timemachine.optional-dependencies.dev ++ (with pkgs; [
-          clang-tools
-          cudaPackages.cuda_gdb
-          cudaPackages.cuda_sanitizer_api
-          gdb
-          pyright
-          python3Packages.jaxlibWithoutCuda
-        ]);
+        timemachine-dev = pkgs.mkShell {
 
-        shellHook = ''
-          # needed to find the NVIDIA driver at runtime on NixOS
-          export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
-        '' + self.checks.${system}.pre-commit-check.shellHook;
+          inputsFrom = [ pkgs.python3.pkgs.timemachine ];
+
+          packages = pkgs.python3.pkgs.timemachine.optional-dependencies.dev ++ (with pkgs; [
+            clang-tools
+            cudaPackages.cuda_gdb
+            cudaPackages.cuda_sanitizer_api
+            gdb
+            pyright
+            python3Packages.jaxlibWithoutCuda
+          ]);
+
+          shellHook = ''
+            # needed to find the NVIDIA driver at runtime on NixOS
+            export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+          '';
+        };
       };
 
       templates = {
@@ -81,16 +85,10 @@
           description = "python environment with timemachine";
         };
       };
-    } // flake-utils.lib.eachDefaultSystem (system:
-      {
-        checks = {
-          pre-commit-check = pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              nixpkgs-fmt.enable = true;
-            };
-          };
-        };
-      }
-    );
+
+      checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks.nixpkgs-fmt.enable = true;
+      };
+    };
 }
