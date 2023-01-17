@@ -12,7 +12,7 @@ prev:
     thrust = final.callPackage ./packages/thrust.nix { };
   });
 
-  python3 = prev.python3.override (old: {
+  python310 = prev.python310.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyfinal: pyprev: {
         black_21_12b0 = (pyprev.black.overrideAttrs (oldAttrs: rec {

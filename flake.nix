@@ -26,11 +26,9 @@
 
       packages.${system} = rec {
 
-        default = python;
+        default = pkgs.python3Packages.timemachine;
 
         python = pkgs.python3.withPackages (ps: with ps; [ jaxlibWithoutCuda timemachine ]);
-
-        inherit (pkgs.python3.pkgs) timemachine;
 
         docker = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
@@ -61,9 +59,9 @@
 
         timemachine-dev = pkgs.mkShell {
 
-          inputsFrom = [ pkgs.python3.pkgs.timemachine ];
+          inputsFrom = [ pkgs.python3Packages.timemachine ];
 
-          packages = pkgs.python3.pkgs.timemachine.optional-dependencies.dev ++ (with pkgs; [
+          packages = pkgs.python3Packages.timemachine.optional-dependencies.dev ++ (with pkgs; [
             clang-tools
             cudaPackages.cuda_gdb
             cudaPackages.cuda_sanitizer_api
