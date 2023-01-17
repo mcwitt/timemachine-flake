@@ -3,17 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixgl.url = "github:guibou/nixgl";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
-  outputs = inputs @ { self, nixpkgs, pre-commit-hooks, ... }:
+  outputs = inputs @ { self, nixpkgs, nixgl, pre-commit-hooks, ... }:
     let
       system = "x86_64-linux";
 
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ (import ./overlay.nix { inherit inputs; }) ];
+        overlays = [
+          nixgl.overlay
+          (import ./overlay.nix { inherit inputs; })
+        ];
       };
 
     in
@@ -51,7 +55,7 @@
 
       devShells.${system} = {
 
-        default = nixpkgs.legacyPackages.${system}.mkShell {
+        default = pkgs.mkShell {
           inherit (self.checks.${system}.pre-commit-check) shellHook;
         };
 
@@ -64,13 +68,13 @@
             cudaPackages.cuda_gdb
             cudaPackages.cuda_sanitizer_api
             gdb
+            pkgs.nixgl.auto.nixGLDefault
             pyright
             python3Packages.jaxlibWithoutCuda
           ]);
 
           shellHook = ''
-            # needed to find the NVIDIA driver at runtime on NixOS
-            export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+            export LD_LIBRARY_PATH=$(nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
           '';
         };
       };
