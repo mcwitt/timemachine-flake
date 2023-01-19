@@ -30,7 +30,7 @@
 
         python = pkgs.python3.withPackages (ps: with ps; [ jaxlibWithoutCuda timemachine ]);
 
-        docker = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
+        dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
           contents = [
             python
