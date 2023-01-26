@@ -45,8 +45,8 @@ let
     src = fetchFromGitHub {
       owner = "proteneer";
       repo = "timemachine";
-      rev = "eb6765c90c8cc245a857b6c57f183cae1b64f070";
-      hash = "sha256-y6s2MtNk19w0G3AmmYWtbRUaqK7kaUr94dDeYYsHzjo=";
+      rev = "33c7328db23a69985568c719550a22af25bfe55c";
+      hash = "sha256-JbSZaihY7+sgNpe70Y4iuov0I4YqSHFcssqnlvCvtfA=";
 
       # work around hash instability due to use of export-subst
       postFetch = ''
