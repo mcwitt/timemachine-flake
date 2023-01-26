@@ -26,9 +26,11 @@
 
       packages.${system} = rec {
 
-        default = pkgs.python3Packages.timemachine;
+        default = python;
 
         python = pkgs.python3.withPackages (ps: with ps; [ jaxlibWithoutCuda timemachine ]);
+
+        inherit (pkgs.python3Packages) timemachine;
 
         dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
@@ -57,7 +59,7 @@
           inherit (self.checks.${system}.pre-commit-check) shellHook;
         };
 
-        timemachine-dev = pkgs.mkShell {
+        timemachine = pkgs.mkShell {
 
           inputsFrom = [ pkgs.python3Packages.timemachine ];
 
