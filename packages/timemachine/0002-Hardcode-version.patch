@@ -1,5 +1,15 @@
+From d18e168ec408e914e7e9b694525c46bf32163bc6 Mon Sep 17 00:00:00 2001
+From: Matt Wittmann <mwittmann@relaytx.com>
+Date: Thu, 12 Jan 2023 10:59:49 -0800
+Subject: [PATCH 2/2] Hardcode version
+
+---
+ setup.py                | 6 ++----
+ timemachine/__init__.py | 5 ++---
+ 2 files changed, 4 insertions(+), 7 deletions(-)
+
 diff --git a/setup.py b/setup.py
-index d09c8f40..da6fb0cb 100644
+index 20571dee..8f04caa2 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -12,8 +12,6 @@ import sys
@@ -9,15 +19,18 @@ index d09c8f40..da6fb0cb 100644
 -import versioneer
 -
  
- # CMake configuration adapted from https://github.com/pybind/cmake_example
- class CMakeExtension(Extension):
-@@ -54,12 +52,12 @@ here = pathlib.Path(__file__).parent.resolve()
+ def install_custom_ops() -> bool:
+     """Determine if we should install the custom ops.
+@@ -72,7 +70,7 @@ here = pathlib.Path(__file__).parent.resolve()
  # Get the long description from the README file
  long_description = (here / "README.md").read_text(encoding="utf-8")
  
 -cmdclass = versioneer.get_cmdclass()
 +cmdclass = {}
  cmdclass.update(build_ext=CMakeBuild)
+ 
+ ext_modules = None
+@@ -81,7 +79,7 @@ if install_custom_ops():
  
  setup(
      name="timemachine",
@@ -27,7 +40,7 @@ index d09c8f40..da6fb0cb 100644
      description="A high-performance differentiable molecular dynamics, docking and optimization engine",
      long_description=long_description,
 diff --git a/timemachine/__init__.py b/timemachine/__init__.py
-index 4d52a61e..4276c9f7 100644
+index 4d52a61e..17dee224 100644
 --- a/timemachine/__init__.py
 +++ b/timemachine/__init__.py
 @@ -1,3 +1,2 @@
@@ -35,4 +48,7 @@ index 4d52a61e..4276c9f7 100644
 -
 -__version__ = _version.get_versions()["version"]
 +__version__ = "@version@"
-+__commit__ = "@commit@"
++__rev__ = "@rev@"
+-- 
+2.38.3
+

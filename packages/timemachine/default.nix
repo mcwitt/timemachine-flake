@@ -45,8 +45,8 @@ let
     src = fetchFromGitHub {
       owner = "proteneer";
       repo = "timemachine";
-      rev = "33c7328db23a69985568c719550a22af25bfe55c";
-      hash = "sha256-JbSZaihY7+sgNpe70Y4iuov0I4YqSHFcssqnlvCvtfA=";
+      rev = "8c4f7091751d940f99f3248e6aac90e360a94001";
+      hash = "sha256-/Os1uHdBn72owfXAWpeZpV0pRyyNorskqJBO6P2LK6Q=";
 
       # work around hash instability due to use of export-subst
       postFetch = ''
@@ -59,12 +59,12 @@ let
     patches =
       let
         update-cmake-build = substituteAll {
-          src = ./patches/update-cmake-build.patch;
+          src = ./0001-Update-cmake-build-for-nix.patch;
           pythonVersion = lib.versions.majorMinor python.version;
         };
         hardcode-version = substituteAll {
-          src = ./patches/hardcode-version.patch;
-          commit = src.rev;
+          src = ./0002-Hardcode-version.patch;
+          inherit (src) rev;
           inherit version;
         };
       in
