@@ -43,10 +43,19 @@ prev:
 
         openeye-toolkits = pyFinal.callPackage ./packages/openeye-toolkits.nix { };
 
-        openmm = pyPrev.openmm.override {
+        openmm = (pyPrev.openmm.override {
           inherit (final) cudaPackages;
           enableCuda = false;
-        };
+        }).overrideAttrs (_: rec {
+          pname = "openmm";
+          version = "7.7.0";
+          src = final.fetchFromGitHub {
+            owner = "openmm";
+            repo = pname;
+            rev = version;
+            hash = "sha256-2PYUGTMVQ5qVDeeABrwR45U3JIgo2xMXKlD6da7y3Dw=";
+          };
+        });
 
         py3Dmol = pyFinal.callPackage ./packages/py3Dmol.nix { };
 
