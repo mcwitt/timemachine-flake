@@ -24,7 +24,7 @@ prev:
           };
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pyFinal.pythonRelaxDepsHook ];
           pythonRelaxDeps = [ "tomli" ];
-          doInstallCheck = false;
+          doCheck = false; # requires pytest 6.X
         })).override { click = pyFinal.click_8_0_4; };
 
         # can remove when upgrading black
@@ -36,7 +36,6 @@ prev:
             inherit pname version;
             hash = "sha256-hFjXsSh8X7EoyQ4jOBz5nc3nS+r2x/9jhM6E1v4JCts=";
           };
-          doInstallCheck = false;
         });
 
         hilbertcurve = pyFinal.callPackage ./packages/hilbertcurve.nix { };
