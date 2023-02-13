@@ -59,7 +59,7 @@
           inherit (self.checks.${system}.pre-commit-check) shellHook;
         };
 
-        timemachine = pkgs.mkShell {
+        timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
 
           inputsFrom = [ pkgs.python3Packages.timemachine ];
 
