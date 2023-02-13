@@ -30,7 +30,7 @@
 
         python = pkgs.python3.withPackages (ps: with ps; [ jaxlibWithoutCuda timemachine ]);
 
-        inherit (pkgs.python3Packages) timemachine;
+        inherit (pkgs.python3Packages) black_21_12b0 click_8_0_4 hilbertcurve timemachine openeye-toolkits openmm py3Dmol pymbar mols2grid;
 
         dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
@@ -90,9 +90,11 @@
         };
       };
 
-      checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks.nixpkgs-fmt.enable = true;
-      };
+      checks.${system} = {
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks.nixpkgs-fmt.enable = true;
+        };
+      } // self.packages.${system}; # ensure packages build with `nix flake check`
     };
 }
