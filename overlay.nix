@@ -15,7 +15,9 @@ prev:
   python310 = prev.python310.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyFinal: pyPrev: {
-        black_21_12b0 = (pyPrev.black.overridePythonAttrs (oldAttrs: rec {
+        black_21_12b0 = (pyPrev.black.override {
+          click = pyFinal.click_8_0_4;
+        }).overridePythonAttrs (oldAttrs: rec {
           pname = "black";
           version = "21.12b0";
           src = pyFinal.fetchPypi {
@@ -25,7 +27,7 @@ prev:
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pyFinal.pythonRelaxDepsHook ];
           pythonRelaxDeps = [ "tomli" ];
           doCheck = false; # requires pytest 6.X
-        })).override { click = pyFinal.click_8_0_4; };
+        });
 
         # can remove when upgrading black
         # https://github.com/psf/black/issues/2964
