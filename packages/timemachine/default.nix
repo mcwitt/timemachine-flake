@@ -137,7 +137,12 @@ let
       "test_jax_transform_intermediate_potential"
     ];
 
-    pytestFlagsArray = [ "--hypothesis-profile=ci" "--numprocesses=auto" "-m" "nogpu" ];
+    pytestFlagsArray = [
+      "--hypothesis-profile=ci"
+      "--numprocesses=auto"
+      "-m"
+      "'nogpu and not nightly'"
+    ];
 
     pythonImportsCheck = [ "timemachine" ];
 
