@@ -78,7 +78,6 @@ buildPythonPackage rec {
     cuda_nvcc
     mypy
     pybind11
-    pytestCheckHook
     pythonRelaxDepsHook
   ];
 
@@ -120,7 +119,10 @@ buildPythonPackage rec {
     addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
   '';
 
-  checkInputs = passthru.optional-dependencies.test ++ [ pytest-xdist ];
+  nativeCheckInputs = passthru.optional-dependencies.test ++ [
+    pytestCheckHook
+    pytest-xdist
+  ];
 
   disabledTestPaths = [
     "tests/test_handlers.py" # many tests require OpenEye license
