@@ -5,12 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
-  outputs =
-    { self
-    , nixpkgs
-    , timemachine-flake
-    , ...
-    }:
+  outputs = { self, nixpkgs, timemachine-flake }:
     let
       system = "x86_64-linux";
 
@@ -34,6 +29,7 @@
           mols2grid
           rich
           timemachine
+          typer
         ]);
 
         run-rbfe =

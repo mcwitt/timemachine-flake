@@ -5,12 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
-  outputs =
-    { self
-    , nixpkgs
-    , timemachine-flake
-    , ...
-    }:
+  outputs = { self, nixpkgs, timemachine-flake }:
     let
       system = "x86_64-linux";
 
@@ -21,7 +16,7 @@
           let
             overlay = _: super: {
               python3 = super.python3.override (old: {
-                packageOverrides = nixpkgs.lib.composeExtensions old.packageOverrides (final: _: {
+                packageOverrides = nixpkgs.lib.composeExtensions (old.packageOverrides or (_: _: { })) (final: _: {
                   jupyter-black = final.callPackage ./nix/jupyter-black.nix { };
                 });
               });
@@ -48,7 +43,9 @@
             matplotlib
             mols2grid
             notebook
+            pandas
             py3Dmol
+            seaborn
             timemachine
             tqdm
           ]
