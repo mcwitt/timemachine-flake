@@ -62,9 +62,7 @@ prev:
 
         pymbar = pyFinal.callPackage ./packages/pymbar.nix { };
 
-        timemachine = pyFinal.callPackage ./packages/timemachine {
-          inherit (final.cudaPackages) cub cuda_cudart cuda_nvcc libcurand thrust;
-        };
+        timemachine = pyFinal.callPackage ./packages/timemachine { };
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
       });

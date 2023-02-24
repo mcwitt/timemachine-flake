@@ -2,9 +2,7 @@
 , black_21_12b0
 , buildPythonPackage
 , cmake
-, cub
-, cuda_cudart
-, cuda_nvcc
+, cudaPackages
 , eigen
 , fetchFromGitHub
 , flake8
@@ -15,7 +13,6 @@
 , jax
 , jaxlib
 , lib
-, libcurand
 , matplotlib
 , mypy
 , networkx
@@ -34,7 +31,6 @@
 , rdkit
 , scipy
 , substituteAll
-, thrust
 }:
 
 buildPythonPackage rec {
@@ -75,19 +71,19 @@ buildPythonPackage rec {
   nativeBuildInputs = [
     addOpenGLRunpath
     cmake
-    cuda_nvcc
+    cudaPackages.cuda_nvcc
     mypy
     pybind11
     pythonRelaxDepsHook
   ];
 
   buildInputs = [
-    cub
-    cuda_cudart
+    cudaPackages.cub
+    cudaPackages.cuda_cudart
     eigen
     jaxlib
-    libcurand
-    thrust
+    cudaPackages.libcurand
+    cudaPackages.thrust
   ];
 
   propagatedBuildInputs = [
