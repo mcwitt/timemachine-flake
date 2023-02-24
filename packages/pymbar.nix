@@ -1,12 +1,11 @@
 { buildPythonPackage
 , fetchFromGitHub
 , numpy
-, scipy
-, six
-
 , pytest
 , pytest-cov
 , pytest-runner
+, scipy
+, six
 }:
 
 buildPythonPackage rec {

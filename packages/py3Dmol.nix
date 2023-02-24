@@ -1,6 +1,4 @@
-{ buildPythonPackage
-, fetchPypi
-}:
+{ buildPythonPackage, fetchPypi }:
 
 buildPythonPackage rec {
   pname = "py3Dmol";

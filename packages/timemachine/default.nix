@@ -80,10 +80,10 @@ buildPythonPackage rec {
   buildInputs = [
     cudaPackages.cub
     cudaPackages.cuda_cudart
-    eigen
-    jaxlib
     cudaPackages.libcurand
     cudaPackages.thrust
+    eigen
+    jaxlib
   ];
 
   propagatedBuildInputs = [
