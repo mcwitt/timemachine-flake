@@ -108,10 +108,10 @@ buildPythonPackage rec {
   # CMake is invoked by the setuptools build
   dontUseCmakeConfigure = true;
 
-  CMAKE_ARGS = lib.concatStringsSep " " [
-    "-DCUDA_ARCH=61"
-    "-DCMAKE_CUDA_HOST_COMPILER=${cudaPackages.cudatoolkit.cc}/bin/cc" # ensure we use a supported version of gcc
-  ];
+  CMAKE_ARGS = [ "-DCUDA_ARCH=61" ];
+
+  # ensure we use a supported compiler
+  CUDAHOSTCXX = "${cudaPackages.cudatoolkit.cc}/bin/cc";
 
   # Allow extension module to find NVIDIA drivers on NixOS
   postFixup = ''
