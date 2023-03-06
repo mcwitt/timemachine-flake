@@ -14,7 +14,7 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "choderalab";
     repo = "pymbar";
-    rev = version;
+    rev = "refs/tags/${version}";
     sha256 = "sha256-lyUFPvhbVsqLIYRspYd+Mk40/1rCYP2W6ESY/7UDUT4=";
   };
   propagatedBuildInputs = [ numpy scipy six ];

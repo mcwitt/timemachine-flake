@@ -7,7 +7,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "NVIDIA";
     repo = "thrust";
-    rev = version;
+    rev = "refs/tags/${version}";
     hash = "sha256-4Ph/QBDFOOwqQN/LKL8v1dWfDbRnW+nK1qmVbWuzfYk=";
   };
 

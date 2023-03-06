@@ -53,7 +53,7 @@ prev:
           src = final.fetchFromGitHub {
             owner = "openmm";
             repo = pname;
-            rev = version;
+            rev = "refs/tags/${version}";
             hash = "sha256-2PYUGTMVQ5qVDeeABrwR45U3JIgo2xMXKlD6da7y3Dw=";
           };
         });

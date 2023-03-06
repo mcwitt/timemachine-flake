@@ -146,23 +146,26 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "timemachine" ];
 
-  passthru.optional-dependencies.dev = [
-    black_21_12b0
-    flake8
-    isort
-    mypy
-  ];
+  passthru.optional-dependencies = {
+    dev = [
+      black_21_12b0
+      flake8
+      isort
+      mypy
+    ];
 
-  passthru.optional-dependencies.test = [
-    pytest
-    pytest-cov
-    hilbertcurve
-    hypothesis
-  ];
+    test = [
+      pytest
+      pytest-cov
+      hilbertcurve
+      hypothesis
+    ];
+  };
 
   meta = {
     description = "A high-performance differentiable molecular dynamics, docking and optimization engine";
     homepage = "https://github.com/proteneer/timemachine";
+    changelog = "https://github.com/proteneer/timemachine/releases/tag/${version}";
     license = lib.licenses.asl20;
     maintainers = [ lib.maintainers.mcwitt ];
   };
