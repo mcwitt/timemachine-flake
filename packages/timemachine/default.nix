@@ -113,7 +113,7 @@ buildPythonPackage rec {
   # ensure we use a supported compiler
   CUDAHOSTCXX = "${cudaPackages.cudatoolkit.cc}/bin/cc";
 
-  # Allow extension module to find NVIDIA drivers on NixOS
+  # allow extension module to find NVIDIA drivers on NixOS
   postFixup = ''
     addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
   '';

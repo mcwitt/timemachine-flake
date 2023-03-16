@@ -42,6 +42,8 @@ prev:
 
         hilbertcurve = pyFinal.callPackage ./packages/hilbertcurve.nix { };
 
+        jupyter-black = pyFinal.callPackage ./packages/jupyter-black.nix { };
+
         openeye-toolkits = pyFinal.callPackage ./packages/openeye-toolkits.nix { };
 
         openmm = (pyPrev.openmm.override {
