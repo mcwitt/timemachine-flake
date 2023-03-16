@@ -201,11 +201,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1677276188,
-        "narHash": "sha256-3387Mmlyw4xuVOw80wzrmc0DC56mUXY+QqLw8nQSgVM=",
+        "lastModified": 1679006617,
+        "narHash": "sha256-l13l9skd3LW1qw1Xo7zIzJU76C9sT6vrW7AOTItXvmA=",
         "owner": "mcwitt",
         "repo": "timemachine-flake",
-        "rev": "708c0d524636136beb6ddc6df6809f6e04d3b0b0",
+        "rev": "8890391bec64827ca4d346c8a22440338643744f",
         "type": "github"
       },
       "original": {
