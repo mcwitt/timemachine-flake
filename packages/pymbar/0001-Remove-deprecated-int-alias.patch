@@ -1,0 +1,54 @@
+From ed0bc9cb7e9e93233c9190fd0bbf3e54967fae16 Mon Sep 17 00:00:00 2001
+From: Matt Wittmann <mwittmann@relaytx.com>
+Date: Wed, 29 Mar 2023 15:57:36 -0700
+Subject: [PATCH] Remove deprecated int alias
+
+np.int is deprecated since numpy 1.20, removed in 1.24
+---
+ pymbar/tests/test_mbar.py                       | 2 +-
+ pymbar/testsystems/exponential_distributions.py | 2 +-
+ pymbar/testsystems/harmonic_oscillators.py      | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pymbar/tests/test_mbar.py b/pymbar/tests/test_mbar.py
+index 9f6e6a9..af6e9ca 100644
+--- a/pymbar/tests/test_mbar.py
++++ b/pymbar/tests/test_mbar.py
+@@ -374,7 +374,7 @@ def test_mbar_computePMF():
+     xmin = test.O_k[refstate] - 1
+     xmax = test.O_k[refstate] + 1
+     within_bounds = (x_n >= xmin) & (x_n < xmax)
+-    bin_centers = dx*np.arange(np.int(xmin/dx),np.int(xmax/dx)) + dx/2
++    bin_centers = dx*np.arange(np.int_(xmin/dx),np.int_(xmax/dx)) + dx/2
+     bin_n = np.zeros(len(x_n),int)
+     bin_n[within_bounds] = 1 + np.floor((x_n[within_bounds]-xmin)/dx)
+     # 0 is reserved for samples outside the domain.  We will ignore this state
+diff --git a/pymbar/testsystems/exponential_distributions.py b/pymbar/testsystems/exponential_distributions.py
+index 4963d82..0f0e1e7 100644
+--- a/pymbar/testsystems/exponential_distributions.py
++++ b/pymbar/testsystems/exponential_distributions.py
+@@ -138,7 +138,7 @@ class ExponentialTestCase(object):
+         x_kn = np.zeros([self.n_states, N_max], np.float64)
+         u_kln = np.zeros([self.n_states, self.n_states, N_max], np.float64)
+         x_n = np.zeros([N_tot], np.float64)
+-        s_n = np.zeros([N_tot], np.int)
++        s_n = np.zeros([N_tot], np.int_)
+         u_kn = np.zeros([self.n_states, N_tot], np.float64)
+         index = 0
+         for k, N in enumerate(N_k):
+diff --git a/pymbar/testsystems/harmonic_oscillators.py b/pymbar/testsystems/harmonic_oscillators.py
+index 6192d28..94d27c3 100644
+--- a/pymbar/testsystems/harmonic_oscillators.py
++++ b/pymbar/testsystems/harmonic_oscillators.py
+@@ -145,7 +145,7 @@ class HarmonicOscillatorsTestCase(object):
+         x_kn = np.zeros([self.n_states, N_max], np.float64)
+         u_kln = np.zeros([self.n_states, self.n_states, N_max], np.float64)
+         x_n = np.zeros([N_tot], np.float64)
+-        s_n = np.zeros([N_tot], np.int)
++        s_n = np.zeros([N_tot], np.int_)
+         u_kn = np.zeros([self.n_states, N_tot], np.float64)
+         index = 0
+         for k, N in enumerate(N_k):
+-- 
+2.38.4
+

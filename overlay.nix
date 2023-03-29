@@ -62,7 +62,7 @@ prev:
 
         py3Dmol = pyFinal.callPackage ./packages/py3Dmol.nix { };
 
-        pymbar = pyFinal.callPackage ./packages/pymbar.nix { };
+        pymbar = pyFinal.callPackage ./packages/pymbar { };
 
         timemachine = pyFinal.callPackage ./packages/timemachine { };
 
