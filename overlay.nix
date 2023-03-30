@@ -44,6 +44,8 @@ prev:
 
         jupyter-black = pyFinal.callPackage ./packages/jupyter-black.nix { };
 
+        nglview = pyFinal.callPackage ./packages/nglview.nix { };
+
         openeye-toolkits = pyFinal.callPackage ./packages/openeye-toolkits.nix { };
 
         openmm = (pyPrev.openmm.override {

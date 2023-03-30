@@ -36,6 +36,7 @@
           hilbertcurve
           jupyter-black
           timemachine
+          nglview
           openeye-toolkits
           openmm
           py3Dmol
