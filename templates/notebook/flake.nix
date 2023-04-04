@@ -25,7 +25,7 @@
             black
             ipywidgets
             isort
-            jaxlibWithoutCuda
+            jaxlib
             jupyter-black
             matplotlib
             mols2grid

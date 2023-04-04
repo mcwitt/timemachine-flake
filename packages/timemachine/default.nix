@@ -40,8 +40,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "348339923cada96f1702adddfdfb90092f7da1b5";
-    hash = "sha256-qWNuImfjUqsbcPIldqgsrZNA0hkihh7qD8R5lFfKs4M=";
+    rev = "419a1388e8a2bd56a6c2a13f6a7c7f297b5a6603";
+    hash = "sha256-+OkZIQ1pkhcSQmns5N99zjLxgegojgKUO4IinU4SiFQ=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -51,22 +51,18 @@ buildPythonPackage rec {
 
   format = "pyproject";
 
-  patches =
-    let
-      update-cmake-build = substituteAll {
-        src = ./0001-Update-cmake-build-for-nix.patch;
-        pythonVersion = lib.versions.majorMinor python.version;
-      };
-      hardcode-version = substituteAll {
-        src = ./0002-Hardcode-version.patch;
-        inherit (src) rev;
-        inherit version;
-      };
-    in
-    [
-      update-cmake-build
-      hardcode-version
-    ];
+  patches = [
+    (substituteAll {
+      src = ./0001-Remove-versioneer.patch;
+      inherit (src) rev;
+      inherit version;
+    })
+    (substituteAll {
+      src = ./0002-Adapt-cmake-build.patch;
+      pythonVersion = lib.versions.majorMinor python.version;
+    })
+    ./0003-Update-jax-import.patch
+  ];
 
   nativeBuildInputs = [
     addOpenGLRunpath

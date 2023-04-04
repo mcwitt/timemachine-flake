@@ -1,0 +1,25 @@
+From 4ca44b67f1325d7bd97d292998172f164726c366 Mon Sep 17 00:00:00 2001
+From: Matt Wittmann <mwittmann@relaytx.com>
+Date: Tue, 4 Apr 2023 10:38:52 -0700
+Subject: [PATCH 3/3] Update jax import
+
+---
+ timemachine/fe/functional.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/timemachine/fe/functional.py b/timemachine/fe/functional.py
+index 3855c92a..5208f187 100644
+--- a/timemachine/fe/functional.py
++++ b/timemachine/fe/functional.py
+@@ -2,7 +2,7 @@ from typing import Tuple
+ 
+ from jax import custom_jvp
+ from jax import numpy as jnp
+-from jax.interpreters.partial_eval import Tracer
++from jax.core import Tracer
+ 
+ from timemachine.lib.potentials import SummedPotential
+ 
+-- 
+2.38.4
+

@@ -28,20 +28,23 @@
 
         default = python;
 
-        python = pkgs.python3.withPackages (ps: with ps; [ jaxlibWithoutCuda timemachine ]);
+        python = pkgs.python3.withPackages (ps: with ps; [ jaxlib timemachine ]);
 
         inherit (pkgs.python3Packages)
           black_21_12b0
           click_8_0_4
           hilbertcurve
+          jax
+          jaxlib
           jupyter-black
-          timemachine
+          ml-dtypes
+          mols2grid
           nglview
           openeye-toolkits
           openmm
           py3Dmol
           pymbar
-          mols2grid;
+          timemachine;
 
         dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
           name = "timemachine";
@@ -81,7 +84,7 @@
             gdb
             pkgs.nixgl.auto.nixGLDefault
             pyright
-            python3Packages.jaxlibWithoutCuda
+            python3Packages.jaxlib
           ]);
 
           shellHook = ''
