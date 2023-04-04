@@ -45,6 +45,8 @@ prev:
 
         ml-dtypes = pyFinal.callPackage ./packages/ml-dtypes.nix { };
 
+        mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
+
         nglview = pyFinal.callPackage ./packages/nglview.nix { };
 
         openeye-toolkits = pyFinal.callPackage ./packages/openeye-toolkits.nix { };
@@ -54,8 +56,6 @@ prev:
         pymbar = pyFinal.callPackage ./packages/pymbar { };
 
         timemachine = pyFinal.callPackage ./packages/timemachine { };
-
-        mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
       });
   });
 }
