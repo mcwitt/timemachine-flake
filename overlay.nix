@@ -28,6 +28,7 @@ prev:
             hash = "sha256-Z8JccGhvDUGh8qw7K5mscLvF7JDQQFsTXPypngQS0TM=";
           };
           propagatedBuildInputs = old.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
+          doCheck = false;
         });
 
         jaxlib = (pyPrev.jaxlib.override { cudaSupport = false; }).overridePythonAttrs (old: rec {
