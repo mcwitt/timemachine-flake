@@ -52,6 +52,9 @@ prev:
 
         openeye-toolkits = pyFinal.callPackage ./packages/openeye-toolkits.nix { };
 
+        # Work around https://github.com/NixOS/nixpkgs/issues/224831
+        openmm = pyPrev.openmm.override { inherit (final) stdenv gfortran; enableOpencl = false; };
+
         py3Dmol = pyFinal.callPackage ./packages/py3Dmol.nix { };
 
         pymbar = pyFinal.callPackage ./packages/pymbar { };
