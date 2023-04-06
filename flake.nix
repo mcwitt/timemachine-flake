@@ -31,17 +31,10 @@
         python = pkgs.python3.withPackages (ps: with ps; [ jaxlib timemachine ]);
 
         inherit (pkgs.python3Packages)
-          hilbertcurve
-          jax
-          jaxlib
           jupyter-black
-          ml-dtypes
           mols2grid
           nglview
-          openeye-toolkits
-          openmm
           py3Dmol
-          pymbar
           timemachine;
 
         dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
