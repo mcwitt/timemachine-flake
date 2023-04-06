@@ -31,6 +31,8 @@
         python = pkgs.python3.withPackages (ps: with ps; [ jaxlib timemachine ]);
 
         inherit (pkgs.python3Packages)
+          black_21_12b0
+          click_8_0_4
           jupyter-black
           mols2grid
           nglview

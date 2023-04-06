@@ -1,5 +1,5 @@
 { addOpenGLRunpath
-, black
+, black_21_12b0
 , buildPythonPackage
 , cmake
 , cudaPackages
@@ -144,7 +144,7 @@ buildPythonPackage rec {
 
   passthru.optional-dependencies = {
     dev = [
-      black
+      black_21_12b0
       flake8
       isort
       mypy
