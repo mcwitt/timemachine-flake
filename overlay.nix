@@ -48,6 +48,29 @@ prev:
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
 
+        mypy = pyPrev.mypy.overridePythonAttrs (old: rec {
+          name = "${old.pname}-${version}";
+          version = "1.1.1";
+          src = final.fetchFromGitHub {
+            owner = "python";
+            repo = "mypy";
+            rev = "refs/tags/v${version}";
+            hash = "sha256-PKbqbGzCdeVGKu1uVhnx7+yl8M2a089qhxLctrV5Vu8=";
+          };
+          patches = [ ];
+        });
+
+        mypy-extensions = pyPrev.mypy-extensions.overridePythonAttrs (old: rec {
+          name = "${old.pname}-${version}";
+          version = "1.0.0";
+          src = final.fetchFromGitHub {
+            owner = "python";
+            repo = "mypy_extensions";
+            rev = "refs/tags/${version}";
+            hash = "sha256-gOfHC6dUeBE7SsWItpUHHIxW3wzhPM5SuGW1U8P7DD0=";
+          };
+        });
+
         nglview = pyFinal.callPackage ./packages/nglview.nix { };
 
         openeye-toolkits = pyFinal.callPackage ./packages/openeye-toolkits.nix { };
