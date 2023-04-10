@@ -19,13 +19,13 @@ prev:
 
         jax = pyPrev.jax.overridePythonAttrs (old: rec {
           pname = "jax";
-          version = "0.4.8";
+          version = "0.4.7";
           name = "${pname}-${version}";
           src = final.fetchFromGitHub {
             owner = "google";
             repo = pname;
             rev = "refs/tags/jax-v${version}";
-            hash = "sha256-Z8JccGhvDUGh8qw7K5mscLvF7JDQQFsTXPypngQS0TM=";
+            hash = "sha256-hjSa8DrQrvJcoITN18JJ7O833jHCTU1PFmw91+RiOwU=";
           };
           propagatedBuildInputs = old.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
           doCheck = false;
