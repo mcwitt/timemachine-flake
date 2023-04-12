@@ -8,7 +8,6 @@
 , flake8
 , hilbertcurve
 , hypothesis
-, importlib-resources
 , isort
 , jax
 , jaxlib
@@ -40,8 +39,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "419a1388e8a2bd56a6c2a13f6a7c7f297b5a6603";
-    hash = "sha256-+OkZIQ1pkhcSQmns5N99zjLxgegojgKUO4IinU4SiFQ=";
+    rev = "c88b42c8aeadaeb7979558f04cae961502fd2917";
+    hash = "sha256-NDmnvot3wKt4AoYgupqk5T9wHX2MAwdO2RfC6d6K+8k=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -61,7 +60,6 @@ buildPythonPackage rec {
       src = ./0002-Adapt-cmake-build.patch;
       pythonVersion = lib.versions.majorMinor python.version;
     })
-    ./0003-Update-jax-import.patch
   ];
 
   nativeBuildInputs = [
@@ -83,7 +81,6 @@ buildPythonPackage rec {
   ];
 
   propagatedBuildInputs = [
-    importlib-resources
     jax
     matplotlib
     networkx

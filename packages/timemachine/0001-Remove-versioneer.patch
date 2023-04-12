@@ -1,7 +1,7 @@
-From 7b339fd67e711e6563fa2cd7e1e403f40b3d5a07 Mon Sep 17 00:00:00 2001
+From 5b2e028cb437cb81fbb78331dc57d6dc6c898389 Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Mon, 6 Mar 2023 08:08:03 -0800
-Subject: [PATCH 1/3] Remove versioneer
+Subject: [PATCH 1/2] Remove versioneer
 
 ---
  setup.py                | 6 ++----
@@ -9,7 +9,7 @@ Subject: [PATCH 1/3] Remove versioneer
  2 files changed, 4 insertions(+), 7 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 171a8b82..7b8ee669 100644
+index f4e9c868..db9dee40 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -12,8 +12,6 @@ import sys
