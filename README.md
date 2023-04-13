@@ -3,7 +3,7 @@
 [Nix][] [Flake](https://nixos.wiki/wiki/Flakes) for the
 [timemachine][] molecular dynamics and free energy package.
 
-Supported platforms: Linux
+Supported platforms: Linux (x86_64), macOS (x86_64)
 
 ## Quick start
 

@@ -30,6 +30,7 @@
 , rdkit
 , scipy
 , substituteAll
+, enableCuda ? true
 }:
 
 buildPythonPackage rec {
@@ -63,21 +64,23 @@ buildPythonPackage rec {
   ];
 
   nativeBuildInputs = [
+    mypy
+    pythonRelaxDepsHook
+  ] ++ lib.optionals enableCuda [
     addOpenGLRunpath
     cmake
     cudaPackages.cuda_nvcc
-    mypy
     pybind11
-    pythonRelaxDepsHook
   ];
 
   buildInputs = [
+    jaxlib
+  ] ++ lib.optionals enableCuda [
     cudaPackages.cub
     cudaPackages.cuda_cudart
     cudaPackages.libcurand
     cudaPackages.thrust
     eigen
-    jaxlib
   ];
 
   propagatedBuildInputs = [
@@ -101,13 +104,13 @@ buildPythonPackage rec {
   # CMake is invoked by the setuptools build
   dontUseCmakeConfigure = true;
 
-  CMAKE_ARGS = [ "-DCUDA_ARCH=61" ];
+  CMAKE_ARGS = lib.optionals enableCuda [ "-DCUDA_ARCH=61" ];
 
   # ensure we use a supported compiler
-  CUDAHOSTCXX = "${cudaPackages.cudatoolkit.cc}/bin/cc";
+  CUDAHOSTCXX = lib.optionalString enableCuda "${cudaPackages.cudatoolkit.cc}/bin/cc";
 
   # allow extension module to find NVIDIA drivers on NixOS
-  postFixup = ''
+  postFixup = lib.optionalString enableCuda ''
     addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
   '';
 

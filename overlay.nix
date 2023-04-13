@@ -1,6 +1,8 @@
 { inputs }:
 final:
 prev:
+let inherit (final) fetchFromGitHub fetchurl stdenv;
+in
 {
   cudaPackages = prev.cudaPackages.overrideScope' (final: _: {
     # The following NVIDIA packages are included in cudatoolkit
@@ -47,7 +49,7 @@ prev:
           pname = "jax";
           version = "0.4.7";
           name = "${pname}-${version}";
-          src = final.fetchFromGitHub {
+          src = fetchFromGitHub {
             owner = "google";
             repo = pname;
             rev = "refs/tags/jax-v${version}";
@@ -60,12 +62,23 @@ prev:
         jaxlib = (pyPrev.jaxlib.override { cudaSupport = false; }).overridePythonAttrs (old: rec {
           version = "0.4.7";
           name = "jaxlib-${version}";
-          src = final.fetchurl {
-            url = "https://storage.googleapis.com/jax-releases/nocuda/jaxlib-${version}-cp310-cp310-manylinux2014_x86_64.whl";
-            hash = "sha256-2og4LmSHgFl0zqb6zGG6krWCinofLdgPdixIfYc6K0c=";
-          };
+          src =
+            let
+              sources = {
+                "x86_64-linux" = fetchurl {
+                  url = "https://storage.googleapis.com/jax-releases/nocuda/jaxlib-${version}-cp310-cp310-manylinux2014_x86_64.whl";
+                  hash = "sha256-2og4LmSHgFl0zqb6zGG6krWCinofLdgPdixIfYc6K0c=";
+                };
+                "x86_64-darwin" = fetchurl {
+                  url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-${version}-cp310-cp310-macosx_10_14_x86_64.whl";
+                  hash = "sha256-Y8KJCXjoZGUW2z2KaAtD0r7YtjVDpwVWOR9YmiYb2F8=";
+                };
+              };
+            in
+            builtins.getAttr stdenv.system sources;
+
           propagatedBuildInputs = old.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
-          nativeBuildInputs = old.nativeBuildInputs ++ [ final.autoPatchelfHook ];
+          nativeBuildInputs = old.nativeBuildInputs ++ final.lib.optionals stdenv.isLinux [ final.autoPatchelfHook ];
         });
 
         jupyter-black = pyFinal.callPackage ./packages/jupyter-black.nix { };
@@ -77,7 +90,7 @@ prev:
         mypy = pyPrev.mypy.overridePythonAttrs (old: rec {
           name = "${old.pname}-${version}";
           version = "1.1.1";
-          src = final.fetchFromGitHub {
+          src = fetchFromGitHub {
             owner = "python";
             repo = "mypy";
             rev = "refs/tags/v${version}";
@@ -89,7 +102,7 @@ prev:
         mypy-extensions = pyPrev.mypy-extensions.overridePythonAttrs (old: rec {
           name = "${old.pname}-${version}";
           version = "1.0.0";
-          src = final.fetchFromGitHub {
+          src = fetchFromGitHub {
             owner = "python";
             repo = "mypy_extensions";
             rev = "refs/tags/${version}";
@@ -109,6 +122,8 @@ prev:
         pymbar = pyFinal.callPackage ./packages/pymbar { };
 
         timemachine = pyFinal.callPackage ./packages/timemachine { };
+
+        timemachineWithoutCuda = pyFinal.callPackage ./packages/timemachine { enableCuda = false; };
       });
   });
 }
