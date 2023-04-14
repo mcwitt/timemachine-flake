@@ -1,15 +1,13 @@
 {
   description = "timemachine notebook environment";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    timemachine-flake.url = "github:mcwitt/timemachine-flake";
-  };
-  outputs = { self, nixpkgs, timemachine-flake }:
+  inputs.timemachine-flake.url = "github:mcwitt/timemachine-flake";
+
+  outputs = { self, timemachine-flake }:
     let
       system = "x86_64-linux";
 
-      pkgs = import nixpkgs {
+      pkgs = import timemachine-flake.inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
         overlays = [ timemachine-flake.overlays.default ];
@@ -22,6 +20,7 @@
 
         python = pkgs.python3.withPackages (
           ps: with ps; [
+            altair
             black
             ipywidgets
             isort
@@ -29,6 +28,7 @@
             jupyter-black
             matplotlib
             mols2grid
+            nglview
             notebook
             pandas
             py3Dmol

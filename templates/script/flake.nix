@@ -1,13 +1,13 @@
 {
   description = "timemachine python environment";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    timemachine-flake.url = "github:mcwitt/timemachine-flake";
-  };
-  outputs = { self, nixpkgs, timemachine-flake }:
+  inputs.timemachine-flake.url = "github:mcwitt/timemachine-flake";
+
+  outputs = { self, timemachine-flake }:
     let
       system = "x86_64-linux";
+
+      inherit (timemachine-flake.inputs) nixpkgs;
 
       pkgs = import nixpkgs {
         inherit system;
