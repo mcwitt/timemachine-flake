@@ -13,34 +13,26 @@ let
 
   mkUrl = pname: "https://pypi.anaconda.org/openeye/simple/${pname}/${version}/${pname}-${version}.tar.gz";
 
-  platforms = {
-    "x86_64-linux" = {
-      binPackage = rec {
-        pname = "OpenEye-toolkits-python3-linux-x64";
-        src = fetchurl {
-          url = mkUrl pname;
-          sha256 = "sha256-WPtjRaQfGj/pHrPrT2L1SDNbNSnPtDvJGaYD/Uhcztk=";
-        };
+  packages = {
+    x86_64-linux = rec {
+      pname = "OpenEye-toolkits-python3-linux-x64";
+      src = fetchurl {
+        url = mkUrl pname;
+        hash = "sha256-WPtjRaQfGj/pHrPrT2L1SDNbNSnPtDvJGaYD/Uhcztk=";
       };
-      pythonPackage.sha256 = "sha256-VGQmSyMJNODuyNcHTgD+xnFI1ylLIHWa21viw67aPvA=";
     };
 
-    "x86_64-darwin" = {
-      binPackage = rec {
-        pname = "OpenEye-toolkits-python3-osx-universal";
-        src = fetchurl {
-          url = mkUrl pname;
-          sha256 = "sha256-EnDRZqdQR/o8wW3hiUaqQQ7b+sdIgSGMIgWK7qAmyVY=";
-        };
+    x86_64-darwin = rec {
+      pname = "OpenEye-toolkits-python3-osx-universal";
+      src = fetchurl {
+        url = mkUrl pname;
+        hash = "sha256-EnDRZqdQR/o8wW3hiUaqQQ7b+sdIgSGMIgWK7qAmyVY=";
       };
-      pythonPackage.sha256 = "sha256-VGQmSyMJNODuyNcHTgD+xnFI1ylLIHWa21viw67aPvA=";
     };
   };
 
-  platform = builtins.getAttr stdenv.system platforms;
-
-  oe-toolkits-bin = buildPythonPackage {
-    inherit (platform.binPackage) pname src;
+  openeye-toolkits-bin = buildPythonPackage {
+    inherit (builtins.getAttr stdenv.system packages) pname src;
     inherit version;
 
     nativeBuildInputs = lib.optionals stdenv.isLinux [ autoPatchelfHook ];
@@ -58,10 +50,10 @@ buildPythonPackage rec {
   pname = "OpenEye-toolkits";
   inherit version;
 
-  propagatedBuildInputs = [ oe-toolkits-bin ];
+  propagatedBuildInputs = [ openeye-toolkits-bin ];
 
   src = fetchurl {
     url = mkUrl pname;
-    inherit (platform.pythonPackage) sha256;
+    hash = "sha256-VGQmSyMJNODuyNcHTgD+xnFI1ylLIHWa21viw67aPvA=";
   };
 }

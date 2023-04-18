@@ -20,10 +20,11 @@ in
         black_21_12b0 = (pyPrev.black.override {
           click = pyFinal.click_8_0_4;
         }).overridePythonAttrs (oldAttrs: rec {
-          pname = "black";
+          name = "${oldAttrs.pname}-${version}";
           version = "21.12b0";
           src = pyFinal.fetchPypi {
-            inherit pname version;
+            inherit (oldAttrs) pname;
+            inherit version;
             hash = "sha256-d7gPaTpWni5SeVhFljTxjfmwuiYluk4MLV2lvkLm8rM=";
           };
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pyFinal.pythonRelaxDepsHook ];
@@ -33,35 +34,34 @@ in
 
         # can remove when upgrading black
         # https://github.com/psf/black/issues/2964
-        click_8_0_4 = pyPrev.click.overridePythonAttrs (_: rec {
-          pname = "click";
+        click_8_0_4 = pyPrev.click.overridePythonAttrs (oldAttrs: rec {
+          name = "${oldAttrs.pname}-${version}";
           version = "8.0.4";
-          name = "${pname}-${version}";
           src = pyFinal.fetchPypi {
-            inherit pname version;
+            inherit (oldAttrs) pname;
+            inherit version;
             hash = "sha256-hFjXsSh8X7EoyQ4jOBz5nc3nS+r2x/9jhM6E1v4JCts=";
           };
         });
 
         hilbertcurve = pyFinal.callPackage ./packages/hilbertcurve.nix { };
 
-        jax = pyPrev.jax.overridePythonAttrs (old: rec {
-          pname = "jax";
+        jax = pyPrev.jax.overridePythonAttrs (oldAttrs: rec {
+          name = "${oldAttrs.pname}-${version}";
           version = "0.4.7";
-          name = "${pname}-${version}";
           src = fetchFromGitHub {
             owner = "google";
-            repo = pname;
+            repo = oldAttrs.pname;
             rev = "refs/tags/jax-v${version}";
             hash = "sha256-hjSa8DrQrvJcoITN18JJ7O833jHCTU1PFmw91+RiOwU=";
           };
-          propagatedBuildInputs = old.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
+          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
           doCheck = false;
         });
 
-        jaxlib = (pyPrev.jaxlib.override { cudaSupport = false; }).overridePythonAttrs (old: rec {
+        jaxlib = (pyPrev.jaxlib.override { cudaSupport = false; }).overridePythonAttrs (oldAttrs: rec {
+          name = "${oldAttrs.pname}-${version}";
           version = "0.4.7";
-          name = "jaxlib-${version}";
           src =
             let
               sources = {
@@ -77,8 +77,8 @@ in
             in
             builtins.getAttr stdenv.system sources;
 
-          propagatedBuildInputs = old.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
-          nativeBuildInputs = old.nativeBuildInputs ++ final.lib.optionals stdenv.isLinux [ final.autoPatchelfHook ];
+          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
+          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ final.lib.optionals stdenv.isLinux [ final.autoPatchelfHook ];
         });
 
         jupyter-black = pyFinal.callPackage ./packages/jupyter-black.nix { };
@@ -87,8 +87,8 @@ in
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
 
-        mypy = pyPrev.mypy.overridePythonAttrs (old: rec {
-          name = "${old.pname}-${version}";
+        mypy = pyPrev.mypy.overridePythonAttrs (oldAttrs: rec {
+          name = "${oldAttrs.pname}-${version}";
           version = "1.1.1";
           src = fetchFromGitHub {
             owner = "python";
@@ -99,8 +99,8 @@ in
           patches = [ ];
         });
 
-        mypy-extensions = pyPrev.mypy-extensions.overridePythonAttrs (old: rec {
-          name = "${old.pname}-${version}";
+        mypy-extensions = pyPrev.mypy-extensions.overridePythonAttrs (oldAttrs: rec {
+          name = "${oldAttrs.pname}-${version}";
           version = "1.0.0";
           src = fetchFromGitHub {
             owner = "python";
