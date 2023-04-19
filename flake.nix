@@ -47,11 +47,13 @@
             (if isLinux then timemachine else timemachineWithoutCuda)
           ]);
 
+          # list packages that we want to build in CI
           inherit
             (pkgs.python3Packages)
             black_21_12b0
             click_8_0_4
             jupyter-black
+            jupyter-client
             mols2grid
             nglview
             py3Dmol;
