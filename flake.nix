@@ -10,14 +10,13 @@
   };
 
   outputs =
-    inputs @ { self
+    { self
     , flake-utils
     , mdtraj
     , nixpkgs
     , nixgl
     , pre-commit-hooks
-    , ...
-    }: flake-utils.lib.eachSystem
+    } @ inputs: flake-utils.lib.eachSystem
       (with flake-utils.lib.system; [
         x86_64-linux
         x86_64-darwin
@@ -60,12 +59,8 @@
             mdtraj
             mols2grid
             nglview
-            py3Dmol;
-
-          timemachine =
-            if isLinux
-            then pkgs.python3Packages.timemachine
-            else pkgs.python3Packages.timemachineWithoutCuda;
+            py3Dmol
+            timemachineWithoutCuda;
 
         } // nixpkgs.lib.optionalAttrs isLinux {
 
@@ -88,6 +83,8 @@
               "NVIDIA_REQUIRE_CUDA=cuda>=${nixpkgs.lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
             ];
           };
+
+          inherit (pkgs.python3Packages) timemachine;
         };
 
         devShells = {
