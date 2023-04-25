@@ -31,6 +31,7 @@
             isort
             jaxlib
             jupyter-black
+            jupytext
             matplotlib
             mols2grid
             nglview
