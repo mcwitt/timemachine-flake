@@ -7,15 +7,19 @@
   };
 
   inputs.timemachine-flake.url = "github:mcwitt/timemachine-flake";
+  inputs.mdtraj.url = "github:mdtraj/mdtraj";
 
-  outputs = { self, timemachine-flake }:
+  outputs = { self, timemachine-flake, mdtraj }:
     let
       system = "x86_64-linux";
 
       pkgs = import timemachine-flake.inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ timemachine-flake.overlays.default ];
+        overlays = [
+          mdtraj.overlay
+          timemachine-flake.overlays.default
+        ];
       };
 
     in
@@ -33,6 +37,7 @@
             jupyter-black
             jupytext
             matplotlib
+            ps.mdtraj
             mols2grid
             nglview
             notebook

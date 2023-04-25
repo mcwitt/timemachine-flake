@@ -106,10 +106,30 @@
         "type": "github"
       }
     },
+    "mdtraj_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "py-utils": "py-utils_2",
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1677167009,
+        "narHash": "sha256-piyTqvQ8azWo8EO3E7e1XXoSC6nqMkLEsIO1zY5ZVhc=",
+        "owner": "mdtraj",
+        "repo": "mdtraj",
+        "rev": "2fe3b43fa3047d094c6bd09c928f04c5fd73b2cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mdtraj",
+        "repo": "mdtraj",
+        "type": "github"
+      }
+    },
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1676383589,
@@ -159,6 +179,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1644359234,
+        "narHash": "sha256-u/sBnRgrFrn9W8gZMS6vN3ZnJsoTvbws968TpqwlDJQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c5051e2b5fe9fab43a64f0e0d06b62c81a890b90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1660551188,
         "narHash": "sha256-a1LARMMYQ8DPx1BgoI/UN4bXe12hhZkCNqdxNi6uS0g=",
         "owner": "nixos",
@@ -172,7 +208,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1680242334,
         "narHash": "sha256-HlCbTg1oj6cWLtdQ9Gi8p27t4bde9cSWgtmWrBXdh8w=",
@@ -188,7 +224,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1681303793,
         "narHash": "sha256-JEdQHsYuCfRL2PICHlOiH/2ue3DwoxUX7DJ6zZxZXFk=",
@@ -209,7 +245,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_3",
         "gitignore": "gitignore",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
@@ -242,8 +278,25 @@
         "type": "github"
       }
     },
+    "py-utils_2": {
+      "locked": {
+        "lastModified": 1644413691,
+        "narHash": "sha256-JcZlxVZGRQkAs5ti5N1hvt7JA3w6NoZ+P4Hte77izC0=",
+        "owner": "rmcgibbo",
+        "repo": "python-flake-utils",
+        "rev": "47b4ec65adfd82f029be229aa0d1646c0b6d2ed4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rmcgibbo",
+        "ref": "2arg",
+        "repo": "python-flake-utils",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "mdtraj": "mdtraj",
         "timemachine-flake": "timemachine-flake"
       }
     },
@@ -265,17 +318,17 @@
     "timemachine-flake": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "mdtraj": "mdtraj",
+        "mdtraj": "mdtraj_2",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1681947192,
-        "narHash": "sha256-/ZvU0NGy6PsPAjN5qHk8wk7echn1Zq6honr7fllFb84=",
+        "lastModified": 1682445699,
+        "narHash": "sha256-J789mN9j6Me4ii4OFE8036TaknNI1SbDeZyUrULOHF8=",
         "owner": "mcwitt",
         "repo": "timemachine-flake",
-        "rev": "05004646888050735179bd1a7a469716c8bf851b",
+        "rev": "36e9e92cd84aee4a743064cdaa8caea73ca864fc",
         "type": "github"
       },
       "original": {
@@ -285,6 +338,21 @@
       }
     },
     "utils": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "locked": {
         "lastModified": 1644229661,
         "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
