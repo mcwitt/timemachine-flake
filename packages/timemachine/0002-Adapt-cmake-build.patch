@@ -1,4 +1,4 @@
-From 85e852ec14ad0aedc3f8d3f39832c23ab202d2cb Mon Sep 17 00:00:00 2001
+From 92c47237b6a513053b62e715eefc621e8b613ff7 Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Mon, 6 Mar 2023 08:09:00 -0800
 Subject: [PATCH 2/2] Adapt cmake build
@@ -15,7 +15,7 @@ Subject: [PATCH 2/2] Adapt cmake build
  1 file changed, 7 insertions(+), 56 deletions(-)
 
 diff --git a/timemachine/cpp/CMakeLists.txt b/timemachine/cpp/CMakeLists.txt
-index 335514b0..14364259 100644
+index 54816b2e..f39e440e 100644
 --- a/timemachine/cpp/CMakeLists.txt
 +++ b/timemachine/cpp/CMakeLists.txt
 @@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
@@ -59,7 +59,7 @@ index 335514b0..14364259 100644
  
  # Disable warnings on vendored files
  file(
-@@ -95,49 +84,11 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
+@@ -96,49 +85,11 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
  
  include_directories(src/kernels)
  include_directories(SYSTEM ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
@@ -111,5 +111,5 @@ index 335514b0..14364259 100644
  set_target_properties(${LIBRARY_NAME} PROPERTIES PREFIX "")
  
 -- 
-2.38.4
+2.39.2
 
