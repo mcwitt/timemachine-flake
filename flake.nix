@@ -3,7 +3,6 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    mdtraj.url = "github:mdtraj/mdtraj";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixgl.url = "github:guibou/nixgl";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
@@ -12,7 +11,6 @@
   outputs =
     { self
     , flake-utils
-    , mdtraj
     , nixpkgs
     , nixgl
     , pre-commit-hooks
@@ -30,7 +28,6 @@
             allowUnsupportedSystem = true; # needed for openmm on non-Linux
           };
           overlays = [
-            mdtraj.overlay
             nixgl.overlay
             (import ./overlay.nix { inherit inputs; })
           ];
@@ -56,7 +53,6 @@
             click_8_0_4
             jupyter-black
             jupyter-client
-            mdtraj
             mols2grid
             nglview
             py3Dmol
