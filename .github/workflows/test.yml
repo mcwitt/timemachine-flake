@@ -12,4 +12,4 @@ jobs:
       with:
         name: timemachine
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix flake check --impure
+    - run: nix flake check

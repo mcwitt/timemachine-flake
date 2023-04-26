@@ -101,11 +101,10 @@
               cudaPackages.cuda_gdb
               cudaPackages.cuda_sanitizer_api
               gdb
-              pkgs.nixgl.auto.nixGLDefault
             ]);
 
-            shellHook = nixpkgs.lib.optionalString isLinux ''
-              export LD_LIBRARY_PATH=$(nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
+            shellHook = nixpkgs.lib.optionalString (isLinux && builtins ? currentSystem) ''
+              export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
             '';
           };
         };
