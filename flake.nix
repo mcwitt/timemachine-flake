@@ -33,18 +33,15 @@
           ];
         };
 
-        inherit (pkgs.stdenv) isLinux;
-
       in
       {
         packages = rec {
 
           default = python;
 
-          python = pkgs.python3.withPackages (ps: with ps; [
-            jaxlib
-            (if isLinux then timemachine else timemachineWithoutCuda)
-          ]);
+          python = pkgs.python3.withPackages (ps:
+            let timemachine = if pkgs.stdenv.isLinux then ps.timemachine else ps.timemachineWithoutCuda;
+            in [ ps.jaxlib timemachine ]);
 
           # list packages that we want to build in CI
           inherit
@@ -58,7 +55,7 @@
             py3Dmol
             timemachineWithoutCuda;
 
-        } // nixpkgs.lib.optionalAttrs isLinux {
+        } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 
           dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
             name = "timemachine";
@@ -91,19 +88,19 @@
 
           timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
 
-            inputsFrom = [ (with pkgs.python3Packages; if isLinux then timemachine else timemachineWithoutCuda) ];
+            inputsFrom = [ pkgs.python3Packages.timemachineWithoutCuda ]
+              ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [ pkgs.python3Packages.timemachine ];
 
             packages = pkgs.python3Packages.timemachine.optional-dependencies.dev ++ (with pkgs; [
               pyright
               python3Packages.jaxlib
-            ] ++ nixpkgs.lib.optionals isLinux [
+            ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
               clang-tools
-              cudaPackages.cuda_gdb
-              cudaPackages.cuda_sanitizer_api
+              cudaPackages.cudatoolkit
               gdb
             ]);
 
-            shellHook = nixpkgs.lib.optionalString (isLinux && builtins ? currentSystem) ''
+            shellHook = nixpkgs.lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
               export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
             '';
           };
