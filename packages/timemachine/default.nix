@@ -18,6 +18,7 @@
 , numpy
 , openeye-toolkits
 , openmm
+, py3Dmol
 , pybind11
 , pymbar
 , pytest
@@ -40,8 +41,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "34c5bfa927ac3be9332de6f6cd17cff4f231cc8f";
-    hash = "sha256-UEOUDn+PZM92u9ylr0jjLF7zeGV8pCQHJ9c9ynxZ0UQ=";
+    rev = "1d7bd9fe47baaf5986a02378c60fcabe78903e03";
+    hash = "sha256-JKR9i7AfTvPH4Z5BD6dT/B3mkzoFaAir54OEBWQGkaI=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -134,7 +135,7 @@ buildPythonPackage rec {
   ];
 
   pytestFlagsArray = [
-    "--hypothesis-profile=ci"
+    "--hypothesis-profile=no-deadline"
     "--numprocesses=auto"
     "-m"
     "'nogpu and not nightly'"
@@ -151,6 +152,7 @@ buildPythonPackage rec {
     ];
 
     test = [
+      py3Dmol
       pytest
       pytest-cov
       hilbertcurve
