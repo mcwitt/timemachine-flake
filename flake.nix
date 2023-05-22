@@ -91,14 +91,16 @@
             inputsFrom = [ pkgs.python3Packages.timemachineWithoutCuda ]
               ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [ pkgs.python3Packages.timemachine ];
 
-            packages = pkgs.python3Packages.timemachine.optional-dependencies.dev ++ (with pkgs; [
-              pyright
-              python3Packages.jaxlib
+            packages = (with pkgs.python3Packages.timemachine.optional-dependencies; dev ++ test) ++ [
+              pkgs.pyright
+              pkgs.python3Packages.jaxlib
             ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
-              clang-tools
-              cudaPackages.cudatoolkit
-              gdb
-            ]);
+              pkgs.clang-tools
+              pkgs.cudaPackages.cuda_gdb
+              pkgs.cudaPackages.cuda_sanitizer_api
+              pkgs.cudaPackages.nsight_systems
+              pkgs.gdb
+            ];
 
             shellHook = nixpkgs.lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
               export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
