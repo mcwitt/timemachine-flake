@@ -93,11 +93,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1677167009,
-        "narHash": "sha256-piyTqvQ8azWo8EO3E7e1XXoSC6nqMkLEsIO1zY5ZVhc=",
+        "lastModified": 1683132274,
+        "narHash": "sha256-9oWmnOBvn07ox7xMT4tbs3hjLPfCSFehgQso11ClWn0=",
         "owner": "mdtraj",
         "repo": "mdtraj",
-        "rev": "2fe3b43fa3047d094c6bd09c928f04c5fd73b2cb",
+        "rev": "7e682a16c1c05d4077f4ba9121ae1da7d5d0cd97",
         "type": "github"
       },
       "original": {
@@ -271,11 +271,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1684333912,
-        "narHash": "sha256-bidxk3gRIOOdPiMygeflsOrTqr40R04dQbm63yHc2K0=",
+        "lastModified": 1684776657,
+        "narHash": "sha256-UReG8oduhLmxowSkAzsFvHiew/+DpR4lqgXPV5lAuiM=",
         "owner": "mcwitt",
         "repo": "timemachine-flake",
-        "rev": "83f696aa3cdb2c9dc612ab42e8fa3563cb527dfb",
+        "rev": "d5551606b733706841b09697566f6fb2c1b1f071",
         "type": "github"
       },
       "original": {
