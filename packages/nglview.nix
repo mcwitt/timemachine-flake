@@ -12,14 +12,14 @@
 
 buildPythonPackage rec {
   pname = "nglview";
-  version = "3.0.3";
+  version = "3.0.4";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "nglviewer";
     repo = "nglview";
-    rev = "a529733626a7de3a82813aec48d741198ac5e509";
-    hash = "sha256-XTLDU+P3ZTRY9hm91SvHTcgICo316g3zmN/DZMySVFA=";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-sMblFhzq+B3jtk6HpZuqtCxPXlsJ4QLANbdjWydkt8o=";
   };
 
   nativeBuildInputs = [ versioneer ];
