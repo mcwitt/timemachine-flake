@@ -74,9 +74,7 @@ buildPythonPackage rec {
     pybind11
   ];
 
-  buildInputs = [
-    jaxlib
-  ] ++ lib.optionals enableCuda [
+  buildInputs = lib.optionals enableCuda [
     cudaPackages.cub
     cudaPackages.cuda_cudart
     cudaPackages.libcurand
@@ -86,6 +84,7 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [
     jax
+    jaxlib
     matplotlib
     networkx
     numpy

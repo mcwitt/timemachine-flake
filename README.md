@@ -75,7 +75,7 @@ Example:
   outputs = { nixpkgs, timemachine-flake, ... }:
     let
       pkgs = import nixpkgs { overlays = [ timemachine-flake.overlay ]; };
-      pythonEnv = pkgs.python3.withPackages (ps: [ ps.jaxlib ps.timemachine ]);
+      pythonEnv = pkgs.python3.withPackages (ps: [ ps.timemachine ]);
     in
     {
       # …

@@ -41,7 +41,7 @@
 
           python = pkgs.python3.withPackages (ps:
             let timemachine = if pkgs.stdenv.isLinux then ps.timemachine else ps.timemachineWithoutCuda;
-            in [ ps.jaxlib timemachine ]);
+            in [ timemachine ]);
 
           # list packages that we want to build in CI
           inherit
@@ -93,7 +93,6 @@
 
             packages = (with pkgs.python3Packages.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
-              pkgs.python3Packages.jaxlib
             ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
               pkgs.clang-tools
               pkgs.cudaPackages.cuda_gdb
