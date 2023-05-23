@@ -124,13 +124,21 @@ buildPythonPackage rec {
   ];
 
   disabledTests = [
-    "test_bootstrap_bar" # nondeterministic timeout
+    # nondeterministic timeout
+    "test_bootstrap_bar"
 
     # require OpenEye license
     "test_get_strained_atoms"
     "test_hif2a_set"
     "test_write_single_topology_frame"
     "test_jax_transform_intermediate_potential"
+
+    # high resource usage
+    "test_jax_nonbonded_waterbox"
+    "test_batched_neighbor_inds"
+    "test_interpret_as_mixture_potential"
+    "test_mixture_reweighting_1d"
+    "test_reference_langevin_integrator"
   ];
 
   pytestFlagsArray = [
