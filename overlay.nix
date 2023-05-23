@@ -135,6 +135,8 @@ in
 
         pymbar = pyFinal.callPackage ./packages/pymbar { };
 
+        pytest-resource-usage = pyFinal.callPackage ./packages/pytest-resource-usage.nix { };
+
         timemachine = pyFinal.callPackage ./packages/timemachine { };
 
         timemachineWithoutCuda = pyFinal.callPackage ./packages/timemachine { enableCuda = false; };

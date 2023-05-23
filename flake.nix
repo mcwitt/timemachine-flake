@@ -53,6 +53,7 @@
             mols2grid
             nglview
             py3Dmol
+            pytest-resource-usage
             timemachineWithoutCuda;
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
@@ -93,6 +94,7 @@
 
             packages = (with pkgs.python3Packages.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
+              pkgs.python3Packages.pytest-resource-usage
             ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
               pkgs.clang-tools
               pkgs.cudaPackages.cuda_gdb
