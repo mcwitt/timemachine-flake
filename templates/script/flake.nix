@@ -29,7 +29,6 @@
         python = pkgs.python3.withPackages (ps: with ps; [
           black
           isort
-          jaxlib
           matplotlib
           mols2grid
           rich

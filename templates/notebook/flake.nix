@@ -33,7 +33,6 @@
             black
             ipywidgets
             isort
-            jaxlib
             jupyter-black
             jupytext
             matplotlib
