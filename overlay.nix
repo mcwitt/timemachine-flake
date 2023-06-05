@@ -1,7 +1,7 @@
 { inputs }:
 final:
 prev:
-let inherit (final) fetchFromGitHub fetchurl stdenv;
+let inherit (final) fetchFromGitHub fetchurl lib stdenv;
 in
 {
   cudaPackages = prev.cudaPackages.overrideScope' (final: _: {
@@ -101,28 +101,36 @@ in
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
 
-        mypy = pyPrev.mypy.overridePythonAttrs (oldAttrs: rec {
-          name = "${oldAttrs.pname}-${version}";
-          version = "1.1.1";
-          src = fetchFromGitHub {
-            owner = "python";
-            repo = "mypy";
-            rev = "refs/tags/v${version}";
-            hash = "sha256-PKbqbGzCdeVGKu1uVhnx7+yl8M2a089qhxLctrV5Vu8=";
-          };
-          patches = [ ];
-        });
+        mypy =
+          let version = "1.1.1"; in
+          if lib.versionAtLeast pyPrev.mypy.version version then lib.warn "Redundant overlay" pyPrev.mypy
+          else
+            pyPrev.mypy.overridePythonAttrs (oldAttrs: rec {
+              name = "${oldAttrs.pname}-${version}";
+              inherit version;
+              src = fetchFromGitHub {
+                owner = "python";
+                repo = "mypy";
+                rev = "refs/tags/v${version}";
+                hash = "sha256-PKbqbGzCdeVGKu1uVhnx7+yl8M2a089qhxLctrV5Vu8=";
+              };
+              patches = [ ];
+            });
 
-        mypy-extensions = pyPrev.mypy-extensions.overridePythonAttrs (oldAttrs: rec {
-          name = "${oldAttrs.pname}-${version}";
-          version = "1.0.0";
-          src = fetchFromGitHub {
-            owner = "python";
-            repo = "mypy_extensions";
-            rev = "refs/tags/${version}";
-            hash = "sha256-gOfHC6dUeBE7SsWItpUHHIxW3wzhPM5SuGW1U8P7DD0=";
-          };
-        });
+        mypy-extensions =
+          let version = "1.0.0"; in
+          if lib.versionAtLeast pyPrev.mypy-extensions.version version then lib.warn "Redundant overlay" pyPrev.mypy
+          else
+            pyPrev.mypy-extensions.overridePythonAttrs (oldAttrs: rec {
+              name = "${oldAttrs.pname}-${version}";
+              inherit version;
+              src = fetchFromGitHub {
+                owner = "python";
+                repo = "mypy_extensions";
+                rev = "refs/tags/${version}";
+                hash = "sha256-gOfHC6dUeBE7SsWItpUHHIxW3wzhPM5SuGW1U8P7DD0=";
+              };
+            });
 
         nglview = pyFinal.callPackage ./packages/nglview.nix { };
 
