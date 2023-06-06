@@ -141,7 +141,7 @@ in
 
         py3Dmol = pyFinal.callPackage ./packages/py3Dmol.nix { };
 
-        pymbar = pyFinal.callPackage ./packages/pymbar { };
+        pymbar = pyFinal.callPackage ./packages/pymbar.nix { };
 
         pytest-resource-usage = pyFinal.callPackage ./packages/pytest-resource-usage.nix { };
 
