@@ -97,6 +97,8 @@ in
           };
         });
 
+        mdtraj = pyFinal.callPackage ./packages/mdtraj.nix { buildDocs = true; };
+
         ml-dtypes = pyFinal.callPackage ./packages/ml-dtypes.nix { };
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };

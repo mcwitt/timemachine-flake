@@ -50,6 +50,7 @@
             click_8_0_4
             jupyter-black
             jupyter-client
+            mdtraj
             mols2grid
             nglview
             py3Dmol
