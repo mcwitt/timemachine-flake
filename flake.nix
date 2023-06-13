@@ -48,12 +48,14 @@
             (pkgs.python3Packages)
             black_21_12b0
             click_8_0_4
+            deeptime
             jupyter-black
             jupyter-client
             mdtraj
             mols2grid
             nglview
             py3Dmol
+            pyemma
             pytest-resource-usage
             timemachineWithoutCuda;
 

@@ -44,6 +44,8 @@ in
           };
         });
 
+        deeptime = pyFinal.callPackage ./packages/deeptime.nix { };
+
         hilbertcurve = pyFinal.callPackage ./packages/hilbertcurve.nix { };
 
         jax = pyPrev.jax.overridePythonAttrs (oldAttrs: rec {
@@ -142,6 +144,8 @@ in
         openmm = pyPrev.openmm.override { inherit (final) stdenv gfortran; enableOpencl = false; };
 
         py3Dmol = pyFinal.callPackage ./packages/py3Dmol.nix { };
+
+        pyemma = pyFinal.callPackage ./packages/pyemma.nix { };
 
         pymbar = pyFinal.callPackage ./packages/pymbar.nix { };
 
