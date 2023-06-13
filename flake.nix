@@ -39,25 +39,22 @@
 
           default = python;
 
-          python = pkgs.python3.withPackages (ps:
-            let timemachine = if pkgs.stdenv.isLinux then ps.timemachine else ps.timemachineWithoutCuda;
-            in [ timemachine ]);
-
-          # list packages that we want to build in CI
-          inherit
-            (pkgs.python3Packages)
-            black_21_12b0
-            click_8_0_4
-            deeptime
-            jupyter-black
-            jupyter-client
-            mdtraj
-            mols2grid
-            nglview
-            py3Dmol
-            pyemma
-            pytest-resource-usage
-            timemachineWithoutCuda;
+          python = pkgs.python3.withPackages
+            (ps:
+              let timemachine = if pkgs.stdenv.isLinux then ps.timemachine else ps.timemachineWithoutCuda;
+              in [ timemachine ] ++ (with ps; [
+                deeptime
+                jupyter-black
+                jupyter-client
+                mdtraj
+                mols2grid
+                nglview
+                py3Dmol
+                pyemma
+                pytest-resource-usage
+                timemachine
+              ])
+            );
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 
