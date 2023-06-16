@@ -104,7 +104,7 @@ buildPythonPackage rec {
   # CMake is invoked by the setuptools build
   dontUseCmakeConfigure = true;
 
-  CMAKE_ARGS = lib.optionals enableCuda [ "-DCUDA_ARCH=61" ];
+  CMAKE_ARGS = lib.optionals enableCuda [ "-DCUDA_ARCH=all-major" ];
 
   # ensure we use a supported compiler
   CUDAHOSTCXX = lib.optionalString enableCuda "${cudaPackages.cudatoolkit.cc}/bin/cc";
