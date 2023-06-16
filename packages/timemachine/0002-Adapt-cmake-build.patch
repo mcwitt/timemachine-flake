@@ -1,4 +1,4 @@
-From 92c47237b6a513053b62e715eefc621e8b613ff7 Mon Sep 17 00:00:00 2001
+From 253b9202fd834d3a3e24fb4b41bea9b3ed49a893 Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Mon, 6 Mar 2023 08:09:00 -0800
 Subject: [PATCH 2/2] Adapt cmake build
@@ -7,18 +7,16 @@ Subject: [PATCH 2/2] Adapt cmake build
 
 * Parameterize python version
 
-* Remove CUDA_ARCH setting
-
 * Remove -Werror (warnings from eigen)
 ---
- timemachine/cpp/CMakeLists.txt | 63 ++++------------------------------
- 1 file changed, 7 insertions(+), 56 deletions(-)
+ timemachine/cpp/CMakeLists.txt | 25 +++++++------------------
+ 1 file changed, 7 insertions(+), 18 deletions(-)
 
 diff --git a/timemachine/cpp/CMakeLists.txt b/timemachine/cpp/CMakeLists.txt
-index 54816b2e..f39e440e 100644
+index 48699409..4b099caa 100644
 --- a/timemachine/cpp/CMakeLists.txt
 +++ b/timemachine/cpp/CMakeLists.txt
-@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
  
  set(CMAKE_CXX_STANDARD 17)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -59,7 +57,7 @@ index 54816b2e..f39e440e 100644
  
  # Disable warnings on vendored files
  file(
-@@ -96,49 +85,11 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
+@@ -98,7 +87,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
  
  include_directories(src/kernels)
  include_directories(SYSTEM ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
@@ -68,48 +66,6 @@ index 54816b2e..f39e440e 100644
  include_directories(SYSTEM ${CMAKE_CURRENT_BINARY_DIR}/${CUB_SRC_DIR})
  
  set_property(TARGET ${LIBRARY_NAME} PROPERTY CUDA_STANDARD 17)
- 
--if (NOT CUDA_ARCH)
--  find_program(HAS_SMI "nvidia-smi")
--  # In cuda 11.6 nvidia-smi added support to get GPU compute capability query
--  if (HAS_SMI AND CMAKE_CUDA_COMPILER_VERSION MATCHES "11\.[6-9]\.*")
--    execute_process(
--      COMMAND
--      bash
--      "-o"
--      "pipefail"
--      "-c"
--      "nvidia-smi --query-gpu=compute_cap --format=csv | grep -v compute_cap | uniq"
--      OUTPUT_VARIABLE SMI_OUTPUT
--      OUTPUT_STRIP_TRAILING_WHITESPACE
--      RESULT_VARIABLE STATUS
--    )
--    if (STATUS AND NOT STATUS EQUAL 0)
--      message("Warning: failed to determine CUDA_ARCH automatically: ${SMI_OUTPUT}")
--    else()
--      STRING(REPLACE "." "" CUDA_ARCH ${SMI_OUTPUT})
--      # Verify that only one compute capability was returned
--      STRING(REGEX MATCHALL "\n" NEW_LINES "${CUDA_ARCH}")
--      # NUM_COMPUTE_CAPS is off by one, as there will be one less newline than there are compute capabilities
--      list(LENGTH NEW_LINES NUM_COMPUTE_CAPS)
--      # If there are multiple compute capabilities, unset the CUDA_ARCH, fall back to the default below.
--      if(NUM_COMPUTE_CAPS GREATER_EQUAL 1)
--        unset(CUDA_ARCH)
--      endif()
--    endif()
--  endif()
--endif()
--# If still not set, default to 75
--if (NOT CUDA_ARCH)
--  set(CUDA_ARCH "75")
--endif()
--message("Cuda Arch: " ${CUDA_ARCH})
--set_property(TARGET ${LIBRARY_NAME} PROPERTY CUDA_ARCHITECTURES "${CUDA_ARCH}")
--unset(CUDA_ARCH CACHE)
--
- target_link_libraries(${LIBRARY_NAME} PRIVATE -lcurand)
- set_target_properties(${LIBRARY_NAME} PROPERTIES PREFIX "")
- 
 -- 
-2.39.2
+2.40.1
 
