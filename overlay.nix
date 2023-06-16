@@ -147,7 +147,7 @@ in
 
         pyemma = pyFinal.callPackage ./packages/pyemma.nix { };
 
-        pymbar = pyFinal.callPackage ./packages/pymbar.nix { };
+        pymbar = pyFinal.callPackage ./packages/pymbar { };
 
         pytest-resource-usage = pyFinal.callPackage ./packages/pytest-resource-usage.nix { };
 
