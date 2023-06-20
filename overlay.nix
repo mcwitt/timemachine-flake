@@ -151,6 +151,19 @@ in
 
         pytest-resource-usage = pyFinal.callPackage ./packages/pytest-resource-usage.nix { };
 
+        # Pin rdkit at 2022.03.5
+        # 2023.03.1 segfaults in Chem.Draw.MolsToGridImage in some cases
+        rdkit =
+          let
+            nixpkgs = fetchFromGitHub {
+              owner = "nixos";
+              repo = "nixpkgs";
+              rev = "1f28f9f5d43baeb968edbae4a7f6502c9d333668";
+              hash = "sha256-h87IUq5rhNJSQ98Q3k6EiVcO4CwYBakJYhMWN5C17tU=";
+            };
+          in
+          pyFinal.callPackage "${nixpkgs}/pkgs/development/python-modules/rdkit" { };
+
         timemachine = pyFinal.callPackage ./packages/timemachine { };
 
         timemachineWithoutCuda = pyFinal.callPackage ./packages/timemachine { enableCuda = false; };
