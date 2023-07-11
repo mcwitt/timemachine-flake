@@ -121,6 +121,7 @@ buildPythonPackage rec {
 
   disabledTestPaths = [
     "tests/test_handlers.py" # many tests require OpenEye license
+    "tests/test_rmsd_align.py" # marked nogpu but requires custom_ops
   ];
 
   disabledTests = [
