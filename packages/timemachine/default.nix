@@ -27,7 +27,6 @@
 , pytestCheckHook
 , python
 , pythonRelaxDepsHook
-, pyyaml
 , rdkit
 , scipy
 , substituteAll
@@ -41,8 +40,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "4e81078f41a22697e78a0f0a4fec5e4ebf1e29d9";
-    hash = "sha256-KkmLuN1FdU8La9cSQnxW3MU2k/JZUV/j8/F7tOOEGJw=";
+    rev = "af72d6b95e57d95b36bcfdc58a11b9307f8f97f8";
+    hash = "sha256-JEach3Cr8QoWtDvxzjT4TqZpP9d+FUx++cPRA1KbA5Q=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -91,7 +90,6 @@ buildPythonPackage rec {
     openeye-toolkits
     openmm
     pymbar
-    pyyaml
     rdkit
     scipy
   ];

@@ -63,6 +63,7 @@ in
 
         jaxlib = (pyPrev.jaxlib.override { cudaSupport = false; }).overridePythonAttrs (oldAttrs: rec {
           name = "${oldAttrs.pname}-${version}";
+          meta.broken = false;
           version = "0.4.7";
           src =
             let
