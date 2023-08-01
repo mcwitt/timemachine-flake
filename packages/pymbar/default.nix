@@ -20,6 +20,11 @@ buildPythonPackage rec {
 
   patches = [ ./0001-Remove-deprecated-int-alias.patch ];
 
+  # version is wrong in setup.py
+  postPatch = ''
+    substituteInPlace setup.py --replace "3.0.5" "${version}"
+  '';
+
   propagatedBuildInputs = [
     numpy
     scipy
