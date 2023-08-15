@@ -41,8 +41,13 @@
 
           python = pkgs.python3.withPackages
             (ps:
-              let timemachine = if pkgs.stdenv.isLinux then ps.timemachine else ps.timemachineWithoutCuda;
-              in [ timemachine ] ++ (with ps; [
+              let
+                timemachine =
+                  if pkgs.stdenv.isLinux
+                  then ps.timemachine
+                  else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
+              in
+              [ timemachine ] ++ (with ps; [
                 deeptime
                 jupyter-black
                 jupyter-client
@@ -89,8 +94,14 @@
 
           timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
 
-            inputsFrom = [ pkgs.python3Packages.timemachineWithoutCuda ]
-              ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [ pkgs.python3Packages.timemachine ];
+            inputsFrom =
+              let
+                timemachine = let ps = pkgs.python3Packages; in
+                  if pkgs.stdenv.isLinux
+                  then ps.timemachine
+                  else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
+              in
+              [ timemachine ];
 
             packages = (with pkgs.python3Packages.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
