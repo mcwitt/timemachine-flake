@@ -12,14 +12,14 @@
 
 buildPythonPackage rec {
   pname = "nglview";
-  version = "3.0.4";
+  version = "3.0.6";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "nglviewer";
     repo = "nglview";
     rev = "refs/tags/v${version}";
-    hash = "sha256-sMblFhzq+B3jtk6HpZuqtCxPXlsJ4QLANbdjWydkt8o=";
+    hash = "sha256-2q3s34FdugkxNlXw2v3e3K0qvHTZrx/ings8iIGJkpk=";
   };
 
   nativeBuildInputs = [ versioneer ];
@@ -60,6 +60,7 @@ buildPythonPackage rec {
     "test_show_schrodinger" # requires parmed
     "test_nglview_show_module" # AssertionError: assert not 14
     "test_nglview_widget" # AssertionError: assert not 3
+    "test_get_port" # ModuleNotFoundError: No module named 'notebook.notebookapp'
   ];
 
   disabledTestPaths = [

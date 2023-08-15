@@ -48,42 +48,6 @@ in
 
         hilbertcurve = pyFinal.callPackage ./packages/hilbertcurve.nix { };
 
-        jax = pyPrev.jax.overridePythonAttrs (oldAttrs: rec {
-          name = "${oldAttrs.pname}-${version}";
-          version = "0.4.7";
-          src = fetchFromGitHub {
-            owner = "google";
-            repo = oldAttrs.pname;
-            rev = "refs/tags/jax-v${version}";
-            hash = "sha256-hjSa8DrQrvJcoITN18JJ7O833jHCTU1PFmw91+RiOwU=";
-          };
-          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
-          doCheck = false;
-        });
-
-        jaxlib = (pyPrev.jaxlib.override { cudaSupport = false; }).overridePythonAttrs (oldAttrs: rec {
-          name = "${oldAttrs.pname}-${version}";
-          meta.broken = false;
-          version = "0.4.7";
-          src =
-            let
-              sources = {
-                "x86_64-linux" = fetchurl {
-                  url = "https://storage.googleapis.com/jax-releases/nocuda/jaxlib-${version}-cp310-cp310-manylinux2014_x86_64.whl";
-                  hash = "sha256-2og4LmSHgFl0zqb6zGG6krWCinofLdgPdixIfYc6K0c=";
-                };
-                "x86_64-darwin" = fetchurl {
-                  url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-${version}-cp310-cp310-macosx_10_14_x86_64.whl";
-                  hash = "sha256-Y8KJCXjoZGUW2z2KaAtD0r7YtjVDpwVWOR9YmiYb2F8=";
-                };
-              };
-            in
-            builtins.getAttr stdenv.system sources;
-
-          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ pyFinal.ml-dtypes ];
-          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ final.lib.optionals stdenv.isLinux [ final.autoPatchelfHook ];
-        });
-
         jupyter-black = pyFinal.callPackage ./packages/jupyter-black.nix { };
 
         # downgrade to work around
@@ -101,8 +65,6 @@ in
         });
 
         mdtraj = pyFinal.callPackage ./packages/mdtraj.nix { buildDocs = true; };
-
-        ml-dtypes = pyFinal.callPackage ./packages/ml-dtypes.nix { };
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
 
