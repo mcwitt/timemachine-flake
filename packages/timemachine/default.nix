@@ -40,8 +40,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "4859435752f7aae76200f63add043325ef4268ef";
-    hash = "sha256-2veWeJMl7z5464MLupXUUoV1UJ0MwMeuB/ScQUgk7ys=";
+    rev = "e856908f1e5b188db52fddb513b2f0581c8ff6ce";
+    hash = "sha256-m5ciFUzDYazXPmER7a3v3c3k+OvITy1AtnzcfZDGDnU=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -117,15 +117,17 @@ buildPythonPackage rec {
     pytest-xdist
   ];
 
+  # Ensure we run tests against the installed package and not the
+  # build dir so that the compiled extension is available
+  preCheck = ''
+    rm -r timemachine
+  '';
+
   disabledTestPaths = [
     "tests/test_handlers.py" # many tests require OpenEye license
-    "tests/test_rmsd_align.py" # marked nogpu but requires custom_ops
   ];
 
   disabledTests = [
-    # nondeterministic timeout
-    "test_bootstrap_bar"
-
     # require OpenEye license
     "test_get_strained_atoms"
     "test_hif2a_set"
