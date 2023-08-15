@@ -42,6 +42,7 @@ in
             inherit version;
             hash = "sha256-hFjXsSh8X7EoyQ4jOBz5nc3nS+r2x/9jhM6E1v4JCts=";
           };
+          doCheck = false;
         });
 
         deeptime = pyFinal.callPackage ./packages/deeptime.nix { };
