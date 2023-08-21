@@ -48,6 +48,7 @@
                   else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
               in
               [ timemachine ] ++ (with ps; [
+                altair
                 deeptime
                 jupyter-black
                 jupyter-client
@@ -57,6 +58,7 @@
                 py3Dmol
                 pyemma
                 pytest-resource-usage
+                seaborn
                 timemachine
               ])
             );
