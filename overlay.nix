@@ -51,20 +51,6 @@ in
 
         jupyter-black = pyFinal.callPackage ./packages/jupyter-black.nix { };
 
-        # downgrade to work around
-        # https://discourse.jupyter.org/t/jupyter-notebook-zmq-message-arrived-on-closed-channel-error/17869
-        jupyter-client = pyPrev.jupyter-client.overridePythonAttrs (old: rec {
-          version = "7.4.9";
-          name = "${old.pname}-${version}";
-          format = "pyproject";
-
-          src = pyFinal.fetchPypi {
-            inherit (old) pname;
-            inherit version;
-            hash = "sha256-Ur4o4EFx8HrtjyDhYWpaVSq5/unLvmwYlq4XDDiA05I=";
-          };
-        });
-
         mdtraj = pyFinal.callPackage ./packages/mdtraj.nix { buildDocs = true; };
 
         mols2grid = pyFinal.callPackage ./packages/mols2grid.nix { };
