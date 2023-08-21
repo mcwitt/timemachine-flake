@@ -125,7 +125,8 @@
             src = ./.;
             hooks.nixpkgs-fmt.enable = true;
           };
-        } // self.packages.${system}; # ensure packages build with `nix flake check`
+        }
+        // self.packages.${system} // self.devShells.${system}; # check that packages and devshells build
       }) // {
       overlays.default = import ./overlay.nix { inherit inputs; };
 
