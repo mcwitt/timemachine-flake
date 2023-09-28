@@ -18,6 +18,7 @@
 , numpy
 , openeye-toolkits
 , openmm
+, psutil
 , py3Dmol
 , pybind11
 , pymbar
@@ -40,8 +41,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "a88c4098175d1db8dca40cc027a8680310b54405";
-    hash = "sha256-e85Dkib7vf/DdJStPA0WSHwu3jGpnVlw/1xscpFMzBE=";
+    rev = "8a32004c9d0259afe596f8ef3bed8b7ba439605f";
+    hash = "sha256-U1HjONYN8qQepOSUgF1Cr5qiKykLYK3L6JmaB/Qor2A=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -160,6 +161,7 @@ buildPythonPackage rec {
     ];
 
     test = [
+      psutil
       py3Dmol
       pytest
       pytest-cov
