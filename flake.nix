@@ -39,7 +39,7 @@
 
           default = python;
 
-          python = pkgs.python3.withPackages
+          python = pkgs.python310.withPackages
             (ps:
               let
                 timemachine =
@@ -85,7 +85,7 @@
             ];
           };
 
-          inherit (pkgs.python3Packages) timemachine;
+          inherit (pkgs.python310Packages) timemachine;
         };
 
         devShells = {
@@ -98,16 +98,16 @@
 
             inputsFrom =
               let
-                timemachine = let ps = pkgs.python3Packages; in
+                timemachine = let ps = pkgs.python310Packages; in
                   if pkgs.stdenv.isLinux
                   then ps.timemachine
                   else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
               in
               [ timemachine ];
 
-            packages = (with pkgs.python3Packages.timemachine.optional-dependencies; dev ++ test) ++ [
+            packages = (with pkgs.python310Packages.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
-              pkgs.python3Packages.pytest-resource-usage
+              pkgs.python310Packages.pytest-resource-usage
             ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
               pkgs.clang-tools
               pkgs.cudaPackages.cuda_gdb
