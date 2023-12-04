@@ -4,7 +4,6 @@
 , black
 , ipython
 , tokenize-rt
-, lib
 }:
 
 buildPythonPackage rec {
