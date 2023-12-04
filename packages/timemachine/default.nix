@@ -1,5 +1,5 @@
 { addOpenGLRunpath
-, black_21_12b0
+, black
 , buildPythonPackage
 , cmake
 , cudaPackages
@@ -41,8 +41,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "8a32004c9d0259afe596f8ef3bed8b7ba439605f";
-    hash = "sha256-U1HjONYN8qQepOSUgF1Cr5qiKykLYK3L6JmaB/Qor2A=";
+    rev = "d8dfa73bdbf845a0612dbc23f91c0f416c0848c2";
+    hash = "sha256-f0xDDpmhqliSdU1um6Adr9pJi4FMHD/gcW8bdjEEBqw=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -62,6 +62,7 @@ buildPythonPackage rec {
       src = ./0002-Adapt-cmake-build.patch;
       pythonVersion = lib.versions.majorMinor python.version;
     })
+    ./0003-Include-stdexcept.patch
   ];
 
   nativeBuildInputs = [
@@ -132,6 +133,7 @@ buildPythonPackage rec {
     # require OpenEye license
     "test_get_strained_atoms"
     "test_hif2a_set"
+    "test_on_methane"
     "test_write_single_topology_frame"
     "test_jax_transform_intermediate_potential"
 
@@ -154,7 +156,7 @@ buildPythonPackage rec {
 
   passthru.optional-dependencies = {
     dev = [
-      black_21_12b0
+      black
       flake8
       isort
       mypy

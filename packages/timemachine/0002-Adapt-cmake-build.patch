@@ -1,7 +1,7 @@
-From 253b9202fd834d3a3e24fb4b41bea9b3ed49a893 Mon Sep 17 00:00:00 2001
+From 35c0c8054d6b06cb564516eb48586b21362dfb7d Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Mon, 6 Mar 2023 08:09:00 -0800
-Subject: [PATCH 2/2] Adapt cmake build
+Subject: [PATCH 2/3] Adapt cmake build
 
 * Use deps from nix
 
@@ -13,7 +13,7 @@ Subject: [PATCH 2/2] Adapt cmake build
  1 file changed, 7 insertions(+), 18 deletions(-)
 
 diff --git a/timemachine/cpp/CMakeLists.txt b/timemachine/cpp/CMakeLists.txt
-index 48699409..4b099caa 100644
+index 6c8a5dc4..60e27fa4 100644
 --- a/timemachine/cpp/CMakeLists.txt
 +++ b/timemachine/cpp/CMakeLists.txt
 @@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
@@ -37,7 +37,7 @@ index 48699409..4b099caa 100644
  
  string(APPEND CMAKE_CUDA_FLAGS "-O3 -lineinfo")
  string(APPEND CMAKE_CUDA_FLAGS
-@@ -28,19 +30,6 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+@@ -29,19 +31,6 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
  endif()
  
  set(LIBRARY_NAME custom_ops)
@@ -57,7 +57,7 @@ index 48699409..4b099caa 100644
  
  # Disable warnings on vendored files
  file(
-@@ -98,7 +87,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
+@@ -115,7 +104,7 @@ pybind11_add_module(${LIBRARY_NAME} SHARED NO_EXTRAS
  
  include_directories(src/kernels)
  include_directories(SYSTEM ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
@@ -67,5 +67,5 @@ index 48699409..4b099caa 100644
  
  set_property(TARGET ${LIBRARY_NAME} PROPERTY CUDA_STANDARD 17)
 -- 
-2.40.1
+2.42.0
 

@@ -17,34 +17,7 @@ in
   python310 = prev.python310.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyFinal: pyPrev:
-        let inherit (pyFinal) callPackage fetchPypi pythonRelaxDepsHook; in {
-          black_21_12b0 = (pyPrev.black.override {
-            click = pyFinal.click_8_0_4;
-          }).overridePythonAttrs (oldAttrs: rec {
-            name = "${oldAttrs.pname}-${version}";
-            version = "21.12b0";
-            src = fetchPypi {
-              inherit (oldAttrs) pname;
-              inherit version;
-              hash = "sha256-d7gPaTpWni5SeVhFljTxjfmwuiYluk4MLV2lvkLm8rM=";
-            };
-            nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pythonRelaxDepsHook ];
-            pythonRelaxDeps = [ "tomli" ];
-            doCheck = false; # requires pytest 6.X
-          });
-
-          # can remove when upgrading black
-          # https://github.com/psf/black/issues/2964
-          click_8_0_4 = pyPrev.click.overridePythonAttrs (oldAttrs: rec {
-            name = "${oldAttrs.pname}-${version}";
-            version = "8.0.4";
-            src = fetchPypi {
-              inherit (oldAttrs) pname;
-              inherit version;
-              hash = "sha256-hFjXsSh8X7EoyQ4jOBz5nc3nS+r2x/9jhM6E1v4JCts=";
-            };
-            doCheck = false;
-          });
+        let inherit (pyFinal) callPackage; in {
 
           deeptime = callPackage ./packages/deeptime.nix { };
 
