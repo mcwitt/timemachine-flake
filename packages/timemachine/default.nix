@@ -41,8 +41,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "d8dfa73bdbf845a0612dbc23f91c0f416c0848c2";
-    hash = "sha256-f0xDDpmhqliSdU1um6Adr9pJi4FMHD/gcW8bdjEEBqw=";
+    rev = "4b82a3270720ea114f72316fb63c7bcca039e4df";
+    hash = "sha256-w8GSf/pSamK2UIaBAPr75cBbgCPpp5ifKnXX75bQ0YE=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -62,7 +62,6 @@ buildPythonPackage rec {
       src = ./0002-Adapt-cmake-build.patch;
       pythonVersion = lib.versions.majorMinor python.version;
     })
-    ./0003-Include-stdexcept.patch
   ];
 
   nativeBuildInputs = [
