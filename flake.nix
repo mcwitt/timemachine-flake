@@ -33,13 +33,15 @@
           ];
         };
 
+        python = pkgs.python310;
+
       in
       {
-        packages = rec {
+        packages = {
 
-          default = python;
+          default = self.packages.${system}.python;
 
-          python = pkgs.python310.withPackages
+          python = python.withPackages
             (ps:
               let
                 timemachine =
@@ -71,8 +73,6 @@
               "NVIDIA_REQUIRE_CUDA=cuda>=${nixpkgs.lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
             ];
           };
-
-          inherit (pkgs.python310Packages) timemachine;
         };
 
         devShells = {
@@ -85,16 +85,16 @@
 
             inputsFrom =
               let
-                timemachine = let ps = pkgs.python310Packages; in
+                timemachine = let ps = python.pkgs; in
                   if pkgs.stdenv.isLinux
                   then ps.timemachine
                   else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
               in
               [ timemachine ];
 
-            packages = (with pkgs.python310Packages.timemachine.optional-dependencies; dev ++ test) ++ [
+            packages = (with python.pkgs.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
-              pkgs.python310Packages.pytest-resource-usage
+              python.pkgs.pytest-resource-usage
             ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
               pkgs.clang-tools
               pkgs.cudaPackages.cuda_gdb
