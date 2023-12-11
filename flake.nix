@@ -47,20 +47,7 @@
                   then ps.timemachine
                   else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
               in
-              [ timemachine ] ++ (with ps; [
-                altair
-                deeptime
-                jupyter-black
-                jupyter-client
-                mdtraj
-                mols2grid
-                nglview
-                py3Dmol
-                pyemma
-                pytest-resource-usage
-                seaborn
-                timemachine
-              ])
+              [ timemachine ]
             );
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
