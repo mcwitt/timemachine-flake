@@ -52,6 +52,8 @@
               [ timemachine ]
             );
 
+          inherit (python.pkgs) deeptime jupyter-black mdtraj mols2grid nglview py3Dmol pyemma;
+
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 
           dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
