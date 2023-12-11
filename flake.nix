@@ -35,22 +35,18 @@
 
         python = pkgs.python310;
 
+        getTimemachinePackage = ps:
+          if pkgs.stdenv.isLinux
+          then ps.timemachine
+          else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
+
       in
       {
         packages = {
 
           default = self.packages.${system}.python;
 
-          python = python.withPackages
-            (ps:
-              let
-                timemachine =
-                  if pkgs.stdenv.isLinux
-                  then ps.timemachine
-                  else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
-              in
-              [ timemachine ]
-            );
+          python = python.withPackages (ps: [ (getTimemachinePackage ps) ]);
 
           inherit (python.pkgs) deeptime jupyter-black mdtraj mols2grid nglview py3Dmol pyemma;
 
@@ -86,13 +82,8 @@
           timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
 
             inputsFrom =
-              let
-                timemachine = let ps = python.pkgs; in
-                  if pkgs.stdenv.isLinux
-                  then ps.timemachine
-                  else ps.timemachineWithoutCuda.override { jaxlib = ps.jaxlib-bin; };
-              in
-              [ timemachine ];
+              let timemachine = getTimemachinePackage python.pkgs;
+              in [ timemachine ];
 
             packages = (with python.pkgs.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
