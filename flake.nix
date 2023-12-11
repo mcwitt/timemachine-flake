@@ -92,7 +92,6 @@
               pkgs.clang-tools
               pkgs.cudaPackages.cuda_gdb
               pkgs.cudaPackages.cuda_sanitizer_api
-              pkgs.cudaPackages.nsight_systems
               pkgs.gdb
             ];
 
