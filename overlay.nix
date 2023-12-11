@@ -1,8 +1,6 @@
 { inputs }:
 final:
 prev:
-let inherit (final) fetchFromGitHub;
-in
 {
   cudaPackages = prev.cudaPackages_11_7.overrideScope' (final: _: {
     # The following NVIDIA packages are included in cudatoolkit
