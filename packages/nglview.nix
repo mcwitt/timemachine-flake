@@ -12,15 +12,21 @@
 
 buildPythonPackage rec {
   pname = "nglview";
-  version = "3.0.6";
+  version = "3.0.8";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "nglviewer";
     repo = "nglview";
     rev = "refs/tags/v${version}";
-    hash = "sha256-2q3s34FdugkxNlXw2v3e3K0qvHTZrx/ings8iIGJkpk=";
+    hash = "sha256-woy0N2tLwRvqFC9njwrQ4LH+Xf61WcefClQmZ57SDzQ=";
   };
+
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace 'jupyter_packaging~=0.7.9' 'jupyter-packaging' \
+      --replace 'versioneer-518' 'versioneer'
+  '';
 
   nativeBuildInputs = [ versioneer ];
 

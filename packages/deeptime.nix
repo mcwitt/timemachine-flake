@@ -1,6 +1,8 @@
 { buildPythonPackage
 , cmake
+, cython
 , fetchFromGitHub
+, ninja
 , numpy
 , pybind11
 , pythonOlder
@@ -26,8 +28,16 @@ buildPythonPackage rec {
     sha256 = "sha256-oLBGyhRyIDFj6fK4OlTOfugPPnmv2yZ3M+BjccbuwDQ=";
   };
 
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace 'scipy==1.9.3' 'scipy>=1.9.3' \
+      --replace 'versioneer[toml]==0.28' 'versioneer[toml]>=0.28'
+  '';
+
   nativeBuildInputs = [
     cmake
+    cython
+    ninja
     pybind11
     scikit-build
     setuptools

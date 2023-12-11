@@ -33,9 +33,6 @@ in
 
           openeye-toolkits = callPackage ./packages/openeye-toolkits.nix { };
 
-          # Work around https://github.com/NixOS/nixpkgs/issues/224831
-          openmm = pyPrev.openmm.override { inherit (final) stdenv gfortran; enableOpencl = false; };
-
           py3Dmol = callPackage ./packages/py3Dmol.nix { };
 
           pyemma = callPackage ./packages/pyemma.nix { };
@@ -43,19 +40,6 @@ in
           pymbar = callPackage ./packages/pymbar { };
 
           pytest-resource-usage = callPackage ./packages/pytest-resource-usage.nix { };
-
-          # Pin rdkit at 2022.03.5
-          # 2023.03.1 segfaults in Chem.Draw.MolsToGridImage in some cases
-          rdkit =
-            let
-              nixpkgs = fetchFromGitHub {
-                owner = "nixos";
-                repo = "nixpkgs";
-                rev = "1f28f9f5d43baeb968edbae4a7f6502c9d333668";
-                hash = "sha256-h87IUq5rhNJSQ98Q3k6EiVcO4CwYBakJYhMWN5C17tU=";
-              };
-            in
-            callPackage "${nixpkgs}/pkgs/development/python-modules/rdkit" { };
 
           timemachine = callPackage ./packages/timemachine { };
 
