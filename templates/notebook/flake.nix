@@ -23,7 +23,7 @@
       packages.${system} = rec {
         default = python;
 
-        python = pkgs.python3.withPackages (
+        python = pkgs.python310.withPackages (
           ps: with ps; [
             altair
             black
