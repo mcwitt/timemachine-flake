@@ -48,7 +48,7 @@
 
           python = python.withPackages (ps: [ (getTimemachinePackage ps) ]);
 
-          inherit (python.pkgs) deeptime jupyter-black mdtraj mols2grid nglview py3Dmol pyemma;
+          inherit (python.pkgs) jupyter-black mdtraj mols2grid nglview py3Dmol;
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 

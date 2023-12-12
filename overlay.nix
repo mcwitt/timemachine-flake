@@ -17,8 +17,6 @@ prev:
       (pyFinal: pyPrev:
         let inherit (pyFinal) callPackage; in {
 
-          deeptime = callPackage ./packages/deeptime.nix { };
-
           hilbertcurve = callPackage ./packages/hilbertcurve.nix { };
 
           jupyter-black = callPackage ./packages/jupyter-black.nix { };
@@ -32,8 +30,6 @@ prev:
           openeye-toolkits = callPackage ./packages/openeye-toolkits.nix { };
 
           py3Dmol = callPackage ./packages/py3Dmol.nix { };
-
-          pyemma = callPackage ./packages/pyemma.nix { };
 
           pymbar = callPackage ./packages/pymbar { };
 
