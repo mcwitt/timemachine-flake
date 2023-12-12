@@ -1,10 +1,38 @@
-{ buildPythonPackage, fetchPypi }:
+{ lib
+, buildPythonPackage
+, fetchPypi
+, setuptools
+, wheel
+, ipython
+}:
 
 buildPythonPackage rec {
   pname = "py3Dmol";
-  version = "2.0.1.post1";
+  version = "2.0.4";
+  pyproject = true;
+
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-rdcOz49keXCSXrjBBDxcE0OBP6SeYTt38GKOUixBSKw=";
+    hash = "sha256-B5CcWHun5A0X4sqTgxk+rYB6+DT5VpsQjP94TsTPtSU=";
+  };
+
+  nativeBuildInputs = [
+    setuptools
+    wheel
+  ];
+
+  passthru.optional-dependencies = {
+    ipython = [
+      ipython
+    ];
+  };
+
+  pythonImportsCheck = [ "py3Dmol" ];
+
+  meta = with lib; {
+    description = "An IPython interface for embedding 3Dmol.js views in Jupyter notebooks";
+    homepage = "https://pypi.org/project/py3Dmol/";
+    license = licenses.mit;
+    maintainers = with maintainers; [ ];
   };
 }

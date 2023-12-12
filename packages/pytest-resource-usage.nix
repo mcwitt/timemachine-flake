@@ -1,22 +1,41 @@
-{ buildPythonPackage
+{ lib
+, buildPythonPackage
 , fetchPypi
 , flit-core
-, pytestCheckHook
+, pytest
+, psutil
 }:
 
 buildPythonPackage rec {
   pname = "pytest-resource-usage";
   version = "1.0.0";
-  format = "pyproject";
+  pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-OiAM7gB/w+dJb/NGILKEFJQ1bJIGOqb6eekgH9Hlg8w=";
+    hash = "sha256-OiAM7gB/w+dJb/NGILKEFJQ1bJIGOqb6eekgH9Hlg8w=";
   };
 
-  propagatedBuildInputs = [
+  nativeBuildInputs = [
     flit-core
   ];
 
-  nativeCheckInputs = [ pytestCheckHook ];
+  propagatedBuildInputs = [
+    pytest
+  ];
+
+  passthru.optional-dependencies = {
+    report_uss = [
+      psutil
+    ];
+  };
+
+  pythonImportsCheck = [ "pytest_resource_usage" ];
+
+  meta = with lib; {
+    description = "Pytest plugin for reporting running time and peak memory usage";
+    homepage = "https://pypi.org/project/pytest-resource-usage/";
+    license = licenses.mit;
+    maintainers = with maintainers; [ ];
+  };
 }

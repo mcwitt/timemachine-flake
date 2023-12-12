@@ -188,6 +188,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/proteneer/timemachine";
     changelog = "https://github.com/proteneer/timemachine/releases/tag/${version}";
     license = lib.licenses.asl20;
-    maintainers = [ lib.maintainers.mcwitt ];
+    maintainers = with lib.maintainers; [ mcwitt ];
   };
 }

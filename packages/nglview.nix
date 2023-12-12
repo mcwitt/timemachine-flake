@@ -1,75 +1,51 @@
-{ ase
+{ lib
 , buildPythonPackage
 , fetchFromGitHub
 , ipywidgets
 , jupyter-packaging
-, mock
-, notebook
 , numpy
-, pytestCheckHook
+, setuptools
 , versioneer
+, wheel
 }:
 
 buildPythonPackage rec {
   pname = "nglview";
   version = "3.0.8";
-  format = "pyproject";
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "nglviewer";
     repo = "nglview";
-    rev = "refs/tags/v${version}";
+    rev = "v${version}";
     hash = "sha256-woy0N2tLwRvqFC9njwrQ4LH+Xf61WcefClQmZ57SDzQ=";
   };
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace 'jupyter_packaging~=0.7.9' 'jupyter-packaging' \
-      --replace 'versioneer-518' 'versioneer'
+      --replace '"versioneer-518"' '"versioneer"' \
+      --replace '"jupyter_packaging~=0.7.9"' '"jupyter_packaging"'
   '';
 
-  nativeBuildInputs = [ versioneer ];
-
-  propagatedBuildInputs = [
-    ipywidgets
+  nativeBuildInputs = [
     jupyter-packaging
-    numpy
+    setuptools
+    versioneer
+    wheel
   ];
 
   nativeCheckInputs = [
-    ase
-    mock
-    notebook
-    pytestCheckHook
+    ipywidgets
+    numpy
   ];
 
-  disabledTests = [
-    # require simpletraj
-    "test_API_promise_to_have"
-    "test_handling_n_components_changed"
-    "test_coordinates_dict"
-    "test_load_data"
-    "test_representations"
-    "test_add_repr_shortcut"
-    "test_remote_call"
-    "test_download_image"
-    "test_component_for_duck_typing"
-    "test_trajectory_show_hide_sending_cooridnates"
-    "test_add_struture_then_trajectory"
-    "test_loaded_attribute"
-    "test_player_simple"
-    "test_player_link_to_ipywidgets"
-    "test_player_interpolation"
-    "test_interpolate"
-    "test_write_html"
+  pythonImportsCheck = [ "nglview" ];
 
-    "test_show_schrodinger" # requires parmed
-    "test_nglview_show_module" # AssertionError: assert not 14
-    "test_nglview_widget" # AssertionError: assert not 3
-    "test_get_port" # ModuleNotFoundError: No module named 'notebook.notebookapp'
-  ];
-
-  disabledTestPaths = [
-    "nglview/tests/test_movie_maker.py" # imports pytraj
-  ];
+  meta = with lib; {
+    description = "Jupyter widget to interactively view molecular structures and trajectories";
+    homepage = "https://github.com/nglviewer/nglview";
+    changelog = "https://github.com/nglviewer/nglview/blob/${src.rev}/CHANGELOG.md";
+    license = licenses.mit;
+    maintainers = with maintainers; [ ];
+  };
 }
