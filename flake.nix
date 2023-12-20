@@ -87,8 +87,10 @@
 
             packages = (with python.pkgs.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
-              python.pkgs.pytest-resource-usage
-            ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
+            ] ++ (with python.pkgs; [
+              notebook
+              pytest-resource-usage
+            ]) ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
               pkgs.clang-tools
               pkgs.cudaPackages.cuda_gdb
               pkgs.cudaPackages.cuda_sanitizer_api
