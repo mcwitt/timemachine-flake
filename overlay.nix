@@ -1,20 +1,8 @@
 { inputs }:
 final:
 prev:
-{
-  cudaPackages = prev.cudaPackages_11_7.overrideScope' (final: _: {
-    # The following NVIDIA packages are included in cudatoolkit
-    # but no redist packages are available:
-    # https://developer.download.nvidia.com/compute/cuda/redist/
-    # Fetching these from github lets us avoid depending on
-    # cudatoolkit, which would add substantial size to the closure
-    cub = final.callPackage ./packages/cub.nix { };
-    thrust = final.callPackage ./packages/thrust.nix { };
-  });
-
-  python3 = final.python311;
-
-  python311 = prev.python311.override (old: {
+let
+  overridePython = python: python.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyFinal: pyPrev:
         let inherit (pyFinal) callPackage; in {
@@ -47,4 +35,17 @@ prev:
           timemachineWithoutCuda = callPackage ./packages/timemachine { enableCuda = false; };
         });
   });
+in
+{
+  cudaPackages = prev.cudaPackages_11_7.overrideScope' (final: _: {
+    # The following NVIDIA packages are included in cudatoolkit
+    # but no redist packages are available:
+    # https://developer.download.nvidia.com/compute/cuda/redist/
+    # Fetching these from github lets us avoid depending on
+    # cudatoolkit, which would add substantial size to the closure
+    cub = final.callPackage ./packages/cub.nix { };
+    thrust = final.callPackage ./packages/thrust.nix { };
+  });
+
+  python311 = overridePython prev.python311;
 }
