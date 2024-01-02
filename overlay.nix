@@ -12,6 +12,8 @@ prev:
     thrust = final.callPackage ./packages/thrust.nix { };
   });
 
+  python3 = final.python310;
+
   python310 = prev.python310.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyFinal: pyPrev:
@@ -35,7 +37,12 @@ prev:
 
           pytest-resource-usage = callPackage ./packages/pytest-resource-usage.nix { };
 
-          timemachine = callPackage ./packages/timemachine { };
+          timemachine =
+            if final.stdenv.isLinux
+            then pyFinal.timemachineWithCuda
+            else pyFinal.timemachineWithoutCuda.override { jaxlib = final.jaxlib-bin; };
+
+          timemachineWithCuda = callPackage ./packages/timemachine { };
 
           timemachineWithoutCuda = callPackage ./packages/timemachine { enableCuda = false; };
         });
