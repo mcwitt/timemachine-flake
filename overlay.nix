@@ -12,9 +12,9 @@ prev:
     thrust = final.callPackage ./packages/thrust.nix { };
   });
 
-  python3 = final.python310;
+  python3 = final.python311;
 
-  python310 = prev.python310.override (old: {
+  python311 = prev.python311.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyFinal: pyPrev:
         let inherit (pyFinal) callPackage; in {
