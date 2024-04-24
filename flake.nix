@@ -4,7 +4,7 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixgl.url = "github:guibou/nixgl";
+    nixgl.url = "github:nix-community/nixGL";
     nixos-qchem.url = "github:Nix-QChem/NixOS-QChem";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
