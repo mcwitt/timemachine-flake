@@ -107,6 +107,24 @@
         "type": "github"
       }
     },
+    "nixos-qchem": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1712867439,
+        "narHash": "sha256-c0QMgs7pCs/NR6KZ2tai7R6EynQs96QKjsxoedNCA00=",
+        "owner": "Nix-QChem",
+        "repo": "NixOS-QChem",
+        "rev": "62f3b8018c2696ac447d8805a5b281b50eea7e85",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Nix-QChem",
+        "repo": "NixOS-QChem",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1660551188,
@@ -140,6 +158,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1711593151,
+        "narHash": "sha256-/9NCoPI7fqJIN8viONsY9X0fAeq8jc3GslFCO0ky6TQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bb2b73df7bcfbd2dd55ff39b944d70547d53c267",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1713805509,
         "narHash": "sha256-YgSEan4CcrjivCNO5ZNzhg7/8ViLkZ4CB/GrGBVSudo=",
         "owner": "nixos",
@@ -154,7 +188,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1689261696,
         "narHash": "sha256-LzfUtFs9MQRvIoQ3MfgSuipBVMXslMPH/vZ+nM40LkA=",
@@ -175,7 +209,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_3",
         "gitignore": "gitignore",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
@@ -196,7 +230,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs_2",
+        "nixos-qchem": "nixos-qchem",
+        "nixpkgs": "nixpkgs_3",
         "pre-commit-hooks": "pre-commit-hooks"
       }
     },

@@ -5,6 +5,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixgl.url = "github:guibou/nixgl";
+    nixos-qchem.url = "github:Nix-QChem/NixOS-QChem";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
@@ -13,6 +14,7 @@
     , flake-utils
     , nixpkgs
     , nixgl
+    , nixos-qchem
     , pre-commit-hooks
     } @ inputs: flake-utils.lib.eachSystem
       (with flake-utils.lib.system; [
