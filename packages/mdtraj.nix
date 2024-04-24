@@ -6,7 +6,7 @@
 , fetchFromGitHub
 , fetchPypi
 , setuptools
-, cython
+, cython_0
 , numpy
 , zlib
 , pyparsing
@@ -64,7 +64,7 @@ buildPythonPackage rec {
 
   buildInputs = [
     setuptools
-    cython
+    cython_0
     numpy
     zlib
   ];
