@@ -92,6 +92,7 @@
             ];
 
             shellHook = nixpkgs.lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
+              export CUDAHOSTCXX=${pkgs.cudaPackages.cudatoolkit.cc}/bin/cc
               export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
             '';
           };
