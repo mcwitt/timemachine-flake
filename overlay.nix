@@ -15,6 +15,20 @@ let
 
           mols2grid = callPackage ./packages/mols2grid.nix { };
 
+          mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:
+            let version = "1.5.1";
+            in {
+              inherit version;
+              name = "${old.pname}-${version}";
+              src = final.fetchFromGitHub {
+                owner = "python";
+                repo = "mypy";
+                rev = "refs/tags/v${version}";
+                hash = "sha256-qs+axm2+UWNuWzLW8CI4qBV7k7Ra8gBajid8mYKDsso=";
+              };
+              doCheck = false; # slow
+            });
+
           nglview = callPackage ./packages/nglview.nix { };
 
           openeye-toolkits = callPackage ./packages/openeye-toolkits.nix { };

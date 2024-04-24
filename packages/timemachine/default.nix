@@ -13,7 +13,7 @@
 , jaxlib
 , lib
 , matplotlib
-, mypy
+, mypy_1_5
 , networkx
 , numpy
 , openeye-toolkits
@@ -69,13 +69,12 @@ buildPythonPackage rec {
   postPatch = ''
     substituteInPlace pyproject.toml \
       --replace "cmake==3.24.3" "cmake" \
-      --replace "mypy==1.1.1" "mypy" \
       --replace "setuptools >= 43.0.0, < 64.0.0" "setuptools" \
       --replace "versioneer-518" "versioneer"
   '';
 
   nativeBuildInputs = [
-    mypy
+    mypy_1_5
     pythonRelaxDepsHook
     setuptools
     versioneer
@@ -170,7 +169,7 @@ buildPythonPackage rec {
       black
       flake8
       isort
-      mypy
+      mypy_1_5
     ];
 
     test = [
