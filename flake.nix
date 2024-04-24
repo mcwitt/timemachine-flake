@@ -6,16 +6,16 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixgl.url = "github:nix-community/nixGL";
     nixos-qchem.url = "github:Nix-QChem/NixOS-QChem";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
   outputs =
     { self
     , flake-utils
+    , git-hooks
     , nixpkgs
     , nixgl
     , nixos-qchem
-    , pre-commit-hooks
     } @ inputs: flake-utils.lib.eachSystem
       (with flake-utils.lib.system; [
         x86_64-linux
@@ -72,6 +72,7 @@
 
           default = pkgs.mkShell {
             inherit (self.checks.${system}.pre-commit-check) shellHook;
+            packages = self.checks.${system}.pre-commit-check.enabledPackages;
           };
 
           timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
@@ -97,7 +98,7 @@
         };
 
         checks = {
-          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          pre-commit-check = git-hooks.lib.${system}.run {
             src = ./.;
             hooks.nixpkgs-fmt.enable = true;
           };
