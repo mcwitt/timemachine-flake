@@ -51,6 +51,20 @@ let
   });
 in
 {
+  black_23 = final.black.overridePythonAttrs (old:
+    let version = "23.9.1";
+    in
+    {
+      inherit version;
+      name = "${old.pname}-${version}";
+      src = final.fetchPypi {
+        inherit (old) pname;
+        inherit version;
+        hash = "sha256-JLaz/1xtnqCKiIj2l36uhY4fNA1yYM9W1wpJgjI2ti0=";
+      };
+      doCheck = false;
+    });
+
   cudaPackages = prev.cudaPackages_11_7.overrideScope (final: _: {
     # The following NVIDIA packages are included in cudatoolkit
     # but no redist packages are available:
