@@ -11,8 +11,6 @@ let
 
           jupyter-black = callPackage ./packages/jupyter-black.nix { };
 
-          mdtraj = callPackage "${inputs.nixos-qchem}/pkgs/lib/mdtraj" { cython = pyFinal.cython_0; };
-
           mols2grid = callPackage ./packages/mols2grid.nix { };
 
           mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:
