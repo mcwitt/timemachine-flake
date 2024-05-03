@@ -43,8 +43,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "7710ecb24b5e58404ecb003c2dfbf16c7f403bfb";
-    hash = "sha256-rDCThmIFZBQmab0GMAvckhdJd0vBFikzdG6KVFKxJrE=";
+    rev = "134b1cfcecd560503a0275a2320a848dca35d59f";
+    hash = "sha256-u+lw+TEHrYosUMdM0JcLoW6E5yOLGDtRcc//YIp+DNw=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -146,6 +146,7 @@ buildPythonPackage rec {
     "test_on_methane"
     "test_write_single_topology_frame"
     "test_jax_transform_intermediate_potential"
+    "test_st_mol"
 
     # high resource usage
     "test_jax_nonbonded_waterbox"
