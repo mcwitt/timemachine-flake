@@ -18,7 +18,12 @@ buildPythonPackage rec {
     owner = "nglviewer";
     repo = "nglview";
     rev = "v${version}";
-    hash = "sha256-woy0N2tLwRvqFC9njwrQ4LH+Xf61WcefClQmZ57SDzQ=";
+    hash = "sha256-dVkek1L4YNt9mpkHO0iZdukIdIWzDcDMeesO6z6k7eo=";
+
+    # work around hash instability due to use of export-subst
+    postFetch = ''
+      rm $out/nglview/_version.py
+    '';
   };
 
   postPatch = ''
