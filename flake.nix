@@ -33,15 +33,17 @@
           ];
         };
 
+        python3 = pkgs.python310;
+
       in
       {
         packages = {
 
           default = self.packages.${system}.python;
 
-          python = pkgs.python3.withPackages (ps: [ ps.timemachine ]);
+          python = python3.withPackages (ps: [ ps.timemachine ]);
 
-          inherit (pkgs.python3.pkgs) jupyter-black mdtraj mols2grid nglview py3Dmol;
+          inherit (python3.pkgs) jupyter-black mdtraj mols2grid nglview py3Dmol;
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 
@@ -75,11 +77,11 @@
 
           timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
 
-            inputsFrom = [ pkgs.python3.pkgs.timemachine ];
+            inputsFrom = [ python3.pkgs.timemachine ];
 
-            packages = (with pkgs.python3.pkgs.timemachine.optional-dependencies; dev ++ test) ++ [
+            packages = (with python3.pkgs.timemachine.optional-dependencies; dev ++ test) ++ [
               pkgs.pyright
-            ] ++ (with pkgs.python3.pkgs; [
+            ] ++ (with python3.pkgs; [
               notebook
               pytest-resource-usage
             ]) ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [

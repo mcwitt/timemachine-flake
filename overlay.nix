@@ -2,10 +2,24 @@
 final:
 prev:
 let
-  overridePython = python: python.override (old: {
+  overridePython3 = python3: python3.override (old: {
     packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
       (pyFinal: pyPrev:
         let inherit (pyFinal) callPackage; in {
+
+          black_23 = pyFinal.black.overridePythonAttrs (old:
+            let version = "23.9.1";
+            in
+            {
+              inherit version;
+              name = "${old.pname}-${version}";
+              src = final.fetchPypi {
+                inherit (old) pname;
+                inherit version;
+                hash = "sha256-JLaz/1xtnqCKiIj2l36uhY4fNA1yYM9W1wpJgjI2ti0=";
+              };
+              doCheck = false;
+            });
 
           hilbertcurve = callPackage ./packages/hilbertcurve.nix { };
 
@@ -49,20 +63,6 @@ let
   });
 in
 {
-  black_23 = final.black.overridePythonAttrs (old:
-    let version = "23.9.1";
-    in
-    {
-      inherit version;
-      name = "${old.pname}-${version}";
-      src = final.fetchPypi {
-        inherit (old) pname;
-        inherit version;
-        hash = "sha256-JLaz/1xtnqCKiIj2l36uhY4fNA1yYM9W1wpJgjI2ti0=";
-      };
-      doCheck = false;
-    });
-
   cudaPackages = prev.cudaPackages_11_7.overrideScope (final: _: {
     # The following NVIDIA packages are included in cudatoolkit
     # but no redist packages are available:
@@ -73,5 +73,5 @@ in
     thrust = final.callPackage ./packages/thrust.nix { };
   });
 
-  python311 = overridePython prev.python311;
+  python310 = overridePython3 prev.python310;
 }
