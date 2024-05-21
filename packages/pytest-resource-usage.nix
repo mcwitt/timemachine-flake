@@ -16,11 +16,11 @@ buildPythonPackage rec {
     hash = "sha256-OiAM7gB/w+dJb/NGILKEFJQ1bJIGOqb6eekgH9Hlg8w=";
   };
 
-  nativeBuildInputs = [
+  build-system = [
     flit-core
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     pytest
   ];
 

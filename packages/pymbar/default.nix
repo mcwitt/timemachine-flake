@@ -25,7 +25,7 @@ buildPythonPackage rec {
     substituteInPlace setup.py --replace "3.0.5" "${version}"
   '';
 
-  propagatedBuildInputs = [
+  dependencies = [
     numpy
     scipy
     six

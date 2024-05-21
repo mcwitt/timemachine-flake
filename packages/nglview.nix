@@ -32,7 +32,7 @@ buildPythonPackage rec {
       --replace '"jupyter_packaging~=0.7.9"' '"jupyter_packaging"'
   '';
 
-  nativeBuildInputs = [
+  build-system = [
     jupyter-packaging
     setuptools
     versioneer

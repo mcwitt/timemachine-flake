@@ -31,13 +31,13 @@ buildPythonPackage rec {
     hash = "sha256-KjjzPUwyHrdo9CYQNjWsm4C0DJ5CqgYHKnKePK3cpMM=";
   };
 
-  nativeBuildInputs = [
+  build-system = [
     setuptools
     setuptools-scm
     wheel
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     black
     ipython
     tokenize-rt

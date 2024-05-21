@@ -50,7 +50,7 @@ buildPythonPackage rec {
   pname = "OpenEye-toolkits";
   inherit version;
 
-  propagatedBuildInputs = [ openeye-toolkits-bin ];
+  dependencies = [ openeye-toolkits-bin ];
 
   src = fetchurl {
     url = mkUrl pname;

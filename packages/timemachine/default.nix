@@ -74,15 +74,18 @@ buildPythonPackage rec {
   '';
 
   nativeBuildInputs = [
-    mypy_1_5
     pythonRelaxDepsHook
-    setuptools
-    versioneer
   ] ++ lib.optionals enableCuda [
     addOpenGLRunpath
     cmake
     cudaPackages.cuda_nvcc
     pybind11
+  ];
+
+  build-system = [
+    mypy_1_5
+    setuptools
+    versioneer
   ];
 
   buildInputs = lib.optionals enableCuda [
@@ -93,7 +96,7 @@ buildPythonPackage rec {
     eigen
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     jax
     jaxlib
     matplotlib
