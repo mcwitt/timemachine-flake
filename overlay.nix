@@ -74,4 +74,5 @@ in
   });
 
   python310 = overridePython3 prev.python310;
+  python311 = overridePython3 prev.python311;
 }
