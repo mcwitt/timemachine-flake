@@ -26,7 +26,7 @@
       packages.${system} = rec {
         default = python;
 
-        python = pkgs.python3.withPackages (ps: with ps; [
+        python = pkgs.python310.withPackages (ps: with ps; [
           black
           isort
           matplotlib
