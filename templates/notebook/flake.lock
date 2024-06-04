@@ -236,11 +236,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1716302606,
-        "narHash": "sha256-U5YJ0b5ZJusoD1hgIzOZn+6huGJZvnvrBvNj1p2uzUE=",
+        "lastModified": 1717006905,
+        "narHash": "sha256-jNVC+3/XOo679PglwgVzdHLJjNYojj4AwwslNTogd+w=",
         "owner": "mcwitt",
         "repo": "timemachine-flake",
-        "rev": "14ee5552843006c18c348a514f34d5cacbc2f0ce",
+        "rev": "6e6517f90ba94ded4732bb2ff1dc9f8ec9081b86",
         "type": "github"
       },
       "original": {
