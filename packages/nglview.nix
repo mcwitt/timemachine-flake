@@ -3,6 +3,8 @@
 , fetchFromGitHub
 , ipywidgets
 , jupyter-packaging
+, jupyterlab-widgets
+, notebook
 , numpy
 , setuptools
 , versioneer
@@ -11,14 +13,14 @@
 
 buildPythonPackage rec {
   pname = "nglview";
-  version = "3.0.8";
+  version = "3.1.2";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "nglviewer";
     repo = "nglview";
     rev = "v${version}";
-    hash = "sha256-dVkek1L4YNt9mpkHO0iZdukIdIWzDcDMeesO6z6k7eo=";
+    hash = "sha256-VEhTzOMob8TAu0xoD6+ArqXxSSUbMRE+gCEiV/kIkww=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -37,6 +39,13 @@ buildPythonPackage rec {
     setuptools
     versioneer
     wheel
+  ];
+
+  dependencies = [
+    ipywidgets
+    notebook
+    jupyterlab-widgets
+    numpy
   ];
 
   nativeCheckInputs = [
