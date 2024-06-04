@@ -2,7 +2,7 @@
 , buildPythonPackage
 , fetchFromGitHub
 , ipywidgets
-, jupyter-packaging
+, jupyter-packaging_0_7
 , jupyterlab-widgets
 , notebook
 , numpy
@@ -29,13 +29,11 @@ buildPythonPackage rec {
   };
 
   postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace '"versioneer-518"' '"versioneer"' \
-      --replace '"jupyter_packaging~=0.7.9"' '"jupyter_packaging"'
+    substituteInPlace pyproject.toml --replace '"versioneer-518"' '"versioneer"'
   '';
 
   build-system = [
-    jupyter-packaging
+    jupyter-packaging_0_7
     setuptools
     versioneer
     wheel
