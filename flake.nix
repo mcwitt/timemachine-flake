@@ -33,7 +33,7 @@
           ];
         };
 
-        python3 = pkgs.python310;
+        python3 = pkgs.python311;
 
       in
       {
