@@ -43,8 +43,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "5bd58bb1e9ced971b353e46073441380677c8c7a";
-    hash = "sha256-WsPaZtY2etDJAMEv6x1N0BgV8I1t+ppIRm4/zYSnXZs=";
+    rev = "7109cd96b6075779b163d3b33041b697fb9e751f";
+    hash = "sha256-2aTzIHuNTmZSN+Nse2A4R4xYH01UH9XOLQS8deQSGPs=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -64,6 +64,7 @@ buildPythonPackage rec {
       src = ./0002-Adapt-cmake-build.patch;
       pythonVersion = lib.versions.majorMinor python.version;
     })
+    ./0003-Fix-jax-config-import.patch
   ];
 
   postPatch = ''

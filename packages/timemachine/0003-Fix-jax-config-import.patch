@@ -1,0 +1,45 @@
+From 1a2f0ee20a5c5f21b406068b7369d3fa537df4af Mon Sep 17 00:00:00 2001
+From: Matt Wittmann <mwittmann@relaytx.com>
+Date: Fri, 7 Jun 2024 15:25:01 -0700
+Subject: [PATCH 3/3] Fix jax config import
+
+---
+ tests/conftest.py       | 4 ++--
+ timemachine/__init__.py | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tests/conftest.py b/tests/conftest.py
+index b5531e93..7252e772 100644
+--- a/tests/conftest.py
++++ b/tests/conftest.py
+@@ -17,9 +17,9 @@ if os.environ.get("XLA_FLAGS"):
+ else:
+     os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count=" + str(multiprocessing.cpu_count())
+ 
+-import jax
++from jax import config
+ 
+-jax.config.update("jax_enable_x64", True)
++config.update("jax_enable_x64", True)
+ 
+ import gc
+ 
+diff --git a/timemachine/__init__.py b/timemachine/__init__.py
+index 08daa2e3..090979e9 100644
+--- a/timemachine/__init__.py
++++ b/timemachine/__init__.py
+@@ -9,9 +9,9 @@ def _suppress_jax_no_gpu_warning():
+ 
+     See https://github.com/google/jax/issues/6805
+     """
+-    import jax
++    from jax import config
+ 
+-    jax.config.update("jax_platform_name", "cpu")
++    config.update("jax_platform_name", "cpu")
+ 
+ 
+ _suppress_jax_no_gpu_warning()
+-- 
+2.44.1
+
