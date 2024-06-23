@@ -90,10 +90,9 @@ buildPythonPackage rec {
   ];
 
   buildInputs = lib.optionals enableCuda [
-    cudaPackages.cub
+    cudaPackages.cuda_cccl.dev
     cudaPackages.cuda_cudart
     cudaPackages.libcurand
-    cudaPackages.thrust
     eigen
   ];
 

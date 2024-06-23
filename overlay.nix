@@ -78,16 +78,6 @@ let
   });
 in
 {
-  cudaPackages = prev.cudaPackages_11_7.overrideScope (final: _: {
-    # The following NVIDIA packages are included in cudatoolkit
-    # but no redist packages are available:
-    # https://developer.download.nvidia.com/compute/cuda/redist/
-    # Fetching these from github lets us avoid depending on
-    # cudatoolkit, which would add substantial size to the closure
-    cub = final.callPackage ./packages/cub.nix { };
-    thrust = final.callPackage ./packages/thrust.nix { };
-  });
-
   python310 = overridePython3 prev.python310;
   python311 = overridePython3 prev.python311;
 }
