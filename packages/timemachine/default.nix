@@ -52,7 +52,7 @@ buildPythonPackage rec {
     '';
   };
 
-  format = "pyproject";
+  pyproject = true;
 
   patches = [
     (substituteAll {

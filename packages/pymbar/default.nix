@@ -9,7 +9,6 @@
 buildPythonPackage rec {
   pname = "pymbar";
   version = "3.1.0";
-  format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "choderalab";
