@@ -7,15 +7,21 @@
   };
 
   inputs.timemachine-flake.url = "github:mcwitt/timemachine-flake";
+  inputs.nixgl.url = "github:nix-community/nixGL";
 
-  outputs = { self, timemachine-flake }:
+  outputs = { self, timemachine-flake, nixgl }:
     let
       system = "x86_64-linux";
+
+      inherit (timemachine-flake.inputs) nixpkgs;
 
       pkgs = import timemachine-flake.inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ timemachine-flake.overlays.default ];
+        overlays = [
+          nixgl.overlays.default
+          timemachine-flake.overlays.default
+        ];
       };
 
     in
@@ -45,6 +51,18 @@
         );
       };
 
-      devShells.${system}.default = self.packages.${system}.python.env;
+      devShells.${system}.default =
+        let impure = builtins ? currentSystem;
+        in
+        pkgs.mkShell {
+          packages = [
+            self.packages.${system}.python
+          ] ++ nixpkgs.lib.optional impure pkgs.nixgl.auto.nixGLDefault;
+
+          # prepend nixGL library paths in impure mode
+          shellHook = nixpkgs.lib.optionalString impure ''
+            export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
+          '';
+        };
     };
 }
