@@ -35,7 +35,6 @@
             black
             ipywidgets
             isort
-            jupyter-black
             jupytext
             matplotlib
             mdtraj

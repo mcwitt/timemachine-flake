@@ -23,9 +23,6 @@ let
 
           hilbertcurve = callPackage ./packages/hilbertcurve.nix { };
 
-          jupyter-black = callPackage ./packages/jupyter-black.nix { };
-
-
           jupyter-packaging_0_7 = pyPrev.jupyter-packaging.overridePythonAttrs (old:
             let version = "0.7.9"; in {
               inherit version;

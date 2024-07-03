@@ -43,7 +43,7 @@
 
           python = python3.withPackages (ps: [ ps.timemachine ]);
 
-          inherit (python3.pkgs) jupyter-black mdtraj mols2grid nglview py3Dmol;
+          inherit (python3.pkgs) mdtraj mols2grid nglview py3Dmol;
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 
