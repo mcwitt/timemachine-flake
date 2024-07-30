@@ -79,17 +79,31 @@
 
             inputsFrom = [ python3.pkgs.timemachine ];
 
-            packages = (with python3.pkgs.timemachine.optional-dependencies; dev ++ test) ++ [
-              pkgs.pyright
-            ] ++ (with python3.pkgs; [
-              notebook
-              pytest-resource-usage
-            ]) ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
-              pkgs.clang-tools
-              pkgs.cudaPackages.cuda_gdb
-              pkgs.cudaPackages.cuda_sanitizer_api
-              pkgs.gdb
-            ];
+            packages =
+              let
+                python =
+                  python3.withPackages
+                    (ps:
+                      (with ps.timemachine.optional-dependencies; dev ++ test)
+                        ++ (with ps; [
+                        ipywidgets
+                        jupytext
+                        memory_profiler
+                        notebook
+                        pytest-resource-usage
+                        pytest-watch
+                      ]));
+              in
+              [
+                python
+                pkgs.py-spy
+                pkgs.pyright
+              ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
+                pkgs.clang-tools
+                pkgs.cudaPackages.cuda_gdb
+                pkgs.cudaPackages.cuda_sanitizer_api
+                pkgs.gdb
+              ];
 
             shellHook = nixpkgs.lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
               export CUDAHOSTCXX=${pkgs.cudaPackages.cudatoolkit.cc}/bin/cc
