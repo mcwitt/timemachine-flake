@@ -86,6 +86,7 @@
                     (ps:
                       (with ps.timemachine.optional-dependencies; dev ++ test)
                         ++ (with ps; [
+                        diskcache
                         ipywidgets
                         jupytext
                         memory_profiler
