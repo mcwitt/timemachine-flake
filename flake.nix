@@ -92,6 +92,7 @@
                         notebook
                         pytest-resource-usage
                         pytest-watch
+                        tqdm
                       ]));
               in
               [
