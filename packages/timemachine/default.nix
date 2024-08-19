@@ -1,4 +1,4 @@
-{ addOpenGLRunpath
+{ addDriverRunpath
 , black_23
 , buildPythonPackage
 , cmake
@@ -77,7 +77,7 @@ buildPythonPackage rec {
   nativeBuildInputs = [
     pythonRelaxDepsHook
   ] ++ lib.optionals enableCuda [
-    addOpenGLRunpath
+    addDriverRunpath
     cmake
     cudaPackages.cuda_nvcc
     pybind11
@@ -124,7 +124,7 @@ buildPythonPackage rec {
 
   # allow extension module to find NVIDIA drivers on NixOS
   postFixup = lib.optionalString enableCuda ''
-    addOpenGLRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
+    addDriverRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
   '';
 
   nativeCheckInputs = passthru.optional-dependencies.test ++ [

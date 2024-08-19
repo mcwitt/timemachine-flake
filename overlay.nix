@@ -37,6 +37,8 @@ let
               patches = [ ];
             });
 
+          mdtraj = pyPrev.mdtraj.overridePythonAttrs (_: { patches = [ ]; });
+
           mols2grid = callPackage ./packages/mols2grid.nix { };
 
           mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:
