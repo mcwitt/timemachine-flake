@@ -157,6 +157,10 @@ buildPythonPackage rec {
     "test_interpret_as_mixture_potential"
     "test_mixture_reweighting_1d"
     "test_reference_langevin_integrator"
+  ] ++ lib.optionals (!enableCuda) [
+    "test_reversibility_with_jax_potentials"
+    "test_rmsd_align_proper"
+    "test_rmsd_align_improper"
   ];
 
   pytestFlagsArray = [

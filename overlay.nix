@@ -37,8 +37,6 @@ let
               patches = [ ];
             });
 
-          mdtraj = pyPrev.mdtraj.overridePythonAttrs (_: { patches = [ ]; });
-
           mols2grid = callPackage ./packages/mols2grid.nix { };
 
           mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:
@@ -68,7 +66,21 @@ let
           timemachine =
             if final.stdenv.isLinux
             then pyFinal.timemachineWithCuda
-            else pyFinal.timemachineWithoutCuda.override { jaxlib = final.jaxlib-bin; };
+            else if final.stdenv.isDarwin then
+              pyFinal.timemachineWithoutCuda.override
+                {
+                  jax = pyPrev.jax.overridePythonAttrs (_: {
+                    doCheck = false;
+                    pythonImportsCheck = [ ]; # work around "jax requires jaxlib"
+                  });
+
+                  jaxlib = pyPrev.jaxlib-bin.overridePythonAttrs (_: {
+                    meta.broken = false; # incorrectly marked broken
+                    doCheck = false;
+                  });
+                }
+            else
+              pyFinal.timemachineWithoutCuda.override { jaxlib = pyFinal.jaxlib-bin; };
 
           timemachineWithCuda = callPackage ./packages/timemachine { };
 
