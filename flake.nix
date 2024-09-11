@@ -43,7 +43,7 @@
 
           python = python3.withPackages (ps: [ ps.timemachine ]);
 
-          inherit (python3.pkgs) mols2grid nglview py3Dmol;
+          inherit (python3.pkgs) deeptime mols2grid nglview py3Dmol pymbar;
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 

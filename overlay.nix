@@ -21,6 +21,8 @@ let
               doCheck = false;
             });
 
+          deeptime = callPackage ./packages/deeptime.nix { };
+
           hilbertcurve = callPackage ./packages/hilbertcurve.nix { };
 
           jupyter-packaging_0_7 = pyPrev.jupyter-packaging.overridePythonAttrs (old:
