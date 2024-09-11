@@ -37,10 +37,11 @@
           packages = rec {
             default = python;
 
-            python = pkgs.python3.withPackages (
+            python = pkgs.python311.withPackages (
               ps: with ps; [
                 altair
                 black
+                deeptime
                 ipywidgets
                 isort
                 jupytext
