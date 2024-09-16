@@ -43,8 +43,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "030faa23ec5e1c3e43b4f628990b002c225d2e69";
-    hash = "sha256-Kz92kocYxFYOEvWdw8Oh5FhxgG7IstByTEHUu+pvRQo=";
+    rev = "edec1389cf2e64c80ac26642c902b79ec9d25069";
+    hash = "sha256-hR05fZEC6k4HyjxCCXxGKkX8+wUhHirqhiZh4BC4Hjo=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -144,6 +144,7 @@ buildPythonPackage rec {
 
   disabledTests = [
     # require OpenEye license
+    "test_assert_potentials_compatible"
     "test_get_strained_atoms"
     "test_hif2a_set"
     "test_on_methane"
