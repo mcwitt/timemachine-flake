@@ -1,4 +1,4 @@
-From c32b68d493853c591fffd711f421e1a06e1f5edb Mon Sep 17 00:00:00 2001
+From 3f9cdb9c6608e328a5b2ea7f438559d8aae18961 Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Mon, 6 Mar 2023 08:09:00 -0800
 Subject: [PATCH 2/3] Adapt cmake build
@@ -15,7 +15,7 @@ Subject: [PATCH 2/3] Adapt cmake build
  1 file changed, 7 insertions(+), 25 deletions(-)
 
 diff --git a/timemachine/cpp/CMakeLists.txt b/timemachine/cpp/CMakeLists.txt
-index 7a7d4145..e9c59dc6 100644
+index 86d99a2e..e9c59dc6 100644
 --- a/timemachine/cpp/CMakeLists.txt
 +++ b/timemachine/cpp/CMakeLists.txt
 @@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
@@ -46,12 +46,12 @@ index 7a7d4145..e9c59dc6 100644
 -set(PYBIND_SRC_DIR pybind11)
 -
 -if(NOT EXISTS ${PYBIND_SRC_DIR})
--  execute_process(COMMAND git clone --branch v2.9.2 https://github.com/pybind/pybind11.git ${PYBIND_SRC_DIR})
+-  execute_process(COMMAND git clone --depth 1 --branch v2.9.2 https://github.com/pybind/pybind11.git ${PYBIND_SRC_DIR})
 -endif()
 -
 -set(EIGEN_SRC_DIR eigen)
 -if(NOT EXISTS ${EIGEN_SRC_DIR})
--  execute_process(COMMAND git clone --branch 3.3.9 https://gitlab.com/libeigen/eigen.git ${EIGEN_SRC_DIR})
+-  execute_process(COMMAND git clone --depth 1 --branch 3.3.9 https://gitlab.com/libeigen/eigen.git ${EIGEN_SRC_DIR})
 -endif()
 -
 -add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/${PYBIND_SRC_DIR} ${CMAKE_CURRENT_BINARY_DIR}/${PYBIND_SRC_DIR})
