@@ -24,7 +24,7 @@ let
   src = fetchFromGitHub {
     owner = "MDAnalysis";
     repo = "mdanalysis";
-    rev = "package-${version}";
+    rev = "aaa4456db50e237cf580c8c986c00d7c5fbe3075";
     hash = "sha256-jgc4syq3j6e00qr5xUH1Dqjs1HQEvDN6zcRwD/D52zs=";
   };
 
