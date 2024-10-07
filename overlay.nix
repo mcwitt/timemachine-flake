@@ -39,6 +39,10 @@ let
               patches = [ ];
             });
 
+          mda-xdrlib = callPackage ./packages/mda-xdrlib.nix { };
+
+          mdanalysis = callPackage ./packages/mdanalysis { };
+
           mols2grid = callPackage ./packages/mols2grid.nix { };
 
           mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:

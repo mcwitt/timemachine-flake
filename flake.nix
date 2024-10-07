@@ -41,9 +41,15 @@
 
           default = self.packages.${system}.python;
 
-          python = python3.withPackages (ps: [ ps.timemachine ]);
-
-          inherit (python3.pkgs) deeptime mols2grid nglview py3Dmol pymbar;
+          python = python3.withPackages (ps: with ps; [
+            deeptime
+            mdanalysis
+            mols2grid
+            nglview
+            py3Dmol
+            pymbar
+            timemachine
+          ]);
 
         } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
 
