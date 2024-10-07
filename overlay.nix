@@ -21,9 +21,9 @@ let
               doCheck = false;
             });
 
-          deeptime = callPackage ./packages/deeptime.nix { };
+          deeptime = callPackage ./packages/deeptime { };
 
-          hilbertcurve = callPackage ./packages/hilbertcurve.nix { };
+          hilbertcurve = callPackage ./packages/hilbertcurve { };
 
           jupyter-packaging_0_7 = pyPrev.jupyter-packaging.overridePythonAttrs (old:
             let version = "0.7.9"; in {
@@ -39,11 +39,11 @@ let
               patches = [ ];
             });
 
-          mda-xdrlib = callPackage ./packages/mda-xdrlib.nix { };
+          mda-xdrlib = callPackage ./packages/mda-xdrlib { };
 
           mdanalysis = callPackage ./packages/mdanalysis { };
 
-          mols2grid = callPackage ./packages/mols2grid.nix { };
+          mols2grid = callPackage ./packages/mols2grid { };
 
           mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:
             let version = "1.5.1";
@@ -59,15 +59,15 @@ let
               doCheck = false; # slow
             });
 
-          nglview = callPackage ./packages/nglview.nix { };
+          nglview = callPackage ./packages/nglview { };
 
-          openeye-toolkits = callPackage ./packages/openeye-toolkits.nix { };
+          openeye-toolkits = callPackage ./packages/openeye-toolkits { };
 
-          py3Dmol = callPackage ./packages/py3Dmol.nix { };
+          py3Dmol = callPackage ./packages/py3Dmol { };
 
           pymbar = callPackage ./packages/pymbar { };
 
-          pytest-resource-usage = callPackage ./packages/pytest-resource-usage.nix { };
+          pytest-resource-usage = callPackage ./packages/pytest-resource-usage { };
 
           timemachine =
             if final.stdenv.isLinux
