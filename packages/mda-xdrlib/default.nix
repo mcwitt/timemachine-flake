@@ -37,7 +37,7 @@ buildPythonPackage rec {
     description = "Stand-alone XDRLIB module (from cpython 3.10.8";
     homepage = "https://github.com/MDAnalysis/mda-xdrlib";
     changelog = "https://github.com/MDAnalysis/mda-xdrlib/blob/${src.rev}/CHANGES";
-    license = licenses.unfree; # FIXME: nix-init did not found a license
+    license = licenses.psfl;
     maintainers = with maintainers; [ ];
   };
 }

@@ -21,12 +21,19 @@
       ])
       (system:
       let
+        inherit (nixpkgs) lib;
         pkgs = import nixpkgs {
           inherit system;
-          config = {
-            allowUnfree = true;
-            allowUnsupportedSystem = true; # needed for openmm on non-Linux
-          };
+          config.allowUnsupportedSystem = true; # needed for openmm on non-Linux
+          config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+            "cuda_cccl"
+            "cuda_cudart"
+            "cuda_nvcc"
+            "libcurand"
+            "mda-xdrlib"
+            "nvidia"
+            "OpenEye-toolkits"
+          ];
           overlays = [
             nixgl.overlay
             (import ./overlay.nix { inherit inputs; })
@@ -51,9 +58,9 @@
             timemachine
           ]);
 
-        } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+        } // lib.optionalAttrs pkgs.stdenv.isLinux {
 
-          dockerImage = nixpkgs.lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
+          dockerImage = lib.makeOverridable pkgs.dockerTools.buildLayeredImage {
             name = "timemachine";
             contents = [
               self.packages.${system}.python
@@ -69,7 +76,7 @@
               "LD_LIBRARY_PATH=/usr/lib64/" # nvidia-runtime mounts the host driver here
               "NVIDIA_DRIVER_CAPABILITIES=compute,utility" # selects which driver components to mount
               "NVIDIA_VISIBLE_DEVICES=all"
-              "NVIDIA_REQUIRE_CUDA=cuda>=${nixpkgs.lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
+              "NVIDIA_REQUIRE_CUDA=cuda>=${lib.versions.majorMinor pkgs.cudaPackages.cuda_cudart.version}"
             ];
           };
         };
@@ -81,43 +88,37 @@
             packages = self.checks.${system}.pre-commit-check.enabledPackages;
           };
 
-          timemachine = nixpkgs.lib.makeOverridable pkgs.mkShell {
+          timemachine =
+            let
+              mkShell =
+                { extraPackages ? [ ]
+                , extraPythonPackages ? (_: [ ])
+                , extraShellHook ? ""
+                }: pkgs.mkShell {
 
-            inputsFrom = [ python3.pkgs.timemachine ];
+                  inputsFrom = [ python3.pkgs.timemachine ];
 
-            packages =
-              let
-                python =
-                  python3.withPackages
-                    (ps:
-                      (with ps.timemachine.optional-dependencies; dev ++ test)
-                        ++ (with ps; [
-                        diskcache
-                        ipywidgets
-                        jupytext
-                        memory_profiler
-                        notebook
-                        pytest-resource-usage
-                        pytest-watch
-                        tqdm
-                      ]));
-              in
-              [
-                python
-                pkgs.py-spy
-                pkgs.pyright
-              ] ++ nixpkgs.lib.optionals pkgs.stdenv.isLinux [
-                pkgs.clang-tools
-                pkgs.cudaPackages.cuda_gdb
-                pkgs.cudaPackages.cuda_sanitizer_api
-                pkgs.gdb
-              ];
+                  packages =
+                    let
+                      python =
+                        python3.withPackages
+                          (ps:
+                            (with ps.timemachine.optional-dependencies; dev ++ test)
+                              ++ extraPythonPackages ps);
+                    in
+                    [
+                      python
+                    ]
+                    ++ extraPackages;
 
-            shellHook = nixpkgs.lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
-              export CUDAHOSTCXX=${pkgs.cudaPackages.cudatoolkit.cc}/bin/cc
-              export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
-            '';
-          };
+                  shellHook = lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
+                    export CUDAHOSTCXX=${pkgs.cudaPackages.cudatoolkit.cc}/bin/cc
+                    export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
+                    ${extraShellHook}
+                  '';
+                };
+            in
+            lib.makeOverridable mkShell { };
         };
 
         checks = {

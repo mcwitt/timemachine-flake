@@ -56,4 +56,6 @@ buildPythonPackage rec {
     url = mkUrl pname;
     hash = "sha256-zBytId8O1ChPfK0n68b3+/fs7wNI0k08YKKQODMjMOM=";
   };
+
+  meta.license = lib.licenses.unfree;
 }

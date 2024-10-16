@@ -100,7 +100,7 @@ buildPythonPackage rec {
   meta = with lib; {
     description = "Python library for analysis of time series data including dimensionality reduction, clustering, and Markov model estimation";
     homepage = "https://github.com/deeptime-ml/deeptime";
-    license = licenses.unfree; # FIXME: nix-init did not found a license
+    license = licenses.lgpl3;
     maintainers = with maintainers; [ ];
   };
 }

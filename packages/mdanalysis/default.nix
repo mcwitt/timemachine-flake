@@ -65,7 +65,7 @@ let
     meta = with lib; {
       description = "MDAnalysis is a Python library to analyze molecular dynamics simulations";
       homepage = "https://github.com/MDAnalysis/mdanalysis";
-      license = licenses.unfree; # FIXME: nix-init did not found a license
+      license = licenses.gpl3;
       maintainers = with maintainers; [ ];
       mainProgram = "mdanalysis";
       platforms = platforms.all;
