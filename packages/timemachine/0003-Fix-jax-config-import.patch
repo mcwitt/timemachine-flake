@@ -1,4 +1,4 @@
-From bae54866145e4f1acfd5719d20ce49deda8c60cf Mon Sep 17 00:00:00 2001
+From 0cd3b7c75cb22c9f1fca5b73c7d0d546f3f7aa7d Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Fri, 7 Jun 2024 15:25:01 -0700
 Subject: [PATCH 3/3] Fix jax config import
