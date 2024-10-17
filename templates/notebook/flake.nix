@@ -37,7 +37,7 @@
           packages = rec {
             default = python;
 
-            python = pkgs.python311.withPackages (
+            python = pkgs.python312.withPackages (
               ps: with ps; [
                 altair
                 black

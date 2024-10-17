@@ -48,7 +48,7 @@
           packages = rec {
             default = python;
 
-            python = pkgs.python311.withPackages (ps: with ps; [
+            python = pkgs.python312.withPackages (ps: with ps; [
               black
               isort
               matplotlib
