@@ -88,7 +88,7 @@ let
             else
               pyFinal.timemachineWithoutCuda.override { jaxlib = pyFinal.jaxlib-bin; };
 
-          timemachineWithCuda = callPackage ./packages/timemachine { };
+          timemachineWithCuda = callPackage ./packages/timemachine { jaxlib = pyFinal.jaxlibWithCuda; };
 
           timemachineWithoutCuda = callPackage ./packages/timemachine { enableCuda = false; };
         });

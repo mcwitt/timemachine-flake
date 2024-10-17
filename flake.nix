@@ -28,10 +28,20 @@
           config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
             "cuda_cccl"
             "cuda_cudart"
+            "cuda_cupti"
             "cuda_nvcc"
+            "cuda_nvml_dev"
+            "cuda_nvtx"
+            "cudnn"
+            "libcublas"
+            "libcufft"
             "libcurand"
-            "mda-xdrlib"
+            "libcusolver"
+            "libcusparse"
+            "libnvjitlink"
             "nvidia"
+
+            "mda-xdrlib"
             "OpenEye-toolkits"
           ];
           overlays = [
