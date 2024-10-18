@@ -1,11 +1,6 @@
 {
   description = "timemachine notebook environment";
 
-  nixConfig = {
-    extra-substituters = [ "https://timemachine.cachix.org" ];
-    extra-trusted-public-keys = [ "timemachine.cachix.org-1:rum4By9jtYccZdzFjb16TzwENtjmdV4al9SeOmWpw4g=" ];
-  };
-
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.timemachine-flake.url = "github:mcwitt/timemachine-flake";
   inputs.nixgl.url = "github:nix-community/nixGL";

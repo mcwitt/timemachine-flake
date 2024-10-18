@@ -1,6 +1,17 @@
 {
   description = "timemachine python environment";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://ploop.cachix.org"
+      "https://timemachine.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "timemachine.cachix.org-1:rum4By9jtYccZdzFjb16TzwENtjmdV4al9SeOmWpw4g="
+      "ploop.cachix.org-1:i6+Fqarsbf5swqH09RXOEDvxy7Wm7vbiIXu4A9HCg1g="
+    ];
+  };
+
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
