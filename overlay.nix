@@ -88,13 +88,22 @@ let
             else
               pyFinal.timemachineWithoutCuda.override { jaxlib = pyFinal.jaxlib-bin; };
 
-          timemachineWithCuda = callPackage ./packages/timemachine { jaxlib = pyFinal.jaxlibWithCuda; };
+          timemachineWithCuda = callPackage ./packages/timemachine {
+            jaxlib = pyFinal.jaxlib-bin.override { cudaSupport = true; };
+          };
 
-          timemachineWithoutCuda = callPackage ./packages/timemachine { enableCuda = false; };
+          timemachineWithoutCuda = callPackage ./packages/timemachine {
+            enableCuda = false;
+          };
         });
   });
 in
 {
+  # pin versions needed for jaxlib-bin
+  cudaPackages = final.cudaPackages_12_2.overrideScope (self: _: {
+    cudnn = self.cudnn_8_9;
+  });
+
   python311 = overridePython3 prev.python311;
   python312 = overridePython3 prev.python312;
 }
