@@ -112,25 +112,25 @@
           timemachine =
             let
               mkShell =
-                { extraPackages ? [ ]
+                { python ? python3
+                , extraPackages ? [ ]
                 , extraPythonPackages ? (_: [ ])
                 , extraShellHook ? ""
                 }: pkgs.mkShell {
 
-                  inputsFrom = [ python3.pkgs.timemachine ];
+                  inputsFrom = [ python.pkgs.timemachine ];
 
                   packages =
                     let
-                      python =
-                        python3.withPackages
+                      pythonWithPackages =
+                        python.withPackages
                           (ps:
                             (with ps.timemachine.optional-dependencies; dev ++ test)
                               ++ extraPythonPackages ps);
                     in
                     [
-                      python
-                    ]
-                    ++ extraPackages;
+                      pythonWithPackages
+                    ] ++ extraPackages;
 
                   shellHook = lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
                     export CUDAHOSTCXX=${pkgs.cudaPackages.cudatoolkit.cc}/bin/cc
