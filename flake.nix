@@ -36,25 +36,21 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnsupportedSystem = true; # needed for openmm on non-Linux
-          config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-            "cuda_cccl"
-            "cuda_cudart"
-            "cuda_cupti"
-            "cuda_nvcc"
-            "cuda_nvml_dev"
-            "cuda_nvtx"
-            "cudnn"
-            "libcublas"
-            "libcufft"
-            "libcurand"
-            "libcusolver"
-            "libcusparse"
-            "libnvjitlink"
-            "nvidia"
+          config.allowUnfreePredicate = pkg:
+            let name = lib.getName pkg;
+            in lib.hasPrefix "cuda_" name || builtins.elem name [
+              "cudnn"
+              "libcublas"
+              "libcufft"
+              "libcurand"
+              "libcusolver"
+              "libcusparse"
 
-            "mda-xdrlib"
-            "OpenEye-toolkits"
-          ];
+              "libnvjitlink"
+              "nvidia"
+
+              "OpenEye-toolkits"
+            ];
           overlays = [
             nixgl.overlay
             (import ./overlay.nix { inherit inputs; })
