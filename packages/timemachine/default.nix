@@ -38,13 +38,13 @@
 
 buildPythonPackage rec {
   pname = "timemachine";
-  version = "0.1";
+  version = "0+${builtins.substring 0 7 src.rev}";
 
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "be34fbf458b54de5454564b67aeb1d70450a1b3f";
-    hash = "sha256-WfibMl3GrDs3kRpSk4oKX2NMJ7lbk8VKR8LH+irvX5M=";
+    rev = "344f11caf98e7fc91204e695fb7d1cb7178eb041";
+    hash = "sha256-3E5EK4DU7EeVaYrUVSmbNJbLBh0GMXu94GOAxWNoR3k=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
