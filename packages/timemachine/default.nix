@@ -140,6 +140,7 @@ buildPythonPackage rec {
 
   disabledTestPaths = [
     "tests/test_handlers.py" # many tests require OpenEye license
+    "tests/test_interpolate.py" # usage of resources.path incompatible with 3.12
   ];
 
   disabledTests = [
