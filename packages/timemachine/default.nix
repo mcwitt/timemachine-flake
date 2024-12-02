@@ -33,7 +33,7 @@
 , setuptools
 , substituteAll
 , versioneer
-, enableCuda ? true
+, cudaSupport ? true
 }:
 
 buildPythonPackage rec {
@@ -43,8 +43,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "344f11caf98e7fc91204e695fb7d1cb7178eb041";
-    hash = "sha256-3E5EK4DU7EeVaYrUVSmbNJbLBh0GMXu94GOAxWNoR3k=";
+    rev = "d32d964d8561d142522e1fa721b37121211c691d";
+    hash = "sha256-tLdoSGBY3CZ73hncIs1pKwCAaTa5Yeq7+r2dtKZ/WYE=";
 
     # work around hash instability due to use of export-subst
     postFetch = ''
@@ -76,7 +76,7 @@ buildPythonPackage rec {
 
   nativeBuildInputs = [
     pythonRelaxDepsHook
-  ] ++ lib.optionals enableCuda [
+  ] ++ lib.optionals cudaSupport [
     addDriverRunpath
     cmake
     cudaPackages.cuda_nvcc
@@ -89,7 +89,7 @@ buildPythonPackage rec {
     versioneer
   ];
 
-  buildInputs = lib.optionals enableCuda [
+  buildInputs = lib.optionals cudaSupport [
     cudaPackages.cuda_cccl.dev
     cudaPackages.cuda_cudart
     cudaPackages.libcurand
@@ -117,13 +117,13 @@ buildPythonPackage rec {
   # CMake is invoked by the setuptools build
   dontUseCmakeConfigure = true;
 
-  CMAKE_ARGS = lib.optionals enableCuda [ "-DCUDA_ARCH=all-major" ];
+  CMAKE_ARGS = lib.optionals cudaSupport [ "-DCUDA_ARCH=all-major" ];
 
   # ensure we use a supported compiler
-  CUDAHOSTCXX = lib.optionalString enableCuda "${cudaPackages.cudatoolkit.cc}/bin/cc";
+  CUDAHOSTCXX = lib.optionalString cudaSupport "${cudaPackages.cudatoolkit.cc}/bin/cc";
 
   # allow extension module to find NVIDIA drivers on NixOS
-  postFixup = lib.optionalString enableCuda ''
+  postFixup = lib.optionalString cudaSupport ''
     addDriverRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
   '';
 
@@ -158,7 +158,7 @@ buildPythonPackage rec {
     "test_interpret_as_mixture_potential"
     "test_mixture_reweighting_1d"
     "test_reference_langevin_integrator"
-  ] ++ lib.optionals (!enableCuda) [
+  ] ++ lib.optionals (!cudaSupport) [
     "test_reversibility_with_jax_potentials"
     "test_rmsd_align_proper"
     "test_rmsd_align_improper"

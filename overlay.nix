@@ -25,6 +25,13 @@ let
 
           hilbertcurve = callPackage ./packages/hilbertcurve { };
 
+          jax = pyPrev.jax.overridePythonAttrs (_: {
+            doCheck = false;
+            pythonImportsCheck = [ ]; # work around "jax requires jaxlib"
+          });
+
+          jaxlib = pyFinal.jaxlib-bin.override { cudaSupport = final.stdenv.isLinux; };
+
           jupyter-packaging_0_7 = pyPrev.jupyter-packaging.overridePythonAttrs (old:
             let version = "0.7.9"; in {
               inherit version;
@@ -69,32 +76,7 @@ let
 
           pytest-resource-usage = callPackage ./packages/pytest-resource-usage { };
 
-          timemachine =
-            if final.stdenv.isLinux
-            then pyFinal.timemachineWithCuda
-            else if final.stdenv.isDarwin then
-              pyFinal.timemachineWithoutCuda.override
-                {
-                  jax = pyPrev.jax.overridePythonAttrs (_: {
-                    doCheck = false;
-                    pythonImportsCheck = [ ]; # work around "jax requires jaxlib"
-                  });
-
-                  jaxlib = pyPrev.jaxlib-bin.overridePythonAttrs (_: {
-                    meta.broken = false; # incorrectly marked broken
-                    doCheck = false;
-                  });
-                }
-            else
-              pyFinal.timemachineWithoutCuda.override { jaxlib = pyFinal.jaxlib-bin; };
-
-          timemachineWithCuda = callPackage ./packages/timemachine {
-            jaxlib = pyFinal.jaxlib-bin.override { cudaSupport = true; };
-          };
-
-          timemachineWithoutCuda = callPackage ./packages/timemachine {
-            enableCuda = false;
-          };
+          timemachine = callPackage ./packages/timemachine { cudaSupport = final.stdenv.isLinux; };
         });
   });
 in
