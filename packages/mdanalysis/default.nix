@@ -58,6 +58,9 @@ let
       # mdahole2
     ];
 
+
+    env.NIX_CFLAGS_COMPILE = "-Wno-error=incompatible-pointer-types";
+
     doCheck = false; # test suite has its own pyproject.toml
 
     pythonImportsCheck = [ "MDAnalysis" ];

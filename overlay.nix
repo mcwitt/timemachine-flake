@@ -25,13 +25,6 @@ let
 
           hilbertcurve = callPackage ./packages/hilbertcurve { };
 
-          jax = pyPrev.jax.overridePythonAttrs (_: {
-            doCheck = false;
-            pythonImportsCheck = [ ]; # work around "jax requires jaxlib"
-          });
-
-          jaxlib = pyFinal.jaxlib-bin.override { cudaSupport = final.stdenv.isLinux; };
-
           jupyter-packaging_0_7 = pyPrev.jupyter-packaging.overridePythonAttrs (old:
             let version = "0.7.9"; in {
               inherit version;
@@ -81,11 +74,6 @@ let
   });
 in
 {
-  # pin versions needed for jaxlib-bin
-  cudaPackages = final.cudaPackages_12_2.overrideScope (self: _: {
-    cudnn = self.cudnn_8_9;
-  });
-
   python311 = overridePython3 prev.python311;
   python312 = overridePython3 prev.python312;
 }

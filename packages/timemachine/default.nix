@@ -10,6 +10,7 @@
 , hypothesis
 , isort
 , jax
+, jax-cuda12-plugin
 , jaxlib
 , lib
 , matplotlib
@@ -107,6 +108,8 @@ buildPythonPackage rec {
     pymbar
     rdkit
     scipy
+  ] ++ lib.optionals cudaSupport [
+    jax-cuda12-plugin
   ];
 
   # setuptools doesn't recognize nixpkgs rdkit because it's missing
