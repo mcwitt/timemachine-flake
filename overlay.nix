@@ -7,20 +7,6 @@ let
       (pyFinal: pyPrev:
         let inherit (pyFinal) callPackage; in {
 
-          black_23 = pyFinal.black.overridePythonAttrs (old:
-            let version = "23.9.1";
-            in
-            {
-              inherit version;
-              name = "${old.pname}-${version}";
-              src = final.fetchPypi {
-                inherit (old) pname;
-                inherit version;
-                hash = "sha256-JLaz/1xtnqCKiIj2l36uhY4fNA1yYM9W1wpJgjI2ti0=";
-              };
-              doCheck = false;
-            });
-
           deeptime = callPackage ./packages/deeptime { };
 
           hilbertcurve = callPackage ./packages/hilbertcurve { };

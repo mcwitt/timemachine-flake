@@ -1,5 +1,4 @@
 { addDriverRunpath
-, black_23
 , buildPythonPackage
 , cmake
 , cudaPackages
@@ -179,7 +178,6 @@ buildPythonPackage rec {
 
   passthru.optional-dependencies = {
     dev = [
-      black_23
       flake8
       isort
       mypy_1_5
