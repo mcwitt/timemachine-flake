@@ -1,4 +1,4 @@
-From 0cd3b7c75cb22c9f1fca5b73c7d0d546f3f7aa7d Mon Sep 17 00:00:00 2001
+From 58ddcaca768aee6704824b74841e7db7453e2ac3 Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Fri, 7 Jun 2024 15:25:01 -0700
 Subject: [PATCH 3/3] Fix jax config import
@@ -41,5 +41,5 @@ index 08daa2e3..090979e9 100644
  
  _suppress_jax_no_gpu_warning()
 -- 
-2.44.1
+2.47.1
 
