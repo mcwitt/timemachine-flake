@@ -1,7 +1,7 @@
-From 444640443483dd24c2ab25a2dc505e94140d7208 Mon Sep 17 00:00:00 2001
+From 5886dc138c77671e7b9b455a91a18e8232acaec5 Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Mon, 6 Mar 2023 08:09:00 -0800
-Subject: [PATCH 2/3] Adapt cmake build
+Subject: [PATCH 1/2] Adapt cmake build
 
 * Use deps from nix
 

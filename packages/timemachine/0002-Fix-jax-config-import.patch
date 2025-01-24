@@ -1,7 +1,7 @@
-From 58ddcaca768aee6704824b74841e7db7453e2ac3 Mon Sep 17 00:00:00 2001
+From 33d382c00598a0ee8e578956c7ad904ef8a712dd Mon Sep 17 00:00:00 2001
 From: Matt Wittmann <mwittmann@relaytx.com>
 Date: Fri, 7 Jun 2024 15:25:01 -0700
-Subject: [PATCH 3/3] Fix jax config import
+Subject: [PATCH 2/2] Fix jax config import
 
 ---
  tests/conftest.py       | 4 ++--
@@ -25,10 +25,10 @@ index b5531e93..7252e772 100644
  import gc
  
 diff --git a/timemachine/__init__.py b/timemachine/__init__.py
-index 08daa2e3..090979e9 100644
+index c84076c7..43000d1e 100644
 --- a/timemachine/__init__.py
 +++ b/timemachine/__init__.py
-@@ -9,9 +9,9 @@ def _suppress_jax_no_gpu_warning():
+@@ -5,9 +5,9 @@ def _suppress_jax_no_gpu_warning():
  
      See https://github.com/google/jax/issues/6805
      """

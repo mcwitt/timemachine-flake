@@ -32,46 +32,34 @@
 , scipy
 , setuptools
 , substituteAll
-, versioneer
 , cudaSupport ? true
 }:
 
 buildPythonPackage rec {
   pname = "timemachine";
-  version = "0+${builtins.substring 0 7 src.rev}";
+  version = "0.1.0+${builtins.substring 0 7 src.rev}";
 
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "a319966254d17b3eb80834f5453ac8647ef4c537";
-    hash = "sha256-LVqK45psKVn3d/djoojDhBdC3cAit8Q+i/bW4TeFxMc=";
-
-    # work around hash instability due to use of export-subst
-    postFetch = ''
-      rm $out/timemachine/_version.py
-    '';
+    rev = "e8afd792fa904639c4eb51580dbb1ee6eb35a83b";
+    hash = "sha256-lnXexwIYiGVa3ltwV440MMHcMUej0imen463Z51xxEc=";
   };
 
   pyproject = true;
 
   patches = [
     (substituteAll {
-      src = ./0001-Remove-versioneer.patch;
-      inherit (src) rev;
-      inherit version;
-    })
-    (substituteAll {
-      src = ./0002-Adapt-cmake-build.patch;
+      src = ./0001-Adapt-cmake-build.patch;
       pythonVersion = lib.versions.majorMinor python.version;
     })
-    ./0003-Fix-jax-config-import.patch
+    ./0002-Fix-jax-config-import.patch
   ];
 
   postPatch = ''
     substituteInPlace pyproject.toml \
       --replace "cmake==3.24.3" "cmake" \
       --replace "setuptools >= 43.0.0, < 64.0.0" "setuptools" \
-      --replace "versioneer-518" "versioneer"
   '';
 
   nativeBuildInputs = [
@@ -86,7 +74,6 @@ buildPythonPackage rec {
   build-system = [
     mypy_1_5
     setuptools
-    versioneer
   ];
 
   buildInputs = lib.optionals cudaSupport [
