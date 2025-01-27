@@ -44,8 +44,6 @@
             default = python;
 
             python = pkgs.python312.withPackages (ps: with ps; [
-              black
-              isort
               matplotlib
               mols2grid
               rich

@@ -35,10 +35,8 @@
             python = pkgs.python312.withPackages (
               ps: with ps; [
                 altair
-                black
                 deeptime
                 ipywidgets
-                isort
                 jupytext
                 matplotlib
                 mdtraj

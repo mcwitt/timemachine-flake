@@ -4,10 +4,8 @@
 , cudaPackages
 , eigen
 , fetchFromGitHub
-, flake8
 , hilbertcurve
 , hypothesis
-, isort
 , jax
 , jax-cuda12-plugin
 , jaxlib
@@ -29,6 +27,7 @@
 , python
 , pythonRelaxDepsHook
 , rdkit
+, ruff
 , scipy
 , setuptools
 , substituteAll
@@ -42,8 +41,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "e8afd792fa904639c4eb51580dbb1ee6eb35a83b";
-    hash = "sha256-lnXexwIYiGVa3ltwV440MMHcMUej0imen463Z51xxEc=";
+    rev = "30d480633f18d858ca505bddafa20847bf40b636";
+    hash = "sha256-Jlxjx1Ce/eU9KFKijBBUd3wbuiQbWGYO3vMepRoOlEo=";
   };
 
   pyproject = true;
@@ -165,8 +164,7 @@ buildPythonPackage rec {
 
   passthru.optional-dependencies = {
     dev = [
-      flake8
-      isort
+      ruff
       mypy_1_5
     ];
 
