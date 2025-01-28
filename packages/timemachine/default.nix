@@ -12,7 +12,7 @@
 , jaxlib
 , lib
 , matplotlib
-, mypy_1_5
+, mypy
 , networkx
 , numpy
 , openeye-toolkits
@@ -72,7 +72,7 @@ buildPythonPackage rec {
   ];
 
   build-system = [
-    mypy_1_5
+    mypy
     setuptools
   ];
 
@@ -170,7 +170,7 @@ buildPythonPackage rec {
     dev = [
       clang-tools
       ruff
-      mypy_1_5
+      mypy
     ];
 
     test = [
