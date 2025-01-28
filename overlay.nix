@@ -29,6 +29,18 @@ let
 
           mdanalysis = callPackage ./packages/mdanalysis { };
 
+          mdtraj =
+            let
+              # TODO: remove when https://github.com/NixOS/nixpkgs/pull/377454 merged
+              nixpkgs = final.fetchFromGitHub {
+                owner = "mcwitt";
+                repo = "nixpkgs";
+                rev = "753c00280353005f9d856d4509535f29f9980aea";
+                hash = "sha256-3c0Tlblfhr2NQA3Yy99tMn8KmtOAbdznCHaiqphWJZ0=";
+              };
+            in
+            pyFinal.callPackage "${nixpkgs}/pkgs/development/python-modules/mdtraj" { };
+
           mols2grid = callPackage ./packages/mols2grid { };
 
           mypy_1_5 = pyFinal.mypy.overridePythonAttrs (old:

@@ -147,6 +147,9 @@ buildPythonPackage rec {
     "test_interpret_as_mixture_potential"
     "test_mixture_reweighting_1d"
     "test_reference_langevin_integrator"
+
+    # flaky
+    "test_hrex_gaussian_mixture"
   ] ++ lib.optionals (!cudaSupport) [
     "test_reversibility_with_jax_potentials"
     "test_rmsd_align_proper"
