@@ -58,8 +58,8 @@ buildPythonPackage rec {
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace "cmake==3.24.3" "cmake" \
-      --replace "setuptools >= 43.0.0, < 64.0.0" "setuptools" \
+      --replace-fail "cmake==3.24.3" "cmake" \
+      --replace-fail "mypy==1.5.1" "mypy" \
   '';
 
   nativeBuildInputs = [
