@@ -1,5 +1,6 @@
 { addDriverRunpath
 , buildPythonPackage
+, clang-tools
 , cmake
 , cudaPackages
 , eigen
@@ -167,6 +168,7 @@ buildPythonPackage rec {
 
   passthru.optional-dependencies = {
     dev = [
+      clang-tools
       ruff
       mypy_1_5
     ];
