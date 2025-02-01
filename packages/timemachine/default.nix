@@ -108,9 +108,6 @@ buildPythonPackage rec {
 
   CMAKE_ARGS = lib.optionals cudaSupport [ "-DCUDA_ARCH=all-major" ];
 
-  # ensure we use a supported compiler
-  CUDAHOSTCXX = lib.optionalString cudaSupport "${cudaPackages.cudatoolkit.cc}/bin/cc";
-
   # allow extension module to find NVIDIA drivers on NixOS
   postFixup = lib.optionalString cudaSupport ''
     addDriverRunpath $out/${python.sitePackages}/timemachine/lib/custom_ops$(${python}/bin/python-config --extension-suffix)
