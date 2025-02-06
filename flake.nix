@@ -15,7 +15,6 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixgl.url = "github:nix-community/nixGL";
     git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
@@ -24,7 +23,6 @@
     , flake-utils
     , git-hooks
     , nixpkgs
-    , nixgl
     } @ inputs: flake-utils.lib.eachSystem
       (with flake-utils.lib.system; [
         x86_64-linux
@@ -51,10 +49,7 @@
 
               "OpenEye-toolkits"
             ];
-          overlays = [
-            nixgl.overlay
-            (import ./overlay.nix { inherit inputs; })
-          ];
+          overlays = [ (import ./overlay.nix { inherit inputs; }) ];
         };
 
         python3 = pkgs.python312;
@@ -105,36 +100,10 @@
             packages = self.checks.${system}.pre-commit-check.enabledPackages;
           };
 
-          timemachine =
-            let
-              mkShell =
-                { python ? python3
-                , extraPackages ? [ ]
-                , extraPythonPackages ? (_: [ ])
-                , extraShellHook ? ""
-                }: pkgs.mkShell.override { stdenv = pkgs.cudaPackages.backendStdenv; } {
-
-                  inputsFrom = [ python.pkgs.timemachine ];
-
-                  packages =
-                    let
-                      pythonWithPackages =
-                        python.withPackages
-                          (ps:
-                            (with ps.timemachine.optional-dependencies; dev ++ test)
-                              ++ extraPythonPackages ps);
-                    in
-                    [
-                      pythonWithPackages
-                    ] ++ extraPackages;
-
-                  shellHook = lib.optionalString (pkgs.stdenv.isLinux && builtins ? currentSystem) ''
-                    export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
-                    ${extraShellHook}
-                  '';
-                };
-            in
-            lib.makeOverridable mkShell { };
+          timemachine = pkgs.mkShell.override { stdenv = pkgs.cudaPackages.backendStdenv; } {
+            inputsFrom = [ python3.pkgs.timemachine ];
+            packages = [ (python3.withPackages (ps: with ps.timemachine.optional-dependencies; dev ++ test)) ];
+          };
         };
 
         checks = {
@@ -145,7 +114,9 @@
         }
         // self.packages.${system} // self.devShells.${system}; # check that packages and devshells build
       }) // {
-      overlays.default = import ./overlay.nix { inherit inputs; };
+      overlays.default = import ./overlay.nix {
+        inherit inputs;
+      };
 
       templates = {
         notebook = {

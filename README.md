@@ -68,4 +68,3 @@ Example:
 
 [Nix]: https://nixos.org/
 [timemachine]: https://github.com/proteneer/timemachine
-[nixGL]: https://github.com/guibou/nixGL
