@@ -3,7 +3,7 @@
 [Nix][] [Flake](https://nixos.wiki/wiki/Flakes) for the
 [timemachine][] molecular dynamics and free energy package.
 
-Supported platforms: Linux (x86_64), macOS (x86_64)
+Supported platforms: Linux (x86_64), darwin (x86_64)
 
 ## Quick start
 
@@ -43,31 +43,14 @@ environment with
 nix develop
 ```
 
-### Create a reproducible script using timemachine
-
-```console
-mkdir my-project
-cd my-project
-nix flake init -t github:mcwitt/timemachine-flake#script
-```
-
-Edit `flake.nix` to configure the environment and entry points.
-Then run (for example)
-
-```console
-nix run .#rbfe
-```
-
-to run the example RBFE script.
-
-## Using as a  nixpkgs overlay
+## Use as a  nixpkgs overlay
 
 Example:
 
 ```nix
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     timemachine-flake.url = "github:mcwitt/timemachine-flake";
   };
