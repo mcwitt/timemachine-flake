@@ -42,8 +42,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "30d480633f18d858ca505bddafa20847bf40b636";
-    hash = "sha256-Jlxjx1Ce/eU9KFKijBBUd3wbuiQbWGYO3vMepRoOlEo=";
+    rev = "3ee00e7fbf0e2bf49a68ba45d39cb579d5ce5683";
+    hash = "sha256-TUpiKb0cVWDjmiUdWHbm3FCMm65acTOf29pCB/Xu4YI=";
   };
 
   pyproject = true;
@@ -57,9 +57,7 @@ buildPythonPackage rec {
   ];
 
   postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace-fail "cmake==3.24.3" "cmake" \
-      --replace-fail "mypy==1.5.1" "mypy" \
+    substituteInPlace pyproject.toml --replace-fail "cmake==3.24.3" "cmake"
   '';
 
   nativeBuildInputs = [
