@@ -11,20 +11,6 @@ let
 
           hilbertcurve = callPackage ./packages/hilbertcurve { };
 
-          jupyter-packaging_0_7 = pyPrev.jupyter-packaging.overridePythonAttrs (old:
-            let version = "0.7.9"; in {
-              inherit version;
-              name = "jupyter-packaging-${version}";
-
-              src = final.fetchPypi {
-                pname = "jupyter-packaging";
-                inherit version;
-                hash = "sha256-Le11cjNy5c7S4b4e6FUGyIiVUYiS8g6sw7OjRM9Zzjo=";
-              };
-
-              patches = [ ];
-            });
-
           mda-xdrlib = callPackage ./packages/mda-xdrlib { };
 
           mdanalysis = callPackage ./packages/mdanalysis { };

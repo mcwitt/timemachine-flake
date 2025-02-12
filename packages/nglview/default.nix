@@ -2,52 +2,40 @@
 , buildPythonPackage
 , fetchFromGitHub
 , ipywidgets
-, jupyter-packaging_0_7
+, jupyter-packaging
+, jupyterlab
 , jupyterlab-widgets
 , notebook
 , numpy
 , setuptools
-, versioneer
+, setuptools-scm
 , wheel
 }:
 
 buildPythonPackage rec {
   pname = "nglview";
-  version = "3.1.2";
+  version = "3.1.4";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "nglviewer";
     repo = "nglview";
     rev = "v${version}";
-    hash = "sha256-VEhTzOMob8TAu0xoD6+ArqXxSSUbMRE+gCEiV/kIkww=";
-
-    # work around hash instability due to use of export-subst
-    postFetch = ''
-      rm $out/nglview/_version.py
-    '';
+    hash = "sha256-QY7rn6q67noWeoLn0RU2Sn5SeJON+Br/j+aNMlK1PDo=";
   };
 
-  postPatch = ''
-    substituteInPlace pyproject.toml --replace '"versioneer-518"' '"versioneer"'
-  '';
-
   build-system = [
-    jupyter-packaging_0_7
+    jupyter-packaging
     setuptools
-    versioneer
+    setuptools-scm
     wheel
   ];
 
   dependencies = [
     ipywidgets
     notebook
+    jupyterlab
     jupyterlab-widgets
-    numpy
-  ];
-
-  nativeCheckInputs = [
-    ipywidgets
     numpy
   ];
 
