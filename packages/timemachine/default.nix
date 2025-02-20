@@ -53,7 +53,6 @@ buildPythonPackage rec {
       src = ./0001-Adapt-cmake-build.patch;
       pythonVersion = lib.versions.majorMinor python.version;
     })
-    ./0002-Fix-jax-config-import.patch
   ];
 
   postPatch = ''
