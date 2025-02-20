@@ -42,8 +42,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "3ee00e7fbf0e2bf49a68ba45d39cb579d5ce5683";
-    hash = "sha256-TUpiKb0cVWDjmiUdWHbm3FCMm65acTOf29pCB/Xu4YI=";
+    rev = "43b7fbe5b86e4b18209b4f83c65a63cfad50b001";
+    hash = "sha256-ngFKNNNi3eKuYOkDmJt0tl0G1uHLcURySjiObPmNNHs=";
   };
 
   pyproject = true;
@@ -164,8 +164,8 @@ buildPythonPackage rec {
   passthru.optional-dependencies = {
     dev = [
       clang-tools
-      ruff
       mypy
+      ruff
     ];
 
     test = [
@@ -173,6 +173,7 @@ buildPythonPackage rec {
       py3Dmol
       pytest
       pytest-cov
+      pytest-xdist
       hilbertcurve
       hypothesis
     ];
