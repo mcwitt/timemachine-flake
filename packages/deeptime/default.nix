@@ -40,8 +40,8 @@ buildPythonPackage rec {
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace 'scipy==1.9.3' 'scipy>=1.9.3' \
-      --replace 'versioneer[toml]==0.28' 'versioneer[toml]>=0.28'
+      --replace-fail 'scipy==1.9.3' 'scipy>=1.9.3' \
+      --replace-fail 'versioneer[toml]==0.28' 'versioneer[toml]>=0.28'
   '';
 
   nativeBuildInputs = [
