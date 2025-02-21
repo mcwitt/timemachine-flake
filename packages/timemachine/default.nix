@@ -1,38 +1,39 @@
-{ addDriverRunpath
-, buildPythonPackage
-, clang-tools
-, cmake
-, cudaPackages
-, eigen
-, fetchFromGitHub
-, hilbertcurve
-, hypothesis
-, jax
-, jax-cuda12-plugin
-, jaxlib
-, lib
-, matplotlib
-, mypy
-, networkx
-, numpy
-, openeye-toolkits
-, openmm
-, psutil
-, py3Dmol
-, pybind11
-, pymbar
-, pytest
-, pytest-cov
-, pytest-xdist
-, pytestCheckHook
-, python
-, pythonRelaxDepsHook
-, rdkit
-, ruff
-, scipy
-, setuptools
-, substituteAll
-, cudaSupport ? true
+{
+  addDriverRunpath,
+  buildPythonPackage,
+  clang-tools,
+  cmake,
+  cudaPackages,
+  eigen,
+  fetchFromGitHub,
+  hilbertcurve,
+  hypothesis,
+  jax,
+  jax-cuda12-plugin,
+  jaxlib,
+  lib,
+  matplotlib,
+  mypy,
+  networkx,
+  numpy,
+  openeye-toolkits,
+  openmm,
+  psutil,
+  py3Dmol,
+  pybind11,
+  pymbar,
+  pytest,
+  pytest-cov,
+  pytest-xdist,
+  pytestCheckHook,
+  python,
+  pythonRelaxDepsHook,
+  rdkit,
+  ruff,
+  scipy,
+  setuptools,
+  substituteAll,
+  cudaSupport ? true,
 }:
 
 buildPythonPackage rec {
@@ -59,14 +60,16 @@ buildPythonPackage rec {
     substituteInPlace pyproject.toml --replace-fail "cmake==3.24.3" "cmake"
   '';
 
-  nativeBuildInputs = [
-    pythonRelaxDepsHook
-  ] ++ lib.optionals cudaSupport [
-    addDriverRunpath
-    cmake
-    cudaPackages.cuda_nvcc
-    pybind11
-  ];
+  nativeBuildInputs =
+    [
+      pythonRelaxDepsHook
+    ]
+    ++ lib.optionals cudaSupport [
+      addDriverRunpath
+      cmake
+      cudaPackages.cuda_nvcc
+      pybind11
+    ];
 
   build-system = [
     mypy
@@ -80,20 +83,22 @@ buildPythonPackage rec {
     eigen
   ];
 
-  dependencies = [
-    jax
-    jaxlib
-    matplotlib
-    networkx
-    numpy
-    openeye-toolkits
-    openmm
-    pymbar
-    rdkit
-    scipy
-  ] ++ lib.optionals cudaSupport [
-    jax-cuda12-plugin
-  ];
+  dependencies =
+    [
+      jax
+      jaxlib
+      matplotlib
+      networkx
+      numpy
+      openeye-toolkits
+      openmm
+      pymbar
+      rdkit
+      scipy
+    ]
+    ++ lib.optionals cudaSupport [
+      jax-cuda12-plugin
+    ];
 
   # setuptools doesn't recognize nixpkgs rdkit because it's missing
   # a dist-info directory. Remove rdkit from the requirements to
@@ -126,30 +131,32 @@ buildPythonPackage rec {
     "tests/test_interpolate.py" # usage of resources.path incompatible with 3.12
   ];
 
-  disabledTests = [
-    # require OpenEye license
-    "test_assert_potentials_compatible"
-    "test_get_strained_atoms"
-    "test_hif2a_set"
-    "test_on_methane"
-    "test_write_single_topology_frame"
-    "test_jax_transform_intermediate_potential"
-    "test_st_mol"
+  disabledTests =
+    [
+      # require OpenEye license
+      "test_assert_potentials_compatible"
+      "test_get_strained_atoms"
+      "test_hif2a_set"
+      "test_on_methane"
+      "test_write_single_topology_frame"
+      "test_jax_transform_intermediate_potential"
+      "test_st_mol"
 
-    # high resource usage
-    "test_jax_nonbonded_waterbox"
-    "test_batched_neighbor_inds"
-    "test_interpret_as_mixture_potential"
-    "test_mixture_reweighting_1d"
-    "test_reference_langevin_integrator"
+      # high resource usage
+      "test_jax_nonbonded_waterbox"
+      "test_batched_neighbor_inds"
+      "test_interpret_as_mixture_potential"
+      "test_mixture_reweighting_1d"
+      "test_reference_langevin_integrator"
 
-    # flaky
-    "test_hrex_gaussian_mixture"
-  ] ++ lib.optionals (!cudaSupport) [
-    "test_reversibility_with_jax_potentials"
-    "test_rmsd_align_proper"
-    "test_rmsd_align_improper"
-  ];
+      # flaky
+      "test_hrex_gaussian_mixture"
+    ]
+    ++ lib.optionals (!cudaSupport) [
+      "test_reversibility_with_jax_potentials"
+      "test_rmsd_align_proper"
+      "test_rmsd_align_improper"
+    ];
 
   pytestFlagsArray = [
     "--hypothesis-profile=no-deadline"

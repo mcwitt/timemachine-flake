@@ -1,17 +1,19 @@
-{ autoPatchelfHook
-, buildPythonPackage
-, cairo
-, fetchurl
-, lib
-, pytest
-, scripttest
-, stdenv
-, zlib
+{
+  autoPatchelfHook,
+  buildPythonPackage,
+  cairo,
+  fetchurl,
+  lib,
+  pytest,
+  scripttest,
+  stdenv,
+  zlib,
 }:
 let
   version = "2020.2.2";
 
-  mkUrl = pname: "https://pypi.anaconda.org/openeye/simple/${pname}/${version}/${pname}-${version}.tar.gz";
+  mkUrl =
+    pname: "https://pypi.anaconda.org/openeye/simple/${pname}/${version}/${pname}-${version}.tar.gz";
 
   packages = {
     x86_64-linux = rec {
@@ -37,9 +39,16 @@ let
 
     nativeBuildInputs = lib.optionals stdenv.isLinux [ autoPatchelfHook ];
 
-    buildInputs = [ cairo stdenv.cc.cc zlib ];
+    buildInputs = [
+      cairo
+      stdenv.cc.cc
+      zlib
+    ];
 
-    nativeCheckInputs = [ pytest scripttest ];
+    nativeCheckInputs = [
+      pytest
+      scripttest
+    ];
 
     pythonImportsCheck = [ "openeye" ];
 

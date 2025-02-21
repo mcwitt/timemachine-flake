@@ -9,17 +9,24 @@
   inputs.pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs =
-    { self
-    , nixpkgs
-    , timemachine-flake
-    , nixgl
-    , pre-commit-hooks
+    {
+      self,
+      nixpkgs,
+      timemachine-flake,
+      nixgl,
+      pre-commit-hooks,
     }:
     let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      getPkgs = system:
+      getPkgs =
+        system:
         import nixpkgs {
           inherit system;
           config = {
@@ -33,9 +40,12 @@
         };
     in
     {
-      packages = forAllSystems (system:
-        let pkgs = getPkgs system;
-        in rec {
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = getPkgs system;
+        in
+        rec {
           default = python;
 
           python = pkgs.python312.withPackages (
@@ -56,34 +66,44 @@
               tqdm
             ]
           );
-        });
+        }
+      );
 
-      devShells = forAllSystems (system:
-        let pkgs = getPkgs system;
-        in {
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = getPkgs system;
+        in
+        {
           default =
             let
               impure = builtins ? currentSystem;
               useNixgl = impure && pkgs.stdenv.isLinux;
             in
             pkgs.mkShell {
-              packages = [
-                self.packages.${system}.python
-              ]
-              ++ self.checks.${system}.pre-commit-check.enabledPackages
-              ++ nixpkgs.lib.optional useNixgl pkgs.nixgl.auto.nixGLDefault;
+              packages =
+                [
+                  self.packages.${system}.python
+                ]
+                ++ self.checks.${system}.pre-commit-check.enabledPackages
+                ++ nixpkgs.lib.optional useNixgl pkgs.nixgl.auto.nixGLDefault;
 
               # prepend nixGL library paths in impure mode
-              shellHook = self.checks.${system}.pre-commit-check.shellHook + nixpkgs.lib.optionalString useNixgl ''
-                export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
-              '';
+              shellHook =
+                self.checks.${system}.pre-commit-check.shellHook
+                + nixpkgs.lib.optionalString useNixgl ''
+                  export LD_LIBRARY_PATH=$(${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH
+                '';
             };
-        });
+        }
+      );
 
-
-      checks = forAllSystems (system:
-        let pkgs = getPkgs system;
-        in {
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = getPkgs system;
+        in
+        {
           pre-commit-check = pre-commit-hooks.lib.${system}.run {
             src = ./.;
             hooks = {
@@ -117,6 +137,7 @@
               ruff.enable = true;
             };
           };
-        });
+        }
+      );
     };
 }

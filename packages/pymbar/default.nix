@@ -1,9 +1,10 @@
-{ buildPythonPackage
-, fetchFromGitHub
-, numexpr
-, numpy
-, pytestCheckHook
-, scipy
+{
+  buildPythonPackage,
+  fetchFromGitHub,
+  numexpr,
+  numpy,
+  pytestCheckHook,
+  scipy,
 }:
 
 buildPythonPackage rec {

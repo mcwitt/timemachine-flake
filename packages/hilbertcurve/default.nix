@@ -1,13 +1,14 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, wheel
-, numpy
-, pytest
-, sphinx
-, sphinx-autodoc-typehints
-, sphinx-rtd-theme
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  wheel,
+  numpy,
+  pytest,
+  sphinx,
+  sphinx-autodoc-typehints,
+  sphinx-rtd-theme,
 }:
 
 buildPythonPackage rec {

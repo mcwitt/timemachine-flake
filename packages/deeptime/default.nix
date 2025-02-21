@@ -1,29 +1,30 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, cmake
-, cython
-, ninja
-, numpy
-, pybind11
-, scikit-build
-, scipy
-, setuptools
-, tomli
-, versioneer
-, wheel
-, scikit-learn
-, threadpoolctl
-, torch
-, matplotlib
-, networkx
-, tqdm
-, coverage
-, flaky
-, pytest
-, pytest-cov
-, pytest-xdist
-, pint
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  cmake,
+  cython,
+  ninja,
+  numpy,
+  pybind11,
+  scikit-build,
+  scipy,
+  setuptools,
+  tomli,
+  versioneer,
+  wheel,
+  scikit-learn,
+  threadpoolctl,
+  torch,
+  matplotlib,
+  networkx,
+  tqdm,
+  coverage,
+  flaky,
+  pytest,
+  pytest-cov,
+  pytest-xdist,
+  pint,
 }:
 
 buildPythonPackage rec {

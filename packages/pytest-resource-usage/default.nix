@@ -1,9 +1,10 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, flit-core
-, pytest
-, psutil
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  flit-core,
+  pytest,
+  psutil,
 }:
 
 buildPythonPackage rec {

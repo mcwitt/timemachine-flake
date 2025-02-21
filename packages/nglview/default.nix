@@ -1,15 +1,16 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, ipywidgets
-, jupyter-packaging
-, jupyterlab
-, jupyterlab-widgets
-, notebook
-, numpy
-, setuptools
-, setuptools-scm
-, wheel
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  ipywidgets,
+  jupyter-packaging,
+  jupyterlab,
+  jupyterlab-widgets,
+  notebook,
+  numpy,
+  setuptools,
+  setuptools-scm,
+  wheel,
 }:
 
 buildPythonPackage rec {

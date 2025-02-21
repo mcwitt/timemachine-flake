@@ -1,11 +1,12 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, jinja2
-, pandas
-, rdkit
-, setuptools
-, wheel
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  jinja2,
+  pandas,
+  rdkit,
+  setuptools,
+  wheel,
 }:
 
 buildPythonPackage rec {

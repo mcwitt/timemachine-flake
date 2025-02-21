@@ -1,21 +1,22 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, cython
-, numpy
-, packaging
-, setuptools
-, wheel
-, mmtf-python
-, joblib
-, scipy
-, matplotlib
-, mda-xdrlib
-, tqdm
-, threadpoolctl
-, fasteners
-, pytestCheckHook
-, hypothesis
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  cython,
+  numpy,
+  packaging,
+  setuptools,
+  wheel,
+  mmtf-python,
+  joblib,
+  scipy,
+  matplotlib,
+  mda-xdrlib,
+  tqdm,
+  threadpoolctl,
+  fasteners,
+  pytestCheckHook,
+  hypothesis,
 }:
 
 let
@@ -57,7 +58,6 @@ let
       # pathsimanalysis
       # mdahole2
     ];
-
 
     env.NIX_CFLAGS_COMPILE = "-Wno-error=incompatible-pointer-types";
 

@@ -1,10 +1,11 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, setuptools
-, tomli
-, wheel
-, pytest
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  setuptools,
+  tomli,
+  wheel,
+  pytest,
 }:
 
 buildPythonPackage rec {

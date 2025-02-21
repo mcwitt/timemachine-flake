@@ -1,11 +1,15 @@
 { inputs }:
-final:
-prev:
+final: prev:
 let
-  overridePython3 = python3: python3.override (old: {
-    packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { }))
-      (pyFinal: pyPrev:
-        let inherit (pyFinal) callPackage; in {
+  overridePython3 =
+    python3:
+    python3.override (old: {
+      packageOverrides = final.lib.composeExtensions (old.packageOverrides or (_: _: { })) (
+        pyFinal: pyPrev:
+        let
+          inherit (pyFinal) callPackage;
+        in
+        {
 
           deeptime = callPackage ./packages/deeptime { };
 
@@ -28,8 +32,9 @@ let
           pytest-resource-usage = callPackage ./packages/pytest-resource-usage { };
 
           timemachine = callPackage ./packages/timemachine { cudaSupport = final.stdenv.isLinux; };
-        });
-  });
+        }
+      );
+    });
 in
 {
   python311 = overridePython3 prev.python311;
