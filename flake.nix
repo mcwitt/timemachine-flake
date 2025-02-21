@@ -109,7 +109,7 @@
         checks = {
           pre-commit-check = git-hooks.lib.${system}.run {
             src = ./.;
-            hooks.nixpkgs-fmt.enable = true;
+            hooks.nixfmt-rfc-style.enable = true;
           };
         }
         // self.packages.${system} // self.devShells.${system}; # check that packages and devshells build
