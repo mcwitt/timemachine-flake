@@ -9,7 +9,6 @@
   hilbertcurve,
   hypothesis,
   jax,
-  jax-cuda12-plugin,
   jaxlib,
   lib,
   matplotlib,
@@ -83,22 +82,18 @@ buildPythonPackage rec {
     eigen
   ];
 
-  dependencies =
-    [
-      jax
-      jaxlib
-      matplotlib
-      networkx
-      numpy
-      openeye-toolkits
-      openmm
-      pymbar
-      rdkit
-      scipy
-    ]
-    ++ lib.optionals cudaSupport [
-      jax-cuda12-plugin
-    ];
+  dependencies = [
+    jax
+    jaxlib
+    matplotlib
+    networkx
+    numpy
+    openeye-toolkits
+    openmm
+    pymbar
+    rdkit
+    scipy
+  ];
 
   # setuptools doesn't recognize nixpkgs rdkit because it's missing
   # a dist-info directory. Remove rdkit from the requirements to
