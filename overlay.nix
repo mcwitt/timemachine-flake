@@ -29,6 +29,8 @@ let
 
           pymbar = callPackage ./packages/pymbar { };
 
+          pymbar_3 = callPackage ./packages/pymbar/3 { };
+
           pytest-resource-usage = callPackage ./packages/pytest-resource-usage { };
 
           timemachine = callPackage ./packages/timemachine { cudaSupport = final.stdenv.isLinux; };

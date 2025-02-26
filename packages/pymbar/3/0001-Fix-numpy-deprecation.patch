@@ -1,0 +1,53 @@
+From c6a87c05d913439806d86d1eb49f6524ae8197c8 Mon Sep 17 00:00:00 2001
+From: Matt Wittmann <mwittmann@relaytx.com>
+Date: Wed, 26 Feb 2025 06:45:37 -0800
+Subject: [PATCH] Fix numpy deprecation
+
+---
+ pymbar/tests/test_mbar.py                       | 2 +-
+ pymbar/testsystems/exponential_distributions.py | 2 +-
+ pymbar/testsystems/harmonic_oscillators.py      | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pymbar/tests/test_mbar.py b/pymbar/tests/test_mbar.py
+index 9f6e6a9..a8fed47 100644
+--- a/pymbar/tests/test_mbar.py
++++ b/pymbar/tests/test_mbar.py
+@@ -374,7 +374,7 @@ def test_mbar_computePMF():
+     xmin = test.O_k[refstate] - 1
+     xmax = test.O_k[refstate] + 1
+     within_bounds = (x_n >= xmin) & (x_n < xmax)
+-    bin_centers = dx*np.arange(np.int(xmin/dx),np.int(xmax/dx)) + dx/2
++    bin_centers = dx*np.arange(int(xmin/dx),int(xmax/dx)) + dx/2
+     bin_n = np.zeros(len(x_n),int)
+     bin_n[within_bounds] = 1 + np.floor((x_n[within_bounds]-xmin)/dx)
+     # 0 is reserved for samples outside the domain.  We will ignore this state
+diff --git a/pymbar/testsystems/exponential_distributions.py b/pymbar/testsystems/exponential_distributions.py
+index 4963d82..ed15507 100644
+--- a/pymbar/testsystems/exponential_distributions.py
++++ b/pymbar/testsystems/exponential_distributions.py
+@@ -138,7 +138,7 @@ class ExponentialTestCase(object):
+         x_kn = np.zeros([self.n_states, N_max], np.float64)
+         u_kln = np.zeros([self.n_states, self.n_states, N_max], np.float64)
+         x_n = np.zeros([N_tot], np.float64)
+-        s_n = np.zeros([N_tot], np.int)
++        s_n = np.zeros([N_tot], int)
+         u_kn = np.zeros([self.n_states, N_tot], np.float64)
+         index = 0
+         for k, N in enumerate(N_k):
+diff --git a/pymbar/testsystems/harmonic_oscillators.py b/pymbar/testsystems/harmonic_oscillators.py
+index 6192d28..0b8e2d2 100644
+--- a/pymbar/testsystems/harmonic_oscillators.py
++++ b/pymbar/testsystems/harmonic_oscillators.py
+@@ -145,7 +145,7 @@ class HarmonicOscillatorsTestCase(object):
+         x_kn = np.zeros([self.n_states, N_max], np.float64)
+         u_kln = np.zeros([self.n_states, self.n_states, N_max], np.float64)
+         x_n = np.zeros([N_tot], np.float64)
+-        s_n = np.zeros([N_tot], np.int)
++        s_n = np.zeros([N_tot], int)
+         u_kn = np.zeros([self.n_states, N_tot], np.float64)
+         index = 0
+         for k, N in enumerate(N_k):
+-- 
+2.47.2
+
