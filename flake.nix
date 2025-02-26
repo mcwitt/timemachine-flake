@@ -65,7 +65,6 @@
         {
           packages =
             {
-
               default = self.packages.${system}.python;
 
               python = python3.withPackages (
@@ -79,7 +78,6 @@
                   timemachine
                 ]
               );
-
             }
             // lib.optionalAttrs pkgs.stdenv.isLinux {
 
