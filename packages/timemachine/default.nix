@@ -26,7 +26,6 @@
   pytest-xdist,
   pytestCheckHook,
   python,
-  pythonRelaxDepsHook,
   rdkit,
   ruff,
   scipy,
@@ -59,16 +58,12 @@ buildPythonPackage rec {
     substituteInPlace pyproject.toml --replace-fail "cmake==3.24.3" "cmake"
   '';
 
-  nativeBuildInputs =
-    [
-      pythonRelaxDepsHook
-    ]
-    ++ lib.optionals cudaSupport [
-      addDriverRunpath
-      cmake
-      cudaPackages.cuda_nvcc
-      pybind11
-    ];
+  nativeBuildInputs = lib.optionals cudaSupport [
+    addDriverRunpath
+    cmake
+    cudaPackages.cuda_nvcc
+    pybind11
+  ];
 
   build-system = [
     mypy
