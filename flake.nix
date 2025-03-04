@@ -56,7 +56,7 @@
 
                 "OpenEye-toolkits"
               ];
-            overlays = [ (import ./overlay.nix { inherit inputs; }) ];
+            overlays = [ (import ./overlay.nix) ];
           };
 
           python3 = pkgs.python312;
@@ -124,9 +124,7 @@
         }
       )
     // {
-      overlays.default = import ./overlay.nix {
-        inherit inputs;
-      };
+      overlays.default = import ./overlay.nix;
 
       templates = {
         notebook = {
