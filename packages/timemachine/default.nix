@@ -41,8 +41,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "proteneer";
     repo = "timemachine";
-    rev = "43b7fbe5b86e4b18209b4f83c65a63cfad50b001";
-    hash = "sha256-ngFKNNNi3eKuYOkDmJt0tl0G1uHLcURySjiObPmNNHs=";
+    rev = "bed474f8b396e264903ac7ff623e7bf34f50a381";
+    hash = "sha256-4Cr7alWLkPA/21sIPTP3XoPGy4a2ttqLzgZE5cVfVvk=";
   };
 
   pyproject = true;
