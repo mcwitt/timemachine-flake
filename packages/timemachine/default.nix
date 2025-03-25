@@ -55,7 +55,9 @@ buildPythonPackage rec {
   ];
 
   postPatch = ''
-    substituteInPlace pyproject.toml --replace-fail "cmake==3.24.3" "cmake"
+    substituteInPlace pyproject.toml \
+      --replace-fail "cmake==3.24.3" "cmake" \
+      --replace-fail "mypy==1.14.1" "mypy"
   '';
 
   nativeBuildInputs = lib.optionals cudaSupport [
